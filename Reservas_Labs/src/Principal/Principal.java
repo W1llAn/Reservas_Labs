@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Principal;
+import Modelos.Conexion;
 
 /**
  *
@@ -10,6 +11,7 @@ package Principal;
  */
 public class Principal {
     public static void main(String[] args) {
-        
+        new Conexion().Conectar();
     }
 }
+
