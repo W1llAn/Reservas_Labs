@@ -30,6 +30,14 @@ public class Menu extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         panItemReservas = new javax.swing.JPanel();
         lblReservas = new javax.swing.JLabel();
+        panItemLaboratorios = new javax.swing.JPanel();
+        lblLaboratorios = new javax.swing.JLabel();
+        panItemHorarios = new javax.swing.JPanel();
+        lblHorarios = new javax.swing.JLabel();
+        panItemCerrar = new javax.swing.JPanel();
+        lblCerrar = new javax.swing.JLabel();
+        panItemSalir = new javax.swing.JPanel();
+        lblSalir = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,11 +62,93 @@ public class Menu extends javax.swing.JFrame {
         panItemReservas.setLayout(panItemReservasLayout);
         panItemReservasLayout.setHorizontalGroup(
             panItemReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblReservas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 262, Short.MAX_VALUE)
+            .addComponent(lblReservas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panItemReservasLayout.setVerticalGroup(
             panItemReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(lblReservas, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        panItemLaboratorios.setBackground(new java.awt.Color(147, 10, 13));
+        panItemLaboratorios.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        lblLaboratorios.setBackground(new java.awt.Color(43, 43, 43));
+        lblLaboratorios.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        lblLaboratorios.setForeground(new java.awt.Color(255, 255, 255));
+        lblLaboratorios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLaboratorios.setText("Laboratorios");
+
+        javax.swing.GroupLayout panItemLaboratoriosLayout = new javax.swing.GroupLayout(panItemLaboratorios);
+        panItemLaboratorios.setLayout(panItemLaboratoriosLayout);
+        panItemLaboratoriosLayout.setHorizontalGroup(
+            panItemLaboratoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblLaboratorios, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+        );
+        panItemLaboratoriosLayout.setVerticalGroup(
+            panItemLaboratoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblLaboratorios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        panItemHorarios.setBackground(new java.awt.Color(147, 10, 13));
+        panItemHorarios.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        lblHorarios.setBackground(new java.awt.Color(43, 43, 43));
+        lblHorarios.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        lblHorarios.setForeground(new java.awt.Color(255, 255, 255));
+        lblHorarios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblHorarios.setText("Horarios");
+
+        javax.swing.GroupLayout panItemHorariosLayout = new javax.swing.GroupLayout(panItemHorarios);
+        panItemHorarios.setLayout(panItemHorariosLayout);
+        panItemHorariosLayout.setHorizontalGroup(
+            panItemHorariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblHorarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        panItemHorariosLayout.setVerticalGroup(
+            panItemHorariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblHorarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        panItemCerrar.setBackground(new java.awt.Color(147, 10, 13));
+        panItemCerrar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        lblCerrar.setBackground(new java.awt.Color(43, 43, 43));
+        lblCerrar.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        lblCerrar.setForeground(new java.awt.Color(255, 255, 255));
+        lblCerrar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCerrar.setText("Cerrar Sesión");
+
+        javax.swing.GroupLayout panItemCerrarLayout = new javax.swing.GroupLayout(panItemCerrar);
+        panItemCerrar.setLayout(panItemCerrarLayout);
+        panItemCerrarLayout.setHorizontalGroup(
+            panItemCerrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        panItemCerrarLayout.setVerticalGroup(
+            panItemCerrarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblCerrar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+        );
+
+        panItemSalir.setBackground(new java.awt.Color(147, 10, 13));
+        panItemSalir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        lblSalir.setBackground(new java.awt.Color(43, 43, 43));
+        lblSalir.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        lblSalir.setForeground(new java.awt.Color(255, 255, 255));
+        lblSalir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSalir.setText("Salir");
+
+        javax.swing.GroupLayout panItemSalirLayout = new javax.swing.GroupLayout(panItemSalir);
+        panItemSalir.setLayout(panItemSalirLayout);
+        panItemSalirLayout.setHorizontalGroup(
+            panItemSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panItemSalirLayout.createSequentialGroup()
+                .addComponent(lblSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panItemSalirLayout.setVerticalGroup(
+            panItemSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -66,23 +156,36 @@ public class Menu extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(113, 113, 113)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(panItemReservas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addGap(113, 113, 113)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(24, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(panItemSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panItemCerrar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(panItemLaboratorios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panItemReservas, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panItemHorarios, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(22, 22, 22))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(41, 41, 41)
                 .addComponent(jLabel1)
-                .addGap(55, 55, 55)
+                .addGap(31, 31, 31)
                 .addComponent(panItemReservas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(249, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panItemHorarios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panItemLaboratorios, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panItemCerrar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panItemSalir, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(57, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -155,7 +258,15 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    public javax.swing.JLabel lblCerrar;
+    public javax.swing.JLabel lblHorarios;
+    public javax.swing.JLabel lblLaboratorios;
     public javax.swing.JLabel lblReservas;
+    public javax.swing.JLabel lblSalir;
+    public javax.swing.JPanel panItemCerrar;
+    public javax.swing.JPanel panItemHorarios;
+    public javax.swing.JPanel panItemLaboratorios;
     public javax.swing.JPanel panItemReservas;
+    public javax.swing.JPanel panItemSalir;
     // End of variables declaration//GEN-END:variables
 }

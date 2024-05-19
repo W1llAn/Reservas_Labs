@@ -43,8 +43,12 @@ public class MenuControlador implements MouseListener {
 
     @Override
     public void mouseEntered(MouseEvent me) {
-        
+
         cambiarColorMenuItems(menu.lblReservas, menu.panItemReservas, me);
+        cambiarColorMenuItems(menu.lblHorarios, menu.panItemHorarios, me);
+        cambiarColorMenuItems(menu.lblLaboratorios, menu.panItemLaboratorios, me);
+        cambiarColorMenuItems(menu.lblCerrar, menu.panItemCerrar, me);
+        cambiarColorMenuItems(menu.lblSalir, menu.panItemSalir, me);
 
     }
 
@@ -64,9 +68,13 @@ public class MenuControlador implements MouseListener {
     }
 
     @Override
-    public void mouseExited(MouseEvent e
+    public void mouseExited(MouseEvent me
     ) {
-        cambiarColorMenuItems(menu.lblReservas, menu.panItemReservas, e);
+        cambiarColorMenuItems(menu.lblReservas, menu.panItemReservas, me);
+        cambiarColorMenuItems(menu.lblHorarios, menu.panItemHorarios, me);
+        cambiarColorMenuItems(menu.lblLaboratorios, menu.panItemLaboratorios, me);
+        cambiarColorMenuItems(menu.lblCerrar, menu.panItemCerrar, me);
+        cambiarColorMenuItems(menu.lblSalir, menu.panItemSalir, me);
     }
 
 }
