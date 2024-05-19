@@ -24,21 +24,33 @@ public final class ControllerPanelLabs {
     public ControllerPanelLabs(JPanelLaboratorios vista) {
         this.view = vista;
         table = new DefaultTableModel(new String[]{"Codigo", "Nombre", "Bloque", "Piso", "Tipo"}, 0);
+        combo = new DefaultComboBoxModel();
         labdb = new LabDB();
         fillTable();
+        fillCombo();
     }
     
-    public void fillTable() {
+    private void fillTable() {
+        table.setRowCount(0);
+        labdb.labList().forEach(lab -> 
+                    table.addRow(new Object[]{lab.getCode(),lab.getName(),lab.getBlockName(),lab.isLab()})
+                );
+        view.tbLabs.setModel(table);
+    }
+    private void fillCombo() {
+        combo.removeAllElements();
+        
         table.setRowCount(0);
         view.tbLabs.setModel(table);
         labdb.labList().forEach(lab -> 
                     table.addRow(new Object[]{lab.getCode(),lab.getName(),lab.getBlockName(),lab.isLab()})
                 );
     }
+    
+    
 
-    public boolean addLabs(Lab l) {
+    public void addLabs(Lab l) {
         
-        return true;
     }
 
     public boolean editLabs() {
