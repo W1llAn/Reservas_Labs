@@ -9,6 +9,8 @@ import Modelos.BlockDB;
 import Modelos.Lab;
 import Modelos.LabDB;
 import Vista.JPanelLaboratorios;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -17,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Kiwar
  */
-public final class ControllerPanelLabs {
+public final class ControllerPanelLabs implements ActionListener{
 
     private final JPanelLaboratorios view;
     private final DefaultTableModel table;
@@ -64,7 +66,7 @@ public final class ControllerPanelLabs {
         view.cbxBlock.setSelectedIndex(0);
     }
 
-    public void addLabs() {
+    private void addLabs() {
         if (validateFields()) {
             Lab lb = new Lab.LabBuilder()
                     .Name(view.txtName.getText())
@@ -85,12 +87,19 @@ public final class ControllerPanelLabs {
         }
     }
 
-    public boolean editLabs() {
+    private boolean editLabs() {
         return true;
     }
 
-    public boolean deleteLabs() {
+    private boolean deleteLabs() {
         return true;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==view.btnAdd) {
+            addLabs();
+        }
     }
 
 }
