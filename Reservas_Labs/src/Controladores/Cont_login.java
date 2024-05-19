@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Controladores;
-
+import Vista.Login;
 /**
  *
  * @author William

@@ -1,1 +1,0 @@
-En este directorio se deberan crear archivo que se relacionen con el nombre del mismo
