@@ -32,7 +32,6 @@ public class JPanelLaboratorios extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
-        txtBlock = new javax.swing.JTextField();
         txtCode = new javax.swing.JTextField();
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
@@ -40,6 +39,7 @@ public class JPanelLaboratorios extends javax.swing.JPanel {
         btnClean = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         txtfloor = new javax.swing.JTextField();
+        cbxBlock = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbLabs = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
@@ -51,53 +51,101 @@ public class JPanelLaboratorios extends javax.swing.JPanel {
         jLabel1.setText("Agregar");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Nombre");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 150, -1));
 
         jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Bloque");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 150, -1));
 
         jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Codigo");
-        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 150, -1));
-        jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 310, -1));
 
-        txtBlock.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtBlockActionPerformed(evt);
-            }
-        });
-        jPanel1.add(txtBlock, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 310, -1));
-        jPanel1.add(txtCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, 310, -1));
-
-        btnAdd.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        btnAdd.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         btnAdd.setText("Agregar");
-        jPanel1.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, -1, -1));
 
-        btnDelete.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        btnDelete.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         btnDelete.setText("Eliminar");
-        jPanel1.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, -1, -1));
 
-        btnEdit.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        btnEdit.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         btnEdit.setText("Editar");
-        jPanel1.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, -1, -1));
 
-        btnClean.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        btnClean.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         btnClean.setText("Limpiar");
-        jPanel1.add(btnClean, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 160, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Piso");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 150, -1));
-        jPanel1.add(txtfloor, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, 310, -1));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(128, 128, 128)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(138, 138, 138)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(80, 80, 80)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtfloor, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbxBlock, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(138, 138, 138)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(80, 80, 80)
+                                .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(80, 80, 80)
+                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btnAdd)
+                                .addGap(91, 91, 91)
+                                .addComponent(btnDelete)
+                                .addGap(92, 92, 92)
+                                .addComponent(btnEdit)
+                                .addGap(95, 95, 95)
+                                .addComponent(btnClean)))))
+                .addContainerGap(175, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7)
+                    .addComponent(txtCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(cbxBlock, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(8, 8, 8)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5)
+                    .addComponent(txtfloor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAdd)
+                    .addComponent(btnDelete)
+                    .addComponent(btnEdit)
+                    .addComponent(btnClean))
+                .addContainerGap())
+        );
 
         tbLabs.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -119,11 +167,11 @@ public class JPanelLaboratorios extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 890, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 890, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 890, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 890, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 893, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 893, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 893, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -131,7 +179,7 @@ public class JPanelLaboratorios extends javax.swing.JPanel {
                 .addGap(10, 10, 10)
                 .addComponent(jLabel1)
                 .addGap(10, 10, 10)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addComponent(jLabel3)
                 .addGap(10, 10, 10)
@@ -139,16 +187,13 @@ public class JPanelLaboratorios extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtBlockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBlockActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtBlockActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnClean;
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnEdit;
+    private javax.swing.JComboBox<String> cbxBlock;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -158,7 +203,6 @@ public class JPanelLaboratorios extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbLabs;
-    private javax.swing.JTextField txtBlock;
     private javax.swing.JTextField txtCode;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtfloor;
