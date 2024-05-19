@@ -55,6 +55,14 @@ public final class ControllerPanelLabs {
                 || view.txtfloor.getText().equals("")
                 || view.txtName.getText().equals(""));
     }
+    
+    private void cleanFields(){
+        view.txtCode.setText("");
+        view.txtfloor.setText("");
+        view.txtName.setText("");
+        view.chkLab.setSelected(false);
+        view.cbxBlock.setSelectedIndex(0);
+    }
 
     public void addLabs() {
         if (validateFields()) {
@@ -68,6 +76,7 @@ public final class ControllerPanelLabs {
                     .build();
             if (labdb.addLab(lb)) {
                 JOptionPane.showMessageDialog(view, "Se guardo");
+                cleanFields();
             } else {
                 JOptionPane.showMessageDialog(view, "No se guardo");
             }
