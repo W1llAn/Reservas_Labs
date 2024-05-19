@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Principal;
-import Modelos.Conexion;
+import Controladores.Cont_login;
+import Modelos.Usuario;
+import Vista.Login;
 
 /**
  *
@@ -11,7 +13,10 @@ import Modelos.Conexion;
  */
 public class Principal {
     public static void main(String[] args) {
-        new Conexion().Conectar();
+        Login log = new Login();
+        Usuario user = new Usuario();
+        Cont_login controlador = new Cont_login(log, user);
+        log.setVisible(true);
     }
 }
 

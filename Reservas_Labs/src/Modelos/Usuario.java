@@ -29,6 +29,9 @@ public class Usuario {
         this.respuesta = respuesta;
     }
 
+    public Usuario() {
+    }
+
     public String getPregunta_seguridad() {
         return this.pregunta_seguridad;
     }
