@@ -4,6 +4,7 @@
  */
 package Controladores;
 
+import Modelos.BlockDB;
 import Modelos.Lab;
 import Modelos.LabDB;
 import Vista.JPanelLaboratorios;
@@ -20,12 +21,14 @@ public final class ControllerPanelLabs {
     private final DefaultTableModel table;
     private DefaultComboBoxModel combo;
     private final LabDB labdb;
+    private final BlockDB blockDB;
 
     public ControllerPanelLabs(JPanelLaboratorios vista) {
         this.view = vista;
         table = new DefaultTableModel(new String[]{"Codigo", "Nombre", "Bloque", "Piso", "Tipo"}, 0);
         combo = new DefaultComboBoxModel();
         labdb = new LabDB();
+        blockDB = new BlockDB();
         fillTable();
         fillCombo();
     }
@@ -41,13 +44,11 @@ public final class ControllerPanelLabs {
         combo.removeAllElements();
         
         table.setRowCount(0);
-        view.tbLabs.setModel(table);
-        labdb.labList().forEach(lab -> 
-                    table.addRow(new Object[]{lab.getCode(),lab.getName(),lab.getBlockName(),lab.isLab()})
+        blockDB.blockList().forEach(lab -> 
+                    table.addRow(new Object[]{lab})
                 );
     }
-    
-    
+      
 
     public void addLabs(Lab l) {
         
