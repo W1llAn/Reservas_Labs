@@ -32,23 +32,22 @@ public final class ControllerPanelLabs {
         fillTable();
         fillCombo();
     }
-    
+
     private void fillTable() {
         table.setRowCount(0);
-        labdb.labList().forEach(lab -> 
-                    table.addRow(new Object[]{lab.getCode(),lab.getName(),lab.getBlockName(),lab.isLab()})
-                );
+        labdb.labList().forEach(lab
+                -> table.addRow(new Object[]{lab.getCode(), lab.getName(), lab.getBlockName(), lab.isLab()})
+        );
         view.tbLabs.setModel(table);
     }
+
     private void fillCombo() {
         combo.removeAllElements();
-        
-        table.setRowCount(0);
-        blockDB.blockList().forEach(lab -> 
-                    table.addRow(new Object[]{lab})
-                );
+
+        blockDB.blockList().forEach(lab
+                -> combo.addElement(lab)
+        );
     }
-      
 
     public void addLabs(Lab l) {
         
