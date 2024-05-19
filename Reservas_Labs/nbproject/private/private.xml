@@ -5,7 +5,8 @@
         <group>
             <file>file:/C:/Users/William/Documents/4°%20Semestre/Configuracion%20Software/2Parcial/Reservas_Labs/Reservas_Labs/src/Vista/Login.java</file>
             <file>file:/C:/Users/William/Documents/4°%20Semestre/Configuracion%20Software/2Parcial/Reservas_Labs/Reservas_Labs/src/Principal/Principal.java</file>
-            <file>file:/C:/Users/William/Documents/4°%20Semestre/Configuracion%20Software/2Parcial/Reservas_Labs/Reservas_Labs/src/Modelos/Conexion.java</file>
+            <file>file:/C:/Users/William/Documents/4°%20Semestre/Configuracion%20Software/2Parcial/Reservas_Labs/Reservas_Labs/src/Modelos/Usuario.java</file>
+            <file>file:/C:/Users/William/Documents/4°%20Semestre/Configuracion%20Software/2Parcial/Reservas_Labs/Reservas_Labs/src/Controladores/Cont_login.java</file>
         </group>
     </open-files>
 </project-private>
