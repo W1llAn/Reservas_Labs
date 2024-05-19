@@ -9,7 +9,7 @@ package Modelos;
  * @author Kiwar
  */
 public class Lab {
-    
+
     private int id;
     private String name;
     private boolean type;
@@ -73,15 +73,15 @@ public class Lab {
     public void setIdBlock(int idBlock) {
         this.idBlock = idBlock;
     }
-    
-    public static class LabBuilder{
-     
-    private int id;
-    private String name;
-    private boolean type;
-    private String code;
-    private int floor;
-    private int idBlock;
+
+    public static class LabBuilder {
+
+        private int id;
+        private String name;
+        private boolean type;
+        private String code;
+        private int floor;
+        private int idBlock;
 
         public LabBuilder Id(int id) {
             this.id = id;
@@ -112,11 +112,11 @@ public class Lab {
             this.idBlock = idBlock;
             return this;
         }
-    
-    public Lab build(){
-        return new Lab(id, name, type, code, floor, idBlock);
+
+        public Lab build() {
+            return new Lab(id, name, type, code, floor, idBlock);
+        }
+
     }
-    
-}
-     
+
 }

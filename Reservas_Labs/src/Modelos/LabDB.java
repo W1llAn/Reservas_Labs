@@ -2,6 +2,9 @@ package Modelos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
+import java.util.List;
+import java.sql.ResultSet;
 
 
 public class LabDB {
@@ -31,5 +34,36 @@ public class LabDB {
         
     }
     
+   public List<Lab> labList() {
+    List<Lab> labs = new ArrayList<>();
+    try (Connection cn = con.Conectar();
+         PreparedStatement preparedStatement = cn.prepareStatement("SELECT * FROM laboratorios")) {
+        
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            // Suponiendo que la clase Lab tiene un constructor que acepta estos parámetros
+            Lab lab = new Lab.LabBuilder()
+                    .Id(resultSet.getInt("id"))
+                    .Name(resultSet.getString("nombre_laboratorio"))
+                    .Type(resultSet.getBoolean("es_aula"))
+                    .Code(resultSet.getString("codigo"))
+                    .IdBlock(resultSet.getInt("id_bloque"))
+                    .Floor(resultSet.getInt("piso"))
+                    .build();
+                    
+                    /*new Lab(
+                resultSet.getInt("id"), // Ajusta los nombres de las columnas según tu base de datos
+                resultSet.getString("nombre"),
+                resultSet.getString("ubicacion"),
+                resultSet.getString("telefono")
+                // Añade más atributos según tu tabla de laboratorios
+            );*/
+            labs.add(lab);
+        }
+    } catch (Exception e) {
+        System.out.println("Error: " + e);
+    }
+    return labs;
+}
         
 }
