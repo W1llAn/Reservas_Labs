@@ -4,11 +4,13 @@
  */
 package Controladores;
 
+import Modelos.Block;
 import Modelos.BlockDB;
 import Modelos.Lab;
 import Modelos.LabDB;
 import Vista.JPanelLaboratorios;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -43,14 +45,35 @@ public final class ControllerPanelLabs {
 
     private void fillCombo() {
         combo.removeAllElements();
-
         blockDB.blockList().forEach(lab
                 -> combo.addElement(lab)
         );
     }
 
-    public void addLabs(Lab l) {
-        
+    private boolean validateFields() {
+        return (view.txtCode.getText().equals("")
+                || view.txtfloor.getText().equals("")
+                || view.txtName.getText().equals(""));
+    }
+
+    public void addLabs() {
+        if (validateFields()) {
+            Lab lb = new Lab.LabBuilder()
+                    .Name(view.txtName.getText())
+                    .Code(view.txtCode.getText())
+                    .Floor(Integer.getInteger(view.txtfloor.getText()))
+                    .BlockName(((Block) view.cbxBlock.getSelectedItem()).getName())
+                    .IdBlock(((Block) view.cbxBlock.getSelectedItem()).getId())
+                    .Type(view.chkLab.isSelected())
+                    .build();
+            if (labdb.addLab(lb)) {
+                JOptionPane.showMessageDialog(view, "Se guardo");
+            } else {
+                JOptionPane.showMessageDialog(view, "No se guardo");
+            }
+        } else {
+            JOptionPane.showMessageDialog(view, "Campos Incompletos");
+        }
     }
 
     public boolean editLabs() {
