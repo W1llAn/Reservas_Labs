@@ -27,6 +27,7 @@ public class Reservas extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        jSlider1 = new javax.swing.JSlider();
         panelReservas = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txtHoraFin = new javax.swing.JTextField();
@@ -36,13 +37,17 @@ public class Reservas extends javax.swing.JInternalFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtObservacionesLaboratorio = new javax.swing.JTextField();
         txtHoraInicio = new javax.swing.JTextField();
-        txtAsunto = new javax.swing.JTextField();
         jDayChooser1 = new com.toedter.calendar.JDayChooser();
         jLabel1 = new javax.swing.JLabel();
         cbLaboratorios = new javax.swing.JComboBox<>();
         jSeparator1 = new javax.swing.JSeparator();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(930, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -86,16 +91,6 @@ public class Reservas extends javax.swing.JInternalFrame {
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Asunto:");
 
-        txtObservacionesLaboratorio.setBackground(new java.awt.Color(147, 10, 13));
-        txtObservacionesLaboratorio.setFont(new java.awt.Font("Constantia", 0, 15)); // NOI18N
-        txtObservacionesLaboratorio.setForeground(new java.awt.Color(255, 255, 255));
-        txtObservacionesLaboratorio.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
-        txtObservacionesLaboratorio.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtObservacionesLaboratorioActionPerformed(evt);
-            }
-        });
-
         txtHoraInicio.setBackground(new java.awt.Color(147, 10, 13));
         txtHoraInicio.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
         txtHoraInicio.setForeground(new java.awt.Color(255, 255, 255));
@@ -103,16 +98,6 @@ public class Reservas extends javax.swing.JInternalFrame {
         txtHoraInicio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtHoraInicioActionPerformed(evt);
-            }
-        });
-
-        txtAsunto.setBackground(new java.awt.Color(147, 10, 13));
-        txtAsunto.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
-        txtAsunto.setForeground(new java.awt.Color(255, 255, 255));
-        txtAsunto.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
-        txtAsunto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtAsuntoActionPerformed(evt);
             }
         });
 
@@ -136,44 +121,89 @@ public class Reservas extends javax.swing.JInternalFrame {
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
         jSeparator1.setAlignmentX(0.3F);
 
+        jTextArea1.setBackground(new java.awt.Color(147, 10, 13));
+        jTextArea1.setColumns(20);
+        jTextArea1.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
+        jTextArea1.setForeground(new java.awt.Color(255, 255, 255));
+        jTextArea1.setLineWrap(true);
+        jTextArea1.setRows(5);
+        jTextArea1.setToolTipText("");
+        jTextArea1.setWrapStyleWord(true);
+        jTextArea1.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+        jTextArea1.setCaretColor(new java.awt.Color(255, 255, 255));
+        jTextArea1.setDisabledTextColor(new java.awt.Color(147, 10, 13));
+        jTextArea1.setSelectedTextColor(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jTextArea2.setBackground(new java.awt.Color(147, 10, 13));
+        jTextArea2.setColumns(20);
+        jTextArea2.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
+        jTextArea2.setForeground(new java.awt.Color(255, 255, 255));
+        jTextArea2.setLineWrap(true);
+        jTextArea2.setRows(5);
+        jTextArea2.setToolTipText("");
+        jTextArea2.setWrapStyleWord(true);
+        jTextArea2.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+        jTextArea2.setCaretColor(new java.awt.Color(255, 255, 255));
+        jTextArea2.setDisabledTextColor(new java.awt.Color(147, 10, 13));
+        jScrollPane2.setViewportView(jTextArea2);
+
+        jButton1.setBackground(new java.awt.Color(147, 10, 13));
+        jButton1.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Reservar");
+        jButton1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 255), new java.awt.Color(255, 255, 255), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255)));
+
+        jButton2.setBackground(new java.awt.Color(43, 43, 43));
+        jButton2.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Cancelar");
+        jButton2.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 255), new java.awt.Color(255, 255, 255), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255)));
+
         javax.swing.GroupLayout panelReservasLayout = new javax.swing.GroupLayout(panelReservas);
         panelReservas.setLayout(panelReservasLayout);
         panelReservasLayout.setHorizontalGroup(
             panelReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelReservasLayout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel1)
-                .addGap(109, 109, 109)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(panelReservasLayout.createSequentialGroup()
-                .addGap(48, 48, 48)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 798, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(panelReservasLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(jLabel3)
-                .addGap(228, 228, 228)
-                .addComponent(jLabel4)
-                .addGap(123, 123, 123)
-                .addComponent(jLabel7))
-            .addGroup(panelReservasLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
                 .addGroup(panelReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cbLaboratorios, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtAsunto, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8))
-                .addGap(66, 66, 66)
-                .addGroup(panelReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5)
-                    .addComponent(txtHoraFin, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(70, 70, 70)
-                .addComponent(jDayChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(panelReservasLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(jLabel6))
-            .addGroup(panelReservasLayout.createSequentialGroup()
-                .addGap(64, 64, 64)
-                .addComponent(txtObservacionesLaboratorio, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelReservasLayout.createSequentialGroup()
+                        .addGap(64, 64, 64)
+                        .addComponent(jLabel3)
+                        .addGap(228, 228, 228)
+                        .addComponent(jLabel4)
+                        .addGap(123, 123, 123)
+                        .addComponent(jLabel7))
+                    .addGroup(panelReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(panelReservasLayout.createSequentialGroup()
+                            .addGap(64, 64, 64)
+                            .addGroup(panelReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(panelReservasLayout.createSequentialGroup()
+                                    .addGroup(panelReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(cbLaboratorios, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel8)
+                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel6))
+                                    .addGap(90, 90, 90)
+                                    .addGroup(panelReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(txtHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel5)
+                                        .addComponent(txtHoraFin, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 264, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(70, 70, 70)
+                            .addGroup(panelReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jDayChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 202, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGap(0, 0, Short.MAX_VALUE))
+                        .addGroup(panelReservasLayout.createSequentialGroup()
+                            .addGap(23, 23, 23)
+                            .addComponent(jLabel1)
+                            .addGap(109, 109, 109)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 385, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(panelReservasLayout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 798, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(59, 59, 59))
         );
         panelReservasLayout.setVerticalGroup(
             panelReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,24 +222,31 @@ public class Reservas extends javax.swing.JInternalFrame {
                 .addGap(12, 12, 12)
                 .addGroup(panelReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelReservasLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(cbLaboratorios, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtAsunto, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelReservasLayout.createSequentialGroup()
                         .addComponent(txtHoraInicio, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel5)
                         .addGap(18, 18, 18)
                         .addComponent(txtHoraFin, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jDayChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(6, 6, 6)
+                    .addComponent(jDayChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelReservasLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(cbLaboratorios, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(28, 28, 28)
                 .addComponent(jLabel6)
-                .addGap(18, 18, 18)
-                .addComponent(txtObservacionesLaboratorio, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(panelReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelReservasLayout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelReservasLayout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(jButton1)
+                        .addGap(34, 34, 34)
+                        .addComponent(jButton2)))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         getContentPane().add(panelReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 928, 576));
@@ -217,17 +254,9 @@ public class Reservas extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtAsuntoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtAsuntoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtAsuntoActionPerformed
-
     private void txtHoraInicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHoraInicioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtHoraInicioActionPerformed
-
-    private void txtObservacionesLaboratorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtObservacionesLaboratorioActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtObservacionesLaboratorioActionPerformed
 
     private void txtHoraFinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtHoraFinActionPerformed
         // TODO add your handling code here:
@@ -236,6 +265,8 @@ public class Reservas extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cbLaboratorios;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private com.toedter.calendar.JDayChooser jDayChooser1;
     private javax.swing.JLabel jLabel1;
@@ -246,11 +277,14 @@ public class Reservas extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSlider jSlider1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
     private javax.swing.JPanel panelReservas;
-    private javax.swing.JTextField txtAsunto;
     private javax.swing.JTextField txtHoraFin;
     private javax.swing.JTextField txtHoraInicio;
-    private javax.swing.JTextField txtObservacionesLaboratorio;
     // End of variables declaration//GEN-END:variables
 }
