@@ -16,16 +16,27 @@ public class Lab {
     private String code;
     private int floor;
     private int idBlock;
+    private String blockName;
 
-    private Lab(int id, String name, boolean type, String code, int floor, int idBlock) {
+    private Lab(int id, String name, boolean type, String code, int floor, int idBlock,String blockName) {
         this.id = id;
         this.name = name;
         this.type = type;
         this.code = code;
         this.floor = floor;
         this.idBlock = idBlock;
+        this.blockName = blockName;
     }
 
+    public String getBlockName() {
+        return blockName;
+    }
+
+    public void setBlockName(String blockName) {
+        this.blockName = blockName;
+    }
+
+    
     public int getId() {
         return id;
     }
@@ -73,6 +84,10 @@ public class Lab {
     public void setIdBlock(int idBlock) {
         this.idBlock = idBlock;
     }
+    
+    public String isLab(){
+        return (this.isType())?"Aula":"Laboratorio";
+    }
 
     public static class LabBuilder {
 
@@ -83,6 +98,13 @@ public class Lab {
         private int floor;
         private int idBlock;
 
+    private String blockName;
+    
+     public LabBuilder BlockName(String name) {
+            this.blockName = name;
+            return this;
+        }
+    
         public LabBuilder Id(int id) {
             this.id = id;
             return this;
@@ -114,7 +136,7 @@ public class Lab {
         }
 
         public Lab build() {
-            return new Lab(id, name, type, code, floor, idBlock);
+            return new Lab(id, name, type, code, floor, idBlock,blockName);
         }
 
     }

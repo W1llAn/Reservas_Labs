@@ -4,6 +4,7 @@
  */
 package Controladores;
 
+import Modelos.Lab;
 import Modelos.LabDB;
 import Vista.JPanelLaboratorios;
 import javax.swing.DefaultComboBoxModel;
@@ -13,22 +14,29 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Kiwar
  */
-public class ControllerPanelLabs {
+public final class ControllerPanelLabs {
 
-    private JPanelLaboratorios vista;
-    private DefaultTableModel table;
+    private final JPanelLaboratorios view;
+    private final DefaultTableModel table;
     private DefaultComboBoxModel combo;
+    private final LabDB labdb;
 
     public ControllerPanelLabs(JPanelLaboratorios vista) {
-        this.vista = vista;
-        table = new DefaultTableModel(new String[]{"Codigo", "Bloque", "Piso", "Nombre"}, 0);
+        this.view = vista;
+        table = new DefaultTableModel(new String[]{"Codigo", "Nombre", "Bloque", "Piso", "Tipo"}, 0);
+        labdb = new LabDB();
+        fillTable();
     }
-
+    
     public void fillTable() {
-        
+        table.setRowCount(0);
+        view.tbLabs.setModel(table);
+        labdb.labList().forEach(lab -> 
+                    table.addRow(new Object[]{lab.getCode(),lab.getName(),lab.getBlockName(),lab.isLab()})
+                );
     }
 
-    public boolean addLabs() {
+    public boolean addLabs(Lab l) {
         
         return true;
     }
