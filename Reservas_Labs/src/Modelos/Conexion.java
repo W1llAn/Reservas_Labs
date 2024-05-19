@@ -12,7 +12,7 @@ import java.sql.DriverManager;
  * @author William
  */
 public class Conexion {
-        private static final String url="jdbc:sqlserver://serv-reserv.database.windows.net:1433;database=reservas_labs;user=administrador@serv-reserv;password=Reservas_04BDD;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
+    private static final String url="jdbc:sqlserver://serv-reserv.database.windows.net:1433;database=reservas_labs;user=administrador@serv-reserv;password=Reservas_04BDD;encrypt=true;trustServerCertificate=false;hostNameInCertificate=*.database.windows.net;loginTimeout=30;";
     private static final String driver="com.microsoft.sqlserver.jdbc.SQLServerDriver";
     private static Connection con;
     

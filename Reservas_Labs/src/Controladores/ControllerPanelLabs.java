@@ -18,7 +18,6 @@ public class ControllerPanelLabs {
     private JPanelLaboratorios vista;
     private DefaultTableModel table;
     private DefaultComboBoxModel combo;
-    private LabDB labd;
 
     public ControllerPanelLabs(JPanelLaboratorios vista) {
         this.vista = vista;

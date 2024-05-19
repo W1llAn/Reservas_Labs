@@ -8,7 +8,7 @@ package Modelos;
  *
  * @author Kiwar
  */
-class Lab {
+public class Lab {
     
     private int id;
     private String name;
