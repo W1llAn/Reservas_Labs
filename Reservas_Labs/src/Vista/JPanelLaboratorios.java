@@ -26,19 +26,123 @@ public class JPanelLaboratorios extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
-        );
+        jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txtName = new javax.swing.JTextField();
+        txtBlock = new javax.swing.JTextField();
+        txtCode = new javax.swing.JTextField();
+        btnAdd = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnEdit = new javax.swing.JButton();
+        btnClean = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        txtfloor = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tbLabs = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+
+        setPreferredSize(new java.awt.Dimension(930, 600));
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Agregar");
+        add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, 890, -1));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("Nombre");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 150, -1));
+
+        jLabel4.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("Bloque");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 150, -1));
+
+        jLabel7.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("Codigo");
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 150, -1));
+        jPanel1.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 120, 310, -1));
+
+        txtBlock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtBlockActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtBlock, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 310, -1));
+        jPanel1.add(txtCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, 310, -1));
+
+        btnAdd.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        btnAdd.setText("Agregar");
+        jPanel1.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, -1, -1));
+
+        btnDelete.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        btnDelete.setText("Eliminar");
+        jPanel1.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 160, -1, -1));
+
+        btnEdit.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        btnEdit.setText("Editar");
+        jPanel1.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 160, -1, -1));
+
+        btnClean.setFont(new java.awt.Font("Times New Roman", 1, 11)); // NOI18N
+        btnClean.setText("Limpiar");
+        jPanel1.add(btnClean, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 160, -1, -1));
+
+        jLabel5.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Piso");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 90, 150, -1));
+        jPanel1.add(txtfloor, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 90, 310, -1));
+
+        add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 890, 210));
+
+        tbLabs.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane1.setViewportView(tbLabs);
+
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 890, 280));
+
+        jLabel3.setFont(new java.awt.Font("Times New Roman", 1, 16)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("Laboratorios");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 890, -1));
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtBlockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBlockActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtBlockActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnClean;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEdit;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tbLabs;
+    private javax.swing.JTextField txtBlock;
+    private javax.swing.JTextField txtCode;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtfloor;
     // End of variables declaration//GEN-END:variables
 }
