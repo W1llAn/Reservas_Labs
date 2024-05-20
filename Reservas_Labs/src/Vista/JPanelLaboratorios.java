@@ -82,7 +82,7 @@ public class JPanelLaboratorios extends javax.swing.JPanel {
         jLabel5.setText("Piso");
 
         chkLab.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        chkLab.setText("Laboratorio");
+        chkLab.setText("Aula");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
