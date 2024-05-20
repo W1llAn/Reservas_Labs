@@ -43,7 +43,10 @@ public class usuario {
     public void setNombre_usuario(String nombre_usuario) {
         this.nombre_usuario = nombre_usuario;
     }
-
+    @Override
+    public String toString(){
+    return this.nombre_usuario;
+    }
     //CONSULTAR USUARIO
     public ArrayList<usuario> consultaUsuarios() throws SQLException, ClassNotFoundException {
         ArrayList<usuario> usuarios = new ArrayList<>();
@@ -55,7 +58,7 @@ public class usuario {
             con = conexion.Conectar();
             Statement st = con.createStatement();
             ResultSet rs = null;
-            String consulta = "SELECT * FROM usuario;";
+            String consulta = "SELECT * FROM Usuarios;";
             rs = st.executeQuery(consulta);
             while (rs.next()) {
                 usuario user = new usuario();

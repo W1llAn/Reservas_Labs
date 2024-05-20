@@ -41,6 +41,11 @@ public class docente {
     public void setNombre_responsable(String nombre_responsable) {
         this.nombre_responsable = nombre_responsable;
     }
+    
+    @Override
+    public String toString(){
+        return this.nombre_responsable;
+    }
     //CONSULTA DE RESPONSABLES EN LA BASE DE DATOS
      public ArrayList<docente> consultaDocente() throws SQLException, ClassNotFoundException {
         ArrayList<docente> Responsable = new ArrayList<>();

@@ -19,15 +19,16 @@ public class Principal {
     public static void main(String[] args) {
         try {
             new Conexion().Conectar();
-            Reservas res = new Reservas();
+            Reservas visualDeReserva = new Reservas();
             Reserva mres= new Reserva();
             JFrame frame = new JFrame();
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.setSize(900, 600);  // Ajusta el tamaño según necesites
-            frame.add(res);  // 'res' es tu JInternalFrame
+            frame.setSize(930, 600);  // Ajusta el tamaño según necesites
+            frame.add(visualDeReserva);  // 'res' es tu JInternalFrame
             frame.setVisible(true);
-            guardarReserva gr = new guardarReserva(res,mres);
-            res.setVisible(true);
+            frame.setLocationRelativeTo(null);
+            guardarReserva gr = new guardarReserva(visualDeReserva,mres);
+            visualDeReserva.setVisible(true);
         } catch (Exception e) {
             e.printStackTrace();  // Esto mostrará el error en la consola
         }

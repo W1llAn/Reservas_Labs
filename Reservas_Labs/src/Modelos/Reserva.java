@@ -1,11 +1,9 @@
-
 package Modelos;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
+import java.time.LocalTime;
 import java.util.Date;
 
 /**
@@ -13,28 +11,96 @@ import java.util.Date;
  * @author ASUS
  */
 public class Reserva {
-  private String laboratorio,horaFin,horaInicio,descripcion,observacionLaboratorio; 
-  private Date fechaReserva; 
-  private Recursos rec = new Recursos();
-//  
-//  
-//  
-//  
-//    //Consultas SQL-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//
-//  //GUARDAR CLIENTE-------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-//    public void guardarReserva(Reserva res) throws SQLException {
-//        Conexion conec = new Conexion();
-//        Connection con = conec.Conectar();
-//        if (con == null) {
-//            rec.aviso("No tiene conexion RECUERDE cada accion que realize en el programa no se va a guardar");
-//        } else {
-//            Statement stmt = con.createStatement();
-//            String consulta = "INSERT INTO reservas (cedula,nombre,ciudadID,direccion) VALUES('"+c.getCedula()+"','"+ c.getNombre()+"','"+c.getCiudad().getCodigo()+"','"+ c.getDireccion()+"');";
-//            stmt.executeUpdate(consulta);
-//            stmt.close();
-//            con.close();
-//        }
-//    }
-      
+
+    private String descripcion;
+    private String horafin, horaInicio,fechaReserva;
+    private int usuario, docente, laboratorio;
+    private Recursos rec = new Recursos();
+
+    public Reserva(String descripcion, String horafin, String horaInicio, String fechaReserva, int usuario, int docente, int laboratorio) {
+        this.descripcion = descripcion;
+        this.horafin = horafin;
+        this.horaInicio = horaInicio;
+        this.fechaReserva = fechaReserva;
+        this.usuario = usuario;
+        this.docente = docente;
+        this.laboratorio = laboratorio;
+    }
+
+    public Reserva() {
+    }
+
+    public int getUsuario() {
+        return this.usuario;
+    }
+
+    public void setUsuario(int usuario) {
+        this.usuario = usuario;
+    }
+
+    public int getDocente() {
+        return this.docente;
+    }
+
+    public void setDocente(int docente) {
+        this.docente = docente;
+    }
+
+    public int getLaboratorio() {
+        return this.laboratorio;
+    }
+
+    public void setLaboratorio(int laboratorio) {
+        this.laboratorio = laboratorio;
+    }
+
+    public String getDescripcion() {
+        return this.descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getFechaReserva() {
+        return this.fechaReserva;
+    }
+
+    public void setFechaReserva(String fechaReserva) {
+        this.fechaReserva = fechaReserva;
+    }
+
+    
+
+    public String getHorafin() {
+        return this.horafin;
+    }
+
+    public void setHorafin(String horafin) {
+        this.horafin = horafin;
+    }
+
+    public String getHoraInicio() {
+        return this.horaInicio;
+    }
+
+    public void setHoraInicio(String horaInicio) {
+        this.horaInicio = horaInicio;
+    }
+
+    public Recursos getRec() {
+        return this.rec;
+    }
+
+    public void setRec(Recursos rec) {
+        this.rec = rec;
+    }
+
+
 }
+
+
+
+
+
+//  //GUARDAR CLIENTE-------------------------------------------------------------------------------------------------------------------------------------------------------------------------

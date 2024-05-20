@@ -41,7 +41,10 @@ public class bloque {
     public void setNombre_bloque(String nombre_bloque) {
         this.nombre_bloque = nombre_bloque;
     }
-    
+    @Override
+    public String toString(){
+    return this.nombre_bloque;
+    }
     
     //CONSULTAR bloque -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     public ArrayList<bloque> consultaBloques() throws SQLException, ClassNotFoundException {

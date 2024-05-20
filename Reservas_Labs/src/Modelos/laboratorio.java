@@ -43,8 +43,11 @@ public class laboratorio {
         this.nombreLaboratorio = nombreLaboratorio;
     }
     //CONSULTAR LABORATORIOS -------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-    public ArrayList<laboratorio> consultaLaboratorio() throws SQLException, ClassNotFoundException {
+    @Override
+    public String toString(){
+    return this.nombreLaboratorio;
+    }
+    public ArrayList<laboratorio> consultaLaboratorio(int id_bloque) throws SQLException, ClassNotFoundException {
         ArrayList<laboratorio> laboratorios = new ArrayList<>();
         Conexion conexion = new Conexion();
         Connection con = conexion.Conectar();
@@ -54,7 +57,7 @@ public class laboratorio {
             con = conexion.Conectar();
             Statement st = con.createStatement();
             ResultSet rs = null;
-            String consulta = "SELECT * from laboratorios;";
+            String consulta = "SELECT * from laboratorios where id_bloque='"+id_bloque+"';";
             rs = st.executeQuery(consulta);
             while (rs.next()) {
                 laboratorio labs=  new laboratorio();
