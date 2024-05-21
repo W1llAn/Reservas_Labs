@@ -66,7 +66,7 @@ public class Usuario {
     public int getId_usuario() {
         return this.id_usuario;
     }
-    public ArrayList<Usuario> accedoBD() throws SQLException, ClassNotFoundException{
+    public ArrayList<Usuario> DataUsuarios() throws SQLException, ClassNotFoundException{
     ArrayList<Usuario> Usuarios = new ArrayList<>();
     Recurso rec = new Recurso();
     Conexion conexion = new Conexion();    

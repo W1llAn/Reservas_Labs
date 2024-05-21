@@ -50,7 +50,11 @@ public class Cont_login implements ActionListener{
     }
     
     private void llenarUsuarios() throws SQLException {
-        this.usuario= new Usuario().DataUsuarios();
+        try {
+            this.usuario= new Usuario().DataUsuarios();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Cont_login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     private boolean VerificacionCredenciales(String username, String contraseña) throws SQLException{
