@@ -60,7 +60,7 @@ class PreguntasS {
                                                           rs.getString("descipcion_pregunta"));
                     preguntas.add(pregunta);
                 } catch (Exception ex) {
-                    Logger.getLogger(Usuario.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(PreguntasS.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         st.close();
