@@ -39,7 +39,6 @@ public class Login extends javax.swing.JFrame {
         txt_contraseña = new javax.swing.JPasswordField();
         btn_salir = new javax.swing.JButton();
         btn_ingresar = new javax.swing.JButton();
-        jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         txt_usuario = new java.awt.TextField();
         JP_fondo = new javax.swing.JLabel();
@@ -117,11 +116,6 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(btn_ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 340, 40));
 
-        jLabel8.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Registrarse");
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, -1, -1));
-
         jLabel9.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Olvidé mi contraseña");
@@ -193,7 +187,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JPanel panel_fondo;

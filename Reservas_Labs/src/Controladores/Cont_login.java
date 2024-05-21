@@ -6,6 +6,7 @@ package Controladores;
 import Modelos.Usuario;
 import Utilidades.Recurso;
 import Vista.Login;
+import Vista.Menu;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -50,7 +51,11 @@ public class Cont_login implements ActionListener{
     }
     
     private void llenarUsuarios() throws SQLException {
-        this.usuario= new Usuario().DataUsuarios();
+        try {
+            this.usuario= new Usuario().DataUsuarios();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Cont_login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     private boolean VerificacionCredenciales(String username, String contraseña) throws SQLException{
@@ -69,7 +74,9 @@ public class Cont_login implements ActionListener{
             String username = vista_login.txt_usuario.getText(), contraseña = String.valueOf(vista_login.txt_contraseña.getPassword());
             try {
                 if (this.VerificacionCredenciales(username, contraseña)) {
-                    rec.aviso("Credenciales correctas");
+                MenuControlador menu = new MenuControlador();
+                this.vista_login.dispose();
+                menu.iniciar();
                 }else{
                     rec.aviso("Nombre de usuario o contraseña incorrecta");
                 }

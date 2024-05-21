@@ -10,7 +10,7 @@ import Modelos.Recursos;
 import Modelos.Reserva;
 import Modelos.bloque;
 import Modelos.docente;
-import Modelos.usuario;
+import Modelos.Usuario;
 import Vista.Reservas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -125,8 +125,8 @@ public class guardarReserva implements ActionListener {
     //LLENAR TXT USUARIO
 
     private void llenarDatosUsuario() {
-        usuario user = new usuario();
-        ArrayList<usuario> usuarios = new ArrayList<>();
+        Usuario user = new Usuario();
+        ArrayList<Usuario> usuarios = new ArrayList<>();
         try {
             usuarios = user.consultaUsuarios();
         } catch (Exception e) {
