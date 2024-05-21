@@ -56,7 +56,7 @@ public class Reservas extends javax.swing.JInternalFrame {
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        cbLaboratorios = new javax.swing.JComboBox<laboratorio>();
+        cbLaboratorios = new javax.swing.JComboBox<>();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane2 = new javax.swing.JScrollPane();
         textAreaAsunto = new javax.swing.JTextArea();
@@ -65,9 +65,9 @@ public class Reservas extends javax.swing.JInternalFrame {
         JspinerHoraInicio = new javax.swing.JSpinner();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        cbEdificios = new javax.swing.JComboBox<bloque>();
+        cbEdificios = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
-        cbResponsables = new javax.swing.JComboBox<docente>();
+        cbResponsables = new javax.swing.JComboBox<>();
         txtUsuario = new javax.swing.JTextField();
         JspinerHoraFin = new javax.swing.JSpinner();
 
