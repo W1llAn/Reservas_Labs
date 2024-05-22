@@ -36,8 +36,8 @@ public class LabDB {
 
     }
 
-    public List<Lab> labList() {
-        List<Lab> labs = new ArrayList<>();
+    public ArrayList<Lab> labList() {
+        ArrayList<Lab> labs = new ArrayList<>();
         try (Connection cn = con.Conectar(); PreparedStatement preparedStatement = cn.prepareStatement(
                 "SELECT l.*,b.nombre_bloque AS name FROM laboratorios l,bloques b where l.id_bloque=b.id"
         )) {
@@ -55,6 +55,7 @@ public class LabDB {
                         .build();
 
                 labs.add(lab);
+                Almacen.getInstance().agregarLabLista(lab);
             }
         } catch (Exception e) {
             System.out.println("Error: " + e);

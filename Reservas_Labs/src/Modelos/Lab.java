@@ -18,6 +18,9 @@ public class Lab {
     private int idBlock;
     private String blockName;
 
+    public Lab() {
+    }
+
     private Lab(int id, String name, boolean type, String code, int floor, int idBlock,String blockName) {
         this.id = id;
         this.name = name;

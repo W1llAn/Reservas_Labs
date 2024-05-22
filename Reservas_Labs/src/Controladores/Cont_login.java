@@ -4,9 +4,9 @@
  */
 package Controladores;
 import Modelos.Usuario;
+import Modelos.UsuarioSesion;
 import Utilidades.Recurso;
 import Vista.Login;
-import Vista.Menu;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,6 +25,7 @@ public class Cont_login implements ActionListener{
     Login vista_login = new Login();
     Recurso rec = new Recurso();
     Usuario user;
+    UsuarioSesion DatosUsuario;
 
     public Cont_login( Login vista_login, Usuario user) throws SQLException {
         this.ingresoImagenes( vista_login);
@@ -62,6 +63,8 @@ public class Cont_login implements ActionListener{
         for(Usuario user : this.usuario){
             System.out.println(username +"  "+contraseña+"---"+user.getNombre_usuario()+"  "+user.getContraseña());
             if (user.getNombre_usuario().equals(username) && user.getContraseña().equals(contraseña) ) {
+                DatosUsuario.setNombreUsuario(username);
+                DatosUsuario.setIdUsuario(user.getId_usuario());
                 return true;
             }
         }

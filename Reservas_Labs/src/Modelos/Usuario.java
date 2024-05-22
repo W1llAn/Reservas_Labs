@@ -59,10 +59,6 @@ public class Usuario {
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
-    
-
-
-
     public int getId_usuario() {
         return this.id_usuario;
     }

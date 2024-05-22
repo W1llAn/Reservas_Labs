@@ -14,16 +14,16 @@ public class Reserva {
 
     private String descripcion;
     private String horafin, horaInicio,fechaReserva;
-    private int usuario, docente, laboratorio;
+    private int usuario, responsable, laboratorio;
     private Recursos rec = new Recursos();
 
-    public Reserva(String descripcion, String horafin, String horaInicio, String fechaReserva, int usuario, int docente, int laboratorio) {
+    public Reserva(String descripcion, String horafin, String horaInicio, String fechaReserva, int usuario, int responsable, int laboratorio) {
         this.descripcion = descripcion;
         this.horafin = horafin;
         this.horaInicio = horaInicio;
         this.fechaReserva = fechaReserva;
         this.usuario = usuario;
-        this.docente = docente;
+        this.responsable = responsable;
         this.laboratorio = laboratorio;
     }
 
@@ -38,12 +38,12 @@ public class Reserva {
         this.usuario = usuario;
     }
 
-    public int getDocente() {
-        return this.docente;
+    public int getResponsable() {
+        return this.responsable;
     }
 
-    public void setDocente(int docente) {
-        this.docente = docente;
+    public void setResponsable(int responsable) {
+        this.responsable = responsable;
     }
 
     public int getLaboratorio() {
