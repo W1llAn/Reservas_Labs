@@ -15,14 +15,14 @@ import java.util.Calendar;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerDateModel;
 
-public class Reservas extends javax.swing.JInternalFrame {
+public class Reservas extends javax.swing.JFrame  {
 
     /**
      * Creates new form reservas
      */
     public Reservas() {
     initComponents();
-    this.setLocation(930, 600);
+    this.setLocationRelativeTo(null);
     //FORMATO PARA EL HORARIO DE INICIO SPINNER
     Date date = new Date(); // Fecha y hora actual
     SpinnerDateModel sm = new SpinnerDateModel(date, null, null, Calendar.MINUTE);

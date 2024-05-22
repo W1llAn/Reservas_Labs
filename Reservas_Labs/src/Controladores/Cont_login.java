@@ -64,6 +64,7 @@ public class Cont_login implements ActionListener{
             System.out.println(username +"  "+contraseña+"---"+user.getNombre_usuario()+"  "+user.getContraseña());
             if (user.getNombre_usuario().equals(username) && user.getContraseña().equals(contraseña) ) {
                 DatosUsuario.setNombreUsuario(username);
+                System.out.println("El usuario id desde cont_login"+user.getId_usuario());
                 DatosUsuario.setIdUsuario(user.getId_usuario());
                 return true;
             }

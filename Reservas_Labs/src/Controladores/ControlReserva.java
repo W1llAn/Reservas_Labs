@@ -12,8 +12,10 @@ import Modelos.Conexion;
 import Modelos.Recursos;
 import Modelos.Reserva;
 import Modelos.Lab;
+import Modelos.LabDB;
 import Modelos.Responsable;
 import Modelos.UsuarioSesion;
+import Vista.Menu;
 import Vista.Reservas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,7 +31,7 @@ import javax.swing.JSpinner;
  *
  * @author ASUS
  */
-public class guardarReserva implements ActionListener {
+public class ControlReserva implements ActionListener {
 
     private Reserva modeloRes;
     private Reservas vistaRes;
@@ -38,29 +40,37 @@ public class guardarReserva implements ActionListener {
     private Responsable responsable;
 //CONSTRUCTOR PARA GUARDAR LAS RESERVAS DE LABORATORIOS
 
-    public guardarReserva(Reservas vistRes, Reserva modeloRes) throws SQLException, ClassNotFoundException {
+    public ControlReserva(Reservas vistRes, Reserva modeloRes) throws SQLException, ClassNotFoundException {
         this.modeloRes = modeloRes;
-        this.vistaRes = vistRes;
+        this.vistaRes = vistRes; // Asegúrate de que esta asignación sea una de las primeras líneas en tu constructor.
+
+        // Inicializa y configura componentes que dependen de vistaRes
         this.vistaRes.btReservas.addActionListener(this);
         this.vistaRes.btCancelar.addActionListener(this);
-        //LLENAR EL CBBOX DE EDIFICIOS,DOCENTES,USUARIO
+
+        this.responsable = new Responsable();
+        LabDB labs = new LabDB();
+        labs.labList();
+
+        // Llenar datos que dependen de los componentes de vistaRes
+        this.llenarDatosCarreas();
         this.llenarDatosBloques();
         this.llenarDatosUsuario();
-        this.llenarDatosCarreas();
-        //Llenamos la lista de responsables
+
+        // Llenamos la lista de responsables
         responsable.consultaResponsables();
         this.vistaRes.cbCarreras.setSelectedIndex(-1);
         this.vistaRes.cbLaboratorios.setSelectedIndex(-1);
         this.vistaRes.cbEdificios.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                vistRes.cbLaboratorios.removeAllItems();
-                int id_bloque = vistRes.cbEdificios.getItemAt(vistRes.cbEdificios.getSelectedIndex()).getId();
-                System.out.println("id de edificio" + id_bloque);
-                consultarLaboratoriosEdificio(id_bloque);
+                if (vistaRes.cbEdificios.getSelectedIndex() != -1) {
+                    int id_bloque = vistaRes.cbEdificios.getItemAt(vistaRes.cbEdificios.getSelectedIndex()).getId();
+
+                    consultarLaboratoriosEdificio(id_bloque);
+                }
             }
         });
-
     }
 
     //GUARDAR INFORMACION DE LA RESERVA
@@ -78,10 +88,11 @@ public class guardarReserva implements ActionListener {
                     } catch (SQLException ex) {
                         rec.aviso("Fallo en la inserccion del responsable");
                     } catch (ClassNotFoundException ex) {
-                       rec.aviso("Fallo en la consulta del responsable");
+                        rec.aviso("Fallo en la consulta del responsable");
                     }
                 }
                 r.setResponsable(id_responsable);
+                System.out.println("El id del usuario es: " + UsuarioSesion.getIdUsuario());
                 r.setUsuario(UsuarioSesion.getIdUsuario());
                 r.setHoraInicio(obtenerHoraMinutosDesdeSpinner(this.vistaRes.JspinerHoraInicio));
                 r.setHorafin(obtenerHoraMinutosDesdeSpinner(this.vistaRes.JspinerHoraFin));
@@ -98,6 +109,13 @@ public class guardarReserva implements ActionListener {
                 }
             }
         }
+         if (e.getSource() == this.vistaRes.btCancelar) {
+             MenuControlador menu = new MenuControlador();
+             borrarDatos(vistaRes);
+             this.vistaRes.dispose();
+             menu.iniciar();
+             
+         }
     }
 //TRANSFORMAR EL SPINNER A HORAS Y MINUTOS 
 
@@ -145,15 +163,15 @@ public class guardarReserva implements ActionListener {
 
     private void llenarDatosUsuario() {
         String nombreUsuario = UsuarioSesion.getNombreUsuario();
-        this.vistaRes.txtUsuario.setText(nombreUsuario);
+        this.vistaRes.txtUsuario.setText(nombreUsuario.toUpperCase());
     }
     //LLENAR COMBOBOX EDIFICIOS
 
     private void consultarLaboratoriosEdificio(int id_bloque) {
-        ArrayList<Lab> labs = almacen.getListaLab();
-        for (int i = 0; i < labs.size(); i++) {
-            if (id_bloque == labs.get(i).getId()) {
-                this.vistaRes.cbLaboratorios.addItem(labs.get(i));
+        this.vistaRes.cbLaboratorios.removeAllItems();
+        for (int i = 0; i < Almacen.getInstance().listaLabo.size(); i++) {
+            if (id_bloque == Almacen.getInstance().listaLabo.get(i).getIdBlock()) {
+                this.vistaRes.cbLaboratorios.addItem(Almacen.getInstance().listaLabo.get(i));
             }
         }
     }
@@ -204,8 +222,13 @@ public class guardarReserva implements ActionListener {
     private void borrarDatos(Reservas vistaRes) {
         vistaRes.jFecha.setDate(null);
         this.vistaRes.cbLaboratorios.setSelectedIndex(-1);
-        this.vistaRes.cbEdificios.setSelectedIndex(-1);
-        vistaRes.textAreaAsunto.setText("");
+        this.vistaRes.cbEdificios.setSelectedIndex(-1);    
+        this.vistaRes.cbCarreras.setSelectedIndex(-1);
+        this.vistaRes.textAreaAsunto.setText("");
+        this.vistaRes.txtNombreResponsable.setText("");  
+        this.vistaRes.txtApellidoResponsable.setText("");
+        this.vistaRes.txtCedulaResponsable.setText("");    
+        this.vistaRes.txtCargoResponsable.setText("");
     }
 //Inserccion de los datos del usuario en la base 
 

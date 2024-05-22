@@ -55,7 +55,7 @@ public class LabDB {
                         .build();
 
                 labs.add(lab);
-                Almacen.getInstance().agregarLabLista(lab);
+                Almacen.getInstance().listaLabo.add(lab);
             }
         } catch (Exception e) {
             System.out.println("Error: " + e);
