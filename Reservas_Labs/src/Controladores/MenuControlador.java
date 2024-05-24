@@ -1,10 +1,13 @@
 package Controladores;
 
+import Modelos.Reserva;
 import Vista.Menu;
+import Vista.Reservas;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -20,17 +23,28 @@ public class MenuControlador implements MouseListener {
         menu = new Menu();
         this.menu.panItemReservas.addMouseListener(this);
         this.menu.lblReservas.addMouseListener(this);
-
     }
 
     public void iniciar() {
-
         this.menu.setVisible(true);
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        if (e.getSource() == this.menu.lblReservas) {
+            Reserva res = new Reserva();
+            Reservas vistReser = new Reservas();
+            try {
+                ControlReserva contr= new ControlReserva(vistReser, res);// Mostrar la ventana de reserva cuando se hace clic en lblReservas
+                vistReser.setVisible(true);
+                this.menu.dispose();
+            } catch (SQLException ex) {
+                System.out.println("es en inicar reserva");
+            } catch (ClassNotFoundException ex) {
+                System.out.println("es en inicar reserva");
+            }
+            this.menu.dispose();
+        }
     }
 
     @Override

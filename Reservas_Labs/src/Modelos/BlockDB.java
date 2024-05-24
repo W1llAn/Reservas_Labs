@@ -15,14 +15,15 @@ import java.util.List;
  * @author Kiwar
  */
 public class BlockDB {
-   
-    private Conexion con;
 
+    private Conexion con;
     public BlockDB() {
         con = new Conexion();
     }
- public List<Block> blockList() {
-        List<Block> blocks = new ArrayList<>();
+
+
+    public ArrayList<Block> blockList() {
+        ArrayList<Block> blocks = new ArrayList<>();
         try (Connection cn = con.Conectar(); PreparedStatement preparedStatement = cn.prepareStatement(
                 "SELECT * FROM bloques"
         )) {
@@ -31,6 +32,7 @@ public class BlockDB {
             while (resultSet.next()) {
                 Block block = new Block(resultSet.getInt("id"), resultSet.getString("nombre_bloque"));
                 blocks.add(block);
+                
             }
         } catch (Exception e) {
             System.out.println("Error: " + e);

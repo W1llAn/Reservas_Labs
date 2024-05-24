@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Modelos;
 
 /**
@@ -12,13 +9,16 @@ public class Block {
     private int id;
     private String name;
 
+    public Block() {
+    }
+
     public Block(int id, String name) {
         this.id = id;
         this.name = name;
     }
 
     public int getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(int id) {
@@ -26,7 +26,7 @@ public class Block {
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {
@@ -35,7 +35,7 @@ public class Block {
 
     @Override
     public String toString() {
-        return id + "   " + name ;
+        return this.name ;
     }
     
     
