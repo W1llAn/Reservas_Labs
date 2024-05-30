@@ -68,7 +68,45 @@ public class LabDB {
     public static void main(String[] args) {
         LabDB lb = new LabDB();
         //List<Lab> labs = 
-        lb.labList().forEach(lab->System.out.println(lab.getCode()+lab.getName()+lab.getBlockName()+lab.isLab()));
+        lb.labList().forEach(lab->System.out.println(lab.getCode()+lab.getName()+lab.getBlockName()+lab.isLab()+lab.isType()+lab.isLab()));
                 
     }*/
+    
+    public boolean editLab(Lab lb) {
+        String sql = "UPDATE laboratorios SET nombre_laboratorio = ?, piso = ?, id_bloque = ?, es_aula = ?, codigo = ? WHERE id_laboratorio = ?";
+
+        try (Connection cn = con.Conectar(); PreparedStatement preparedStatement = cn.prepareStatement(sql)) {
+
+            // Establecer los parámetros
+            preparedStatement.setString(1, lb.getName());
+            preparedStatement.setInt(2, lb.getFloor());
+            preparedStatement.setInt(3, lb.getIdBlock());
+            preparedStatement.setBoolean(4, lb.isType());
+            preparedStatement.setString(5, lb.getCode());
+            preparedStatement.setInt(6, lb.getId());
+
+            // Ejecutar la actualización
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0; // Devuelve true si al menos una fila fue actualizada
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return false;
+        }
+    }
+
+    public boolean deleteLab(int id) {
+        String sql = "DELETE FROM laboratorios WHERE id_laboratorio = ?";
+
+        try (Connection cn = con.Conectar(); PreparedStatement preparedStatement = cn.prepareStatement(sql)) {
+
+            // Establecer los parámetros
+            preparedStatement.setInt(1, id);
+            // Ejecutar la actualización
+            int rowsAffected = preparedStatement.executeUpdate();
+            return rowsAffected > 0; // Devuelve true si al menos una fila fue actualizada
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+            return false;
+        }
+    }
 }
