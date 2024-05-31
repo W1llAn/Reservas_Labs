@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Controladores;
+import Modelos.UsuarioSesion;
 import Modelos.usuario;
 import Utilidades.Recurso;
 import Vista.Login;
@@ -58,6 +59,8 @@ public class Cont_login implements ActionListener{
         for(usuario user : this.usuario){
             System.out.println(username +"  "+contraseña+"---"+user.getNombre_usuario()+"  "+user.getContraseña());
             if (user.getNombre_usuario().equals(username) && user.getContraseña().equals(contraseña) ) {
+                UsuarioSesion.setIdUsuario(user.getId_usuario());
+                UsuarioSesion.setNombreUsuario(user.getNombre_usuario());
                 return true;
             }
         }
@@ -70,9 +73,8 @@ public class Cont_login implements ActionListener{
             String username = vista_login.txt_usuario.getText(), contraseña = String.valueOf(vista_login.txt_contraseña.getPassword());
             try {
                 if (this.VerificacionCredenciales(username, contraseña)) {
-                    Menu menu = new Menu();
                     MenuControlador ctrl_menu = new MenuControlador();
-                    menu.setVisible(true);
+                    ctrl_menu.iniciar();
                     this.vista_login.dispose();
                     
                 }else{
