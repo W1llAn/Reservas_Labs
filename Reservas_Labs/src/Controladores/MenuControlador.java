@@ -57,7 +57,7 @@ public class MenuControlador implements MouseListener {
     public void mousePressed(MouseEvent e) {
         if (e.getSource()==menu.lblHorarios) {
             Horarios vista_horarios = new Horarios();
-            
+            vista_horarios.setVisible(true);
         }
     }
 
