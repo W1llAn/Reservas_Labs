@@ -1,6 +1,7 @@
 package Controladores;
 
 import Modelos.Reserva;
+import Vista.Horarios;
 import Vista.Menu;
 import Vista.Reservas;
 import java.awt.Color;
@@ -49,6 +50,10 @@ public class MenuControlador implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
+        if (e.getSource()==menu.lblHorarios) {
+            Horarios vista_horarios = new Horarios();
+            
+        }
     }
 
     @Override
