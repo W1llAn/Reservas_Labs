@@ -1,5 +1,6 @@
 package Controladores;
 
+import Modelos.Horario;
 import Modelos.Reserva;
 import Vista.Horarios;
 import Vista.Laboratorios;
@@ -28,7 +29,6 @@ public class MenuControlador implements MouseListener {
         this.menu.lblLaboratorios.addMouseListener(this);
         this.menu.lblHorarios.addMouseListener(this);
         this.menu.lblSalir.addMouseListener(this);
-        this.menu.lblCerrar.addMouseListener(this);
     }
 
     public void iniciar() {
@@ -57,7 +57,13 @@ public class MenuControlador implements MouseListener {
     public void mousePressed(MouseEvent e) {
         if (e.getSource()==menu.lblHorarios) {
             Horarios vista_horarios = new Horarios();
+            Horario horario = new Horario();
+            Cont_Horarios contH = new Cont_Horarios(vista_horarios, horario);
+            this.menu.dispose();
             vista_horarios.setVisible(true);
+        }
+        if (e.getSource()==this.menu.lblSalir) {
+           System.exit(0);
         }
     }
 
@@ -69,6 +75,7 @@ public class MenuControlador implements MouseListener {
             menu.dispose();
         }
     }
+    
 
     @Override
     public void mouseEntered(MouseEvent me) {
@@ -76,7 +83,6 @@ public class MenuControlador implements MouseListener {
         cambiarColorMenuItems(menu.lblReservas, menu.panItemReservas, me);
         cambiarColorMenuItems(menu.lblHorarios, menu.panItemHorarios, me);
         cambiarColorMenuItems(menu.lblLaboratorios, menu.panItemLaboratorios, me);
-        cambiarColorMenuItems(menu.lblCerrar, menu.panItemCerrar, me);
         cambiarColorMenuItems(menu.lblSalir, menu.panItemSalir, me);
 
     }
@@ -102,7 +108,6 @@ public class MenuControlador implements MouseListener {
         cambiarColorMenuItems(menu.lblReservas, menu.panItemReservas, me);
         cambiarColorMenuItems(menu.lblHorarios, menu.panItemHorarios, me);
         cambiarColorMenuItems(menu.lblLaboratorios, menu.panItemLaboratorios, me);
-        cambiarColorMenuItems(menu.lblCerrar, menu.panItemCerrar, me);
         cambiarColorMenuItems(menu.lblSalir, menu.panItemSalir, me);
     }
 

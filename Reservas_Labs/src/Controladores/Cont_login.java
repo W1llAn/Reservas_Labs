@@ -85,7 +85,7 @@ public class Cont_login implements ActionListener{
             }
         }
         if (e.getSource()==vista_login.btn_salir) {
-            vista_login.dispose();
+            System.exit(0);
         }
     }
     
