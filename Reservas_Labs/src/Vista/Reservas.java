@@ -86,6 +86,7 @@ public class Reservas extends javax.swing.JFrame  {
         jSeparator7 = new javax.swing.JSeparator();
         cbCarreras = new javax.swing.JComboBox<>();
 
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(930, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
