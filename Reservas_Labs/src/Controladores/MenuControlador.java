@@ -2,6 +2,7 @@ package Controladores;
 
 import Modelos.Reserva;
 import Vista.Horarios;
+import Vista.Laboratorios;
 import Vista.Menu;
 import Vista.Reservas;
 import java.awt.Color;
@@ -24,6 +25,10 @@ public class MenuControlador implements MouseListener {
         menu = new Menu();
         this.menu.panItemReservas.addMouseListener(this);
         this.menu.lblReservas.addMouseListener(this);
+        this.menu.lblLaboratorios.addMouseListener(this);
+        this.menu.lblHorarios.addMouseListener(this);
+        this.menu.lblSalir.addMouseListener(this);
+        this.menu.lblCerrar.addMouseListener(this);
     }
 
     public void iniciar() {
@@ -52,12 +57,17 @@ public class MenuControlador implements MouseListener {
     public void mousePressed(MouseEvent e) {
         if (e.getSource()==menu.lblHorarios) {
             Horarios vista_horarios = new Horarios();
-            
+            vista_horarios.setVisible(true);
         }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        if (e.getSource()== menu.lblLaboratorios) {
+            Laboratorios vistaLabs = new Laboratorios();
+            ControllerPanelLabs ctrl_labs = new ControllerPanelLabs(vistaLabs);
+            menu.dispose();
+        }
     }
 
     @Override
