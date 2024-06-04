@@ -4,7 +4,7 @@
  */
 package Controladores;
 import Modelos.UsuarioSesion;
-import Modelos.usuario;
+import Modelos.Usuario;
 import Utilidades.Recurso;
 import Vista.Login;
 import Vista.Menu;
@@ -22,12 +22,12 @@ import javax.swing.ImageIcon;
  * @author William
  */
 public class Cont_login implements ActionListener{
-    ArrayList<usuario> usuario = new ArrayList<>();
+    ArrayList<Usuario> usuario = new ArrayList<>();
     Login vista_login = new Login();
     Recurso rec = new Recurso();
-    usuario user;
+    Usuario user;
 
-    public Cont_login( Login vista_login, usuario user) throws SQLException, ClassNotFoundException {
+    public Cont_login( Login vista_login, Usuario user) throws SQLException, ClassNotFoundException {
         this.ingresoImagenes( vista_login);
         this.llenarUsuarios();
         this.vista_login=vista_login;
@@ -52,11 +52,11 @@ public class Cont_login implements ActionListener{
     }
     
     private void llenarUsuarios() throws SQLException, ClassNotFoundException {
-        this.usuario= new usuario().consultaUsuarios();
+        this.usuario= new Usuario().consultaUsuarios();
     }
     
     private boolean VerificacionCredenciales(String username, String contraseña) throws SQLException{
-        for(usuario user : this.usuario){
+        for(Usuario user : this.usuario){
             System.out.println(username +"  "+contraseña+"---"+user.getNombre_usuario()+"  "+user.getContraseña());
             if (user.getNombre_usuario().equals(username) && user.getContraseña().equals(contraseña) ) {
                 UsuarioSesion.setIdUsuario(user.getId_usuario());

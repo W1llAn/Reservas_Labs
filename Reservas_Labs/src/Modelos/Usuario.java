@@ -14,13 +14,13 @@ import java.util.ArrayList;
  *
  * @author ASUS
  */
-public class usuario {
+public class Usuario {
 
     private int id_usuario;
     private String nombre_usuario,contraseña;
     private Recursos rec = new Recursos();
 
-    public usuario() {
+    public Usuario() {
     }
 
     public String getContraseña() {
@@ -32,7 +32,7 @@ public class usuario {
     }
     
 
-    public usuario(int id_usuario, String nombre_usuario) {
+    public Usuario(int id_usuario, String nombre_usuario) {
         this.id_usuario = id_usuario;
         this.nombre_usuario = nombre_usuario;
     }
@@ -57,8 +57,8 @@ public class usuario {
     return this.nombre_usuario;
     }
     //CONSULTAR USUARIO
-    public ArrayList<usuario> consultaUsuarios() throws SQLException, ClassNotFoundException {
-        ArrayList<usuario> usuarios = new ArrayList<>();
+    public ArrayList<Usuario> consultaUsuarios() throws SQLException, ClassNotFoundException {
+        ArrayList<Usuario> usuarios = new ArrayList<>();
         Conexion conexion = new Conexion();
         Connection con = conexion.Conectar();
         if (con == null) {
@@ -70,7 +70,7 @@ public class usuario {
             String consulta = "SELECT * FROM Usuarios;";
             rs = st.executeQuery(consulta);
             while (rs.next()) {
-                usuario user = new usuario();
+                Usuario user = new Usuario();
                 user.setId_usuario(rs.getInt("id_usuario_PK"));
                 user.setNombre_usuario(rs.getString("nombre_usuario"));
                 user.setContraseña(rs.getString("contraseña"));
