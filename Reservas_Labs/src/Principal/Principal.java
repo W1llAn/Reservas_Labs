@@ -14,9 +14,16 @@ import java.sql.SQLException;
  */
 public class Principal {
     public static void main(String[] args) throws SQLException {
-        Login log = new Login();
+        
+        try {
+                    Login log = new Login();
         Usuario user = new Usuario();
         Cont_login controlador = new Cont_login(log, user);
         log.setVisible(true);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        
+
     }
 }
