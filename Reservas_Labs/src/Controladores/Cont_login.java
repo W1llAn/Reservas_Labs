@@ -1,5 +1,7 @@
 
 package Controladores;
+import Modelos.BlockDB;
+import Modelos.LabDB;
 import Modelos.UsuarioSesion;
 import Modelos.Usuario;
 import Utilidades.Recurso;
@@ -69,10 +71,11 @@ public class Cont_login implements ActionListener{
             String username = vista_login.txt_usuario.getText(), contraseña = String.valueOf(vista_login.txt_contraseña.getPassword());
             try {
                 if (this.VerificacionCredenciales(username, contraseña)) {
+                    UsuarioSesion.setBloques( new BlockDB().blockList());
+                    new LabDB().llenarBloques();
                     MenuControlador ctrl_menu = new MenuControlador();
                     ctrl_menu.iniciar();
                     this.vista_login.dispose();
-                    
                 }else{
                     rec.aviso("Nombre de usuario o contraseña incorrecta");
                 }
