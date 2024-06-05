@@ -11,6 +11,8 @@ import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -58,7 +60,12 @@ public class MenuControlador implements MouseListener {
         if (e.getSource()==menu.lblHorarios) {
             Horarios vista_horarios = new Horarios();
             Horario horario = new Horario();
-            Cont_Horarios contH = new Cont_Horarios(vista_horarios, horario);
+            try {
+                Cont_Horarios contH = new Cont_Horarios(vista_horarios, horario);
+               horario.contultaHorarios();
+            } catch (SQLException ex) {
+                Logger.getLogger(MenuControlador.class.getName()).log(Level.SEVERE, null, ex);
+            }
             this.menu.dispose();
             vista_horarios.setVisible(true);
         }
