@@ -73,7 +73,7 @@ public class LabDB {
     }*/
     
     public boolean editLab(Lab lb) {
-        String sql = "UPDATE laboratorios SET nombre_laboratorio = ?, piso = ?, id_bloque = ?, es_aula = ?, codigo = ? WHERE id_laboratorio = ?";
+        String sql = "UPDATE laboratorios SET nombre_laboratorio = ?, id_bloque = ?, es_aula = ? WHERE codigo = ?";
 
         try (Connection cn = con.Conectar(); PreparedStatement preparedStatement = cn.prepareStatement(sql)) {
 
@@ -94,13 +94,13 @@ public class LabDB {
         }
     }
 
-    public boolean deleteLab(int id) {
-        String sql = "DELETE FROM laboratorios WHERE id_laboratorio = ?";
+    public boolean deleteLab(String id) {
+        String sql = "DELETE FROM laboratorios WHERE codigo = ?";
 
         try (Connection cn = con.Conectar(); PreparedStatement preparedStatement = cn.prepareStatement(sql)) {
 
             // Establecer los parámetros
-            preparedStatement.setInt(1, id);
+            preparedStatement.setString(1, id);
             // Ejecutar la actualización
             int rowsAffected = preparedStatement.executeUpdate();
             return rowsAffected > 0; // Devuelve true si al menos una fila fue actualizada

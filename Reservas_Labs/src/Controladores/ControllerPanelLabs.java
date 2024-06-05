@@ -35,11 +35,11 @@ public final class ControllerPanelLabs implements ActionListener {
     private final DefaultComboBoxModel combo;
     private final LabDB labdb;
     private final BlockDB blockDB;
-    private static int id;
+    private boolean select = false;
 
     public ControllerPanelLabs(Laboratorios vista) {
         this.view = vista;
-        table = new DefaultTableModel(new String[]{"ID", "Codigo", "Nombre", "Bloque", "Piso", "Tipo"}, 0);
+        table = new DefaultTableModel(new String[]{"Codigo", "Nombre", "Bloque", "Tipo"}, 0);
         combo = new DefaultComboBoxModel();
         labdb = new LabDB();
         blockDB = new BlockDB();
@@ -47,7 +47,7 @@ public final class ControllerPanelLabs implements ActionListener {
         fillCombo();
         events();
         this.view.setVisible(true);
-        id = 0;
+        
     }
 
     private void events() {
@@ -68,12 +68,11 @@ public final class ControllerPanelLabs implements ActionListener {
 
     private void fillFields(MouseEvent e) {
         JTable target = (JTable) e.getSource();
-        id = Integer.parseInt(getRowTable(target.getSelectedRow(), 0));
+        select = true;
         view.txtCode.setText(getRowTable(target.getSelectedRow(), 1));
-        view.txtfloor.setText(getRowTable(target.getSelectedRow(), 4));
         view.txtName.setText(getRowTable(target.getSelectedRow(), 2));
         seleccionarPorCoincidencia(view.cbxBlock, getRowTable(target.getSelectedRow(), 3));
-        view.chkLab.setSelected(seleccionarPorCoincidencia(getRowTable(target.getSelectedRow(), 5)));
+        seleccionarPorCoincidenciaLaboratorios(view.cbxTipo, getRowTable(target.getSelectedRow(), 2));
     }
 
     private void seleccionarPorCoincidencia(JComboBox<Block> comboBox, String seleccion) {
@@ -85,10 +84,15 @@ public final class ControllerPanelLabs implements ActionListener {
             }
         }
     }
-
-    private boolean seleccionarPorCoincidencia(String seleccion) {
-        return !(seleccion.equalsIgnoreCase("laboratorio"));
+private void seleccionarPorCoincidenciaLaboratorios(JComboBox<String> comboBox, String seleccion) {
+    for (int i = 0; i < comboBox.getItemCount(); i++) {
+        String item = comboBox.getItemAt(i);
+        if (item != null && item.contains(seleccion)) {
+            comboBox.setSelectedItem(item);
+            break;
+        }
     }
+}
 
     private String getRowTable(int row, int column) {
         return view.tbLabs.getModel().getValueAt(row, column).toString();
@@ -97,7 +101,7 @@ public final class ControllerPanelLabs implements ActionListener {
     private void fillTable() {
         table.setRowCount(0);
         labdb.labList().forEach(lab
-                -> table.addRow(new Object[]{lab.getId(), lab.getCode(), lab.getName(), lab.getBlockName(),lab.getFloor(), lab.isLab()})
+                -> table.addRow(new Object[]{lab.getCode(), lab.getName(), lab.getBlockName(), lab.isLab()})
         );
         view.tbLabs.setModel(table);
     }
@@ -112,28 +116,26 @@ public final class ControllerPanelLabs implements ActionListener {
 
     private boolean validateFields() {
         return !(view.txtCode.getText().equals("")
-                || view.txtfloor.getText().equals("")
                 || view.txtName.getText().equals(""));
     }
 
     private void cleanFields() {
         view.txtCode.setText("");
-        view.txtfloor.setText("");
         view.txtName.setText("");
-        view.chkLab.setSelected(false);
+        view.cbxTipo.setSelectedIndex(0);
         view.cbxBlock.setSelectedIndex(0);
-        id = 0;
+       
     }
 
     private void addLabs() {
         if (validateFields()) {
+boolean valor = (view.cbxTipo.getSelectedIndex() != 0);
             Lab lb = new Lab.LabBuilder()
                     .Name(view.txtName.getText())
                     .Code(view.txtCode.getText())
-                    .Floor(Integer.parseInt(view.txtfloor.getText()))
-                    .BlockName(((Block) view.cbxBlock.getSelectedItem()).getName())
-                    .IdBlock(((Block) view.cbxBlock.getSelectedItem()).getId())
-                    .Type(view.chkLab.isSelected())
+                    .BlockName(((Block) view.cbxTipo.getSelectedItem()).getName())
+                    .IdBlock(((Block) view.cbxTipo.getSelectedItem()).getId())
+                    .Type(valor)
                     .build();
             if (labdb.addLab(lb)) {
                 JOptionPane.showMessageDialog(view, "Se guardo");
@@ -161,15 +163,16 @@ public final class ControllerPanelLabs implements ActionListener {
 }
 
     private void editLabs() {
-        if (validateFields() && getSelectTable()) {
+        if (validateFields() && select) {
+            
+boolean valor = (view.cbxTipo.getSelectedIndex() != 0);
             Lab lb = new Lab.LabBuilder()
-                    .Id(id)
                     .Name(view.txtName.getText())
                     .Code(view.txtCode.getText())
-                    .Floor(Integer.parseInt(view.txtfloor.getText()))
-                    .BlockName(((Block) view.cbxBlock.getSelectedItem()).getName())
-                    .IdBlock(((Block) view.cbxBlock.getSelectedItem()).getId())
-                    .Type(view.chkLab.isSelected())
+                    .Floor(0)
+                    .BlockName(((Block) view.cbxTipo.getSelectedItem()).getName())
+                    .IdBlock(((Block) view.cbxTipo.getSelectedItem()).getId())
+                    .Type(valor)
                     .build();
             if (labdb.editLab(lb)) {
                 JOptionPane.showMessageDialog(view, "Se Actualizo");
@@ -183,14 +186,11 @@ public final class ControllerPanelLabs implements ActionListener {
         }
     }
 
-    private boolean getSelectTable() {
-        return id != 0;
-    }
 
     private void deleteLabs() {
-        if (getSelectTable()) {
+        if (select) {
 
-            if (labdb.deleteLab(id)) {
+            if (labdb.deleteLab(view.txtCode.getText())) {
                 JOptionPane.showMessageDialog(view, "Se Borro");
                 cleanFields();
                 fillTable();
