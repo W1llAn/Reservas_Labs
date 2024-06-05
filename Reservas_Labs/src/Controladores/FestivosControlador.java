@@ -7,17 +7,20 @@ package Controladores;
 import Modelos.Block;
 import Modelos.Festivo;
 import Modelos.FestivosDB;
-import Modelos.Lab;
 import Vista.Festivos;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,6 +34,8 @@ public class FestivosControlador implements ActionListener {
     private final Festivo modelo;
     private final FestivosDB dto;
     private final DefaultTableModel table;
+    private static int id;
+    private static SimpleDateFormat dateFormat;
 
     public FestivosControlador(Festivos vista) {
         this.vista = vista;
@@ -41,6 +46,8 @@ public class FestivosControlador implements ActionListener {
         this.vista.setVisible(true);
         fillTable();
         eventos();
+        id = 0;
+        dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     }
 
     private void eventos() {
@@ -49,6 +56,27 @@ public class FestivosControlador implements ActionListener {
         vista.btnDelete.addActionListener(this);
         vista.btnClean.addActionListener(this);
         vista.btnRegresar.addActionListener(this);
+        vista.tbLabs.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                try {
+                    fillFields(e);
+                } catch (ParseException ex) {
+                    System.out.println("Error de parseo" + ex);
+                }
+            }
+        });
+    }
+
+    private void fillFields(MouseEvent e) throws ParseException {
+        JTable target = (JTable) e.getSource();
+        id = Integer.parseInt(getRowTable(target.getSelectedRow(), 0));
+        vista.jTextArea1.setText(getRowTable(target.getSelectedRow(), 1));
+        vista.txtFechaInicio.setDate(dateFormat.parse(getRowTable(target.getSelectedRow(), 2)));
+    }
+
+    private String getRowTable(int row, int column) {
+        return vista.tbLabs.getModel().getValueAt(row, column).toString();
     }
 
     private void fillTable() {
@@ -72,7 +100,7 @@ public class FestivosControlador implements ActionListener {
             modelo.setFechaFin(obtenerFechaFin(vista.txtFechaInicio.getDate()));
             if (dto.insertarDiaFestivo(modelo)) {
                 JOptionPane.showMessageDialog(vista, "Se guardo");
-                //cleanFields();
+                cleanFields();
                 fillTable();
             } else {
                 JOptionPane.showMessageDialog(vista, "No se guardo");
@@ -82,17 +110,30 @@ public class FestivosControlador implements ActionListener {
         }
     }
 
+    private void eliminarFestivos() {
+        if (id != 0) {
+
+            if (dto.eliminarDiaFestivo(id)) {
+                JOptionPane.showMessageDialog(vista, "Se Borro");
+                cleanFields();
+                fillTable();
+            } else {
+                JOptionPane.showMessageDialog(vista, "El laboratorio tiene una reserva, no se puede borrar");
+            }
+        } else {
+            JOptionPane.showMessageDialog(vista, "Seleccione una fila");
+        }
+    }
+
     private String obtenerFechaInicio(Date fecha) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormat.format(fecha);
     }
 
     private String obtenerFechaFin(Date fecha) {
-        int dias = (int) vista.spinDias.getValue()-1;
+        int dias = (int) vista.spinDias.getValue() - 1;
         LocalDate localDate = fecha.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         LocalDate nuevaFecha = localDate.plusDays(dias);
         Date newDate = Date.from(nuevaFecha.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormat.format(newDate);
     }
 
@@ -104,11 +145,6 @@ public class FestivosControlador implements ActionListener {
 
     public static void main(String[] args) throws ParseException {
 
-//        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-//        Date fecha = dateFormat.parse("2023-06-04");
-//        int diasASumar = 5;
-//        String nuevaFechaStr = obtenerFechaFin(fecha, diasASumar);
-//        System.out.println("Nueva fecha: " + nuevaFechaStr);
         Festivos l = new Festivos();
         FestivosControlador v = new FestivosControlador(l);
     }
@@ -118,6 +154,12 @@ public class FestivosControlador implements ActionListener {
 
         if (e.getSource() == vista.btnAdd) {
             insertarDiasFestivos();
+        }
+        if (e.getSource() == vista.btnDelete) {
+            eliminarFestivos();
+        }
+        if (e.getSource() == vista.btnClean) {
+           cleanFields();
         }
     }
 
