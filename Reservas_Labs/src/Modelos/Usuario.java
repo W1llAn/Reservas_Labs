@@ -32,6 +32,7 @@ public class Usuario {
     }
     
 
+
     public Usuario(int id_usuario, String nombre_usuario,String correo) {
         this.id_usuario = id_usuario;
         this.nombre_usuario = nombre_usuario;
