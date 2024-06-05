@@ -53,6 +53,10 @@ public class Laboratorios extends javax.swing.JFrame  {
         btnDelete = new javax.swing.JButton();
         cbxBlock = new javax.swing.JComboBox<>();
 
+        chkLab = new javax.swing.JCheckBox();
+        btnCancelar = new javax.swing.JButton();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelReservas.setBackground(new java.awt.Color(43, 43, 43));
@@ -77,7 +81,7 @@ public class Laboratorios extends javax.swing.JFrame  {
         btnClean.setForeground(new java.awt.Color(255, 255, 255));
         btnClean.setText("Limpiar");
         btnClean.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 255), new java.awt.Color(255, 255, 255), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255)));
-        panelReservas.add(btnClean, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 500, 111, -1));
+        panelReservas.add(btnClean, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 500, 111, -1));
 
         btnEdit.setBackground(new java.awt.Color(43, 43, 43));
         btnEdit.setFont(new java.awt.Font("Constantia", 1, 15)); // NOI18N
@@ -219,6 +223,13 @@ public class Laboratorios extends javax.swing.JFrame  {
         });
         panelReservas.add(cbxBlock, new org.netbeans.lib.awtextra.AbsoluteConstraints(68, 340, 220, 25));
 
+        btnCancelar.setBackground(new java.awt.Color(43, 43, 43));
+        btnCancelar.setFont(new java.awt.Font("Constantia", 1, 15)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setText("Regresar");
+        btnCancelar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 255), new java.awt.Color(255, 255, 255), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255)));
+        panelReservas.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 500, 111, -1));
+
         getContentPane().add(panelReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 928, 590));
 
         pack();
@@ -243,6 +254,7 @@ public class Laboratorios extends javax.swing.JFrame  {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAdd;
+    public javax.swing.JButton btnCancelar;
     public javax.swing.JButton btnClean;
     public javax.swing.JButton btnDelete;
     public javax.swing.JButton btnEdit;

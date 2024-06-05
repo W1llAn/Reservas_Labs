@@ -57,6 +57,7 @@ public final class ControllerPanelLabs implements ActionListener {
         view.btnEdit.addActionListener(this);
         view.btnDelete.addActionListener(this);
         view.btnSearch.addActionListener(this);
+        view.btnCancelar.addActionListener(this);
         view.tbLabs.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -194,7 +195,7 @@ boolean valor = (view.cbxTipo.getSelectedIndex() != 0);
                 cleanFields();
                 fillTable();
             } else {
-                JOptionPane.showMessageDialog(view, "No se Borro");
+                JOptionPane.showMessageDialog(view, "El laboratorio tiene una reserva, no se puede borrar");
             }
         } else {
             JOptionPane.showMessageDialog(view, "Seleccione una fila");
@@ -237,6 +238,11 @@ boolean valor = (view.cbxTipo.getSelectedIndex() != 0);
         }
         if (e.getSource()==view.btnSearch) {
             search();
+        }
+        if (e.getSource()==view.btnCancelar) {
+             MenuControlador menu = new MenuControlador();
+            view.setVisible(false);
+            menu.iniciar();
         }
     }
 
