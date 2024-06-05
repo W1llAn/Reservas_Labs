@@ -1,13 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package Controladores;
+import Modelos.BlockDB;
+import Modelos.LabDB;
 import Modelos.UsuarioSesion;
 import Modelos.Usuario;
 import Utilidades.Recurso;
 import Vista.Login;
-import Vista.Menu;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -34,7 +32,7 @@ public class Cont_login implements ActionListener{
         this.user=user;
         vista_login.txt_usuario.addActionListener(this);
         vista_login.btn_ingresar.addActionListener(this);
-        vista_login.txt_contraseña.addActionListener(this);
+        vista_login.btn_recuperar_contrasenia.addActionListener(this);
         vista_login.btn_salir.addActionListener(this);
     }
     
@@ -73,10 +71,11 @@ public class Cont_login implements ActionListener{
             String username = vista_login.txt_usuario.getText(), contraseña = String.valueOf(vista_login.txt_contraseña.getPassword());
             try {
                 if (this.VerificacionCredenciales(username, contraseña)) {
+                    UsuarioSesion.setBloques( new BlockDB().blockList());
+                    new LabDB().llenarBloques();
                     MenuControlador ctrl_menu = new MenuControlador();
                     ctrl_menu.iniciar();
                     this.vista_login.dispose();
-                    
                 }else{
                     rec.aviso("Nombre de usuario o contraseña incorrecta");
                 }
@@ -87,6 +86,12 @@ public class Cont_login implements ActionListener{
         if (e.getSource()==vista_login.btn_salir) {
             System.exit(0);
         }
+        if(e.getSource()==vista_login.btn_recuperar_contrasenia){
+            Contr_RecContra rec= new Contr_RecContra(this.usuario);
+            rec.iniciar();
+            this.vista_login.dispose();
+        }
     }
+   
     
 }

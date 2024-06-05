@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Usuario {
 
     private int id_usuario;
-    private String nombre_usuario,contraseña;
+    private String nombre_usuario,contraseña,correo;
     private Recursos rec = new Recursos();
 
     public Usuario() {
@@ -32,9 +32,11 @@ public class Usuario {
     }
     
 
-    public Usuario(int id_usuario, String nombre_usuario) {
+
+    public Usuario(int id_usuario, String nombre_usuario,String correo) {
         this.id_usuario = id_usuario;
         this.nombre_usuario = nombre_usuario;
+        this.correo= correo;
     }
 
     public int getId_usuario() {
@@ -52,6 +54,17 @@ public class Usuario {
     public void setNombre_usuario(String nombre_usuario) {
         this.nombre_usuario = nombre_usuario;
     }
+
+    public String getCorreo() {
+        return this.correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
+    }
+    
+    
+    
     @Override
     public String toString(){
     return this.nombre_usuario;
@@ -64,7 +77,6 @@ public class Usuario {
         if (con == null) {
             rec.aviso("No tiene conexion RECUERDE cada accion que realize en el programa no se va a guardar");
         } else {
-            con = conexion.Conectar();
             Statement st = con.createStatement();
             ResultSet rs = null;
             String consulta = "SELECT * FROM Usuarios;";
@@ -74,6 +86,7 @@ public class Usuario {
                 user.setId_usuario(rs.getInt("id_usuario_PK"));
                 user.setNombre_usuario(rs.getString("nombre_usuario"));
                 user.setContraseña(rs.getString("contraseña"));
+                user.setCorreo(rs.getString("correo_electronico"));
                 usuarios.add(user);
             }
             st.close();

@@ -24,8 +24,8 @@ public class Block {
         return this.laboratorios;
     }
 
-    public void setLaboratorios(ArrayList<Lab> laboratorios) {
-        this.laboratorios = laboratorios;
+    public void setLaboratorios(Lab laboratorio) {
+        this.laboratorios.add(laboratorio);
     }
 
     public int getId() {

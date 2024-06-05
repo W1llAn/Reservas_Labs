@@ -3,7 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package Vista;
-
+import Modelos.Block;
+import Modelos.Lab;
 /**
  *
  * @author PC
@@ -70,11 +71,9 @@ public class Horarios extends javax.swing.JFrame {
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
 
         comboBloque.setFont(new java.awt.Font("Corbel", 0, 14)); // NOI18N
-        comboBloque.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un Bloque", " ", " " }));
         jPanel1.add(comboBloque, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 280, -1));
 
         comboLaboratorio.setFont(new java.awt.Font("Corbel", 0, 14)); // NOI18N
-        comboLaboratorio.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione un Laboratorio", " ", " " }));
         jPanel1.add(comboLaboratorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 280, -1));
 
         tablaHorarios.setFont(new java.awt.Font("Corbel", 0, 14)); // NOI18N
@@ -94,7 +93,6 @@ public class Horarios extends javax.swing.JFrame {
         btnRegresar.setFont(new java.awt.Font("Corbel", 1, 16)); // NOI18N
         btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegresar.setText("Regresar");
-        btnRegresar.setActionCommand("Regresar");
         jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 140, 100, 30));
 
         jLabel5.setFont(new java.awt.Font("Corbel", 1, 16)); // NOI18N
@@ -161,8 +159,8 @@ public class Horarios extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnRegresar;
     public javax.swing.JButton btnReserva;
-    public javax.swing.JComboBox<String> comboBloque;
-    public javax.swing.JComboBox<String> comboLaboratorio;
+    public javax.swing.JComboBox<Block> comboBloque;
+    public javax.swing.JComboBox<Lab> comboLaboratorio;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;

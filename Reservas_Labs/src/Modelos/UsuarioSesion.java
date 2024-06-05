@@ -20,6 +20,15 @@ public class  UsuarioSesion {
         return nombre_Usuario;
     }
 
+    public static ArrayList<Block> getBloques() {
+        return bloques;
+    }
+
+    public static void setBloques(ArrayList<Block> bloques) {
+        UsuarioSesion.bloques = bloques;
+    }
+    
+
     // Setter para el nombre del usuario
     public static void setNombreUsuario(String nombreUsuario) {
         UsuarioSesion.nombre_Usuario = nombreUsuario;

@@ -40,8 +40,8 @@ public class Login extends javax.swing.JFrame {
         txt_contraseña = new javax.swing.JPasswordField();
         btn_salir = new javax.swing.JButton();
         btn_ingresar = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
         txt_usuario = new java.awt.TextField();
+        btn_recuperar_contrasenia = new javax.swing.JButton();
         JP_fondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -116,12 +116,18 @@ public class Login extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 340, 40));
-
-        jLabel9.setFont(new java.awt.Font("Times New Roman", 2, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Olvidé mi contraseña");
-        jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 280, -1, -1));
         jPanel1.add(txt_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 340, 30));
+
+        btn_recuperar_contrasenia.setBackground(new java.awt.Color(147, 10, 13));
+        btn_recuperar_contrasenia.setForeground(new java.awt.Color(255, 255, 255));
+        btn_recuperar_contrasenia.setText("Olvidé mi contraseña");
+        btn_recuperar_contrasenia.setBorder(null);
+        btn_recuperar_contrasenia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_recuperar_contraseniaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btn_recuperar_contrasenia, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 272, -1, -1));
 
         panel_fondo.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 380, 420));
 
@@ -140,6 +146,10 @@ public class Login extends javax.swing.JFrame {
     private void btn_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ingresarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_ingresarActionPerformed
+
+    private void btn_recuperar_contraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_recuperar_contraseniaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_recuperar_contraseniaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -180,6 +190,7 @@ public class Login extends javax.swing.JFrame {
     public javax.swing.JLabel JP_fondo;
     public javax.swing.JLabel Lb_logoUta;
     public transient javax.swing.JButton btn_ingresar;
+    public transient javax.swing.JButton btn_recuperar_contrasenia;
     public transient javax.swing.JButton btn_salir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -188,7 +199,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     public javax.swing.JPanel panel_fondo;
     public transient javax.swing.JPasswordField txt_contraseña;
