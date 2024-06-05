@@ -64,7 +64,6 @@ public class usuario {
         if (con == null) {
             rec.aviso("No tiene conexion RECUERDE cada accion que realize en el programa no se va a guardar");
         } else {
-            con = conexion.Conectar();
             Statement st = con.createStatement();
             ResultSet rs = null;
             String consulta = "SELECT * FROM Usuarios;";
