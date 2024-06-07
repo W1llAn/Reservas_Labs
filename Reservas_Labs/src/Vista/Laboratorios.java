@@ -52,7 +52,6 @@ public class Laboratorios extends javax.swing.JFrame  {
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         cbxBlock = new javax.swing.JComboBox<>();
-        chkLab = new javax.swing.JCheckBox();
         btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);

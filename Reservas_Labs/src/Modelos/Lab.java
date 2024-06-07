@@ -12,7 +12,7 @@ public class Lab {
 
     private int id;
     private String name;
-    private boolean type;
+    private String type;
     private String code;
     private int floor;
     private int idBlock;
@@ -21,7 +21,7 @@ public class Lab {
     public Lab() {
     }
 
-    private Lab(int id, String name, boolean type, String code, int floor, int idBlock, String blockName) {
+    private Lab(int id, String name, String type, String code, int floor, int idBlock, String blockName) {
         this.id = id;
         this.name = name;
         this.type = type;
@@ -55,11 +55,11 @@ public class Lab {
         this.name = name;
     }
 
-    public boolean isType() {
+    public String isType() {
         return type;
     }
 
-    public void setType(boolean type) {
+    public void setType(String type) {
         this.type = type;
     }
 
@@ -92,15 +92,11 @@ public class Lab {
         return this.name;
     }
 
-    public String isLab() {
-        return (this.isType()) ? "Aula" : "Laboratorio";
-    }
-
     public static class LabBuilder {
 
         private int id;
         private String name;
-        private boolean type;
+        private String type;
         private String code;
         private int floor;
         private int idBlock;
@@ -122,7 +118,7 @@ public class Lab {
             return this;
         }
 
-        public LabBuilder Type(boolean type) {
+        public LabBuilder Type(String type) {
             this.type = type;
             return this;
         }
