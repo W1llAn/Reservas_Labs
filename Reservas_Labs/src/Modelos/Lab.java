@@ -4,6 +4,8 @@
  */
 package Modelos;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Kiwar
@@ -17,7 +19,7 @@ public class Lab {
     private int floor;
     private int idBlock;
     private String blockName;
-
+    private ArrayList <Horario> horarios = new ArrayList<>();
     public Lab() {
     }
 
@@ -30,10 +32,20 @@ public class Lab {
         this.idBlock = idBlock;
         this.blockName = blockName;
     }
-
+    
     public String getBlockName() {
         return blockName;
     }
+
+    public ArrayList<Horario> getHorarios() {
+        return this.horarios;
+    }
+
+    public void setHorarios(Horario horario) {
+        this.horarios.add(horario);
+    }
+    
+    
 
     public void setBlockName(String blockName) {
         this.blockName = blockName;

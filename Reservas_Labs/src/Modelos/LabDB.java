@@ -106,4 +106,25 @@ public class LabDB {
             return false;
         }
     }
+    
+    
+    public void llenarBloques(){
+        ArrayList<Lab> laboratorios = this.labList();
+        for (int i = 0; i < laboratorios.size(); i++) {
+            switch(laboratorios.get(i).getIdBlock()){
+                case 1:
+                    UsuarioSesion.getBloques().get(0).setLaboratorios(laboratorios.get(i));
+                break;
+                case 2:
+                    UsuarioSesion.getBloques().get(1).setLaboratorios(laboratorios.get(i));
+                break;
+                case 3:
+                    UsuarioSesion.getBloques().get(2).setLaboratorios(laboratorios.get(i));
+                break;
+                case 4:
+                    UsuarioSesion.getBloques().get(3).setLaboratorios(laboratorios.get(i));
+                break;
+            }
+        }
+    }
 }

@@ -4,7 +4,7 @@
  */
 package Principal;
 import Controladores.Cont_login;
-import Modelos.usuario;
+import Modelos.Usuario;
 import Vista.Login;
 import java.sql.SQLException;
 
@@ -13,10 +13,12 @@ import java.sql.SQLException;
  * @author William
  */
 public class Principal {
+
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
         Login log = new Login();
-        usuario user = new usuario();
+        Usuario user = new Usuario();
         Cont_login controlador = new Cont_login(log, user);
         log.setVisible(true);
     }
 }
+

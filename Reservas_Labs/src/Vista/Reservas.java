@@ -70,7 +70,6 @@ public class Reservas extends javax.swing.JFrame  {
         jFecha = new com.toedter.calendar.JDateChooser();
         txtCedulaResponsable = new javax.swing.JTextField();
         txtNombreResponsable = new javax.swing.JTextField();
-        txtCargoResponsable = new javax.swing.JTextField();
         txtApellidoResponsable = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -85,9 +84,9 @@ public class Reservas extends javax.swing.JFrame  {
         jSeparator6 = new javax.swing.JSeparator();
         jSeparator7 = new javax.swing.JSeparator();
         cbCarreras = new javax.swing.JComboBox<>();
+        cbCargo = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(930, 600));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         panelReservas.setBackground(new java.awt.Color(43, 43, 43));
@@ -193,7 +192,7 @@ public class Reservas extends javax.swing.JFrame  {
         jLabel11.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Cargo:");
-        panelReservas.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 416, -1, -1));
+        panelReservas.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 416, -1, -1));
 
         txtUsuario.setBackground(new java.awt.Color(43, 43, 43));
         txtUsuario.setFont(new java.awt.Font("Constantia", 1, 16)); // NOI18N
@@ -223,7 +222,7 @@ public class Reservas extends javax.swing.JFrame  {
         txtCedulaResponsable.setForeground(new java.awt.Color(255, 255, 255));
         txtCedulaResponsable.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtCedulaResponsable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        panelReservas.add(txtCedulaResponsable, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 336, 128, 25));
+        panelReservas.add(txtCedulaResponsable, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 336, 192, 25));
 
         txtNombreResponsable.setBackground(new java.awt.Color(147, 10, 13));
         txtNombreResponsable.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
@@ -235,19 +234,7 @@ public class Reservas extends javax.swing.JFrame  {
                 txtNombreResponsableActionPerformed(evt);
             }
         });
-        panelReservas.add(txtNombreResponsable, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 240, 128, 25));
-
-        txtCargoResponsable.setBackground(new java.awt.Color(147, 10, 13));
-        txtCargoResponsable.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
-        txtCargoResponsable.setForeground(new java.awt.Color(255, 255, 255));
-        txtCargoResponsable.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txtCargoResponsable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        txtCargoResponsable.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtCargoResponsableActionPerformed(evt);
-            }
-        });
-        panelReservas.add(txtCargoResponsable, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 432, 128, 25));
+        panelReservas.add(txtNombreResponsable, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 240, 192, 25));
 
         txtApellidoResponsable.setBackground(new java.awt.Color(147, 10, 13));
         txtApellidoResponsable.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
@@ -259,7 +246,7 @@ public class Reservas extends javax.swing.JFrame  {
                 txtApellidoResponsableActionPerformed(evt);
             }
         });
-        panelReservas.add(txtApellidoResponsable, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 288, 128, 25));
+        panelReservas.add(txtApellidoResponsable, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 288, 192, 25));
 
         jLabel12.setFont(new java.awt.Font("Constantia", 1, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
@@ -270,22 +257,22 @@ public class Reservas extends javax.swing.JFrame  {
         jLabel13.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Apellido");
-        panelReservas.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 272, -1, -1));
+        panelReservas.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 272, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setText("Cédula:");
-        panelReservas.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 320, -1, -1));
+        panelReservas.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 320, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setText("Carrera:");
-        panelReservas.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 368, -1, -1));
+        panelReservas.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 368, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
         jLabel16.setText("Nombre:");
-        panelReservas.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 224, -1, -1));
+        panelReservas.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 224, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Constantia", 1, 18)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
@@ -332,7 +319,20 @@ public class Reservas extends javax.swing.JFrame  {
         cbCarreras.setForeground(new java.awt.Color(255, 255, 255));
         cbCarreras.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
         cbCarreras.setPreferredSize(new java.awt.Dimension(72, 29));
-        panelReservas.add(cbCarreras, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 384, 128, 25));
+        panelReservas.add(cbCarreras, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 384, 192, 25));
+
+        cbCargo.setBackground(new java.awt.Color(147, 10, 13));
+        cbCargo.setFont(new java.awt.Font("Constantia", 0, 17)); // NOI18N
+        cbCargo.setForeground(new java.awt.Color(255, 255, 255));
+        cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Docente", "Estudiante", "Otros" }));
+        cbCargo.setSelectedIndex(-1);
+        cbCargo.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+        cbCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCargoActionPerformed(evt);
+            }
+        });
+        panelReservas.add(cbCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 432, 192, 25));
 
         getContentPane().add(panelReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -16, 928, 576));
 
@@ -347,13 +347,13 @@ public class Reservas extends javax.swing.JFrame  {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApellidoResponsableActionPerformed
 
-    private void txtCargoResponsableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCargoResponsableActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtCargoResponsableActionPerformed
-
     private void txtUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtUsuarioActionPerformed
+
+    private void cbCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCargoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbCargoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -361,6 +361,7 @@ public class Reservas extends javax.swing.JFrame  {
     public javax.swing.JSpinner JspinerHoraInicio;
     public javax.swing.JButton btCancelar;
     public javax.swing.JButton btReservas;
+    public javax.swing.JComboBox<String> cbCargo;
     public javax.swing.JComboBox<Modelos.Carrera> cbCarreras;
     public javax.swing.JComboBox<Modelos.Block> cbEdificios;
     public javax.swing.JComboBox<Modelos.Lab> cbLaboratorios;
@@ -392,7 +393,6 @@ public class Reservas extends javax.swing.JFrame  {
     private javax.swing.JPanel panelReservas;
     public javax.swing.JTextArea textAreaAsunto;
     public javax.swing.JTextField txtApellidoResponsable;
-    public javax.swing.JTextField txtCargoResponsable;
     public javax.swing.JTextField txtCedulaResponsable;
     public javax.swing.JTextField txtNombreResponsable;
     public javax.swing.JTextField txtUsuario;

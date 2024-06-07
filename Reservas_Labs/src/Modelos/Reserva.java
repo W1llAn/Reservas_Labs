@@ -1,10 +1,15 @@
 package Modelos;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.time.LocalTime;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.TextStyle;
 import java.util.Date;
+import java.util.Locale;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
+import java.util.Locale;
 
 /**
  *
@@ -12,20 +17,22 @@ import java.util.Date;
  */
 public class Reserva {
 
-    private String descripcion;
+    private String descripcion,nombreResponsable;
     private String horafin, horaInicio,fechaReserva;
     private int usuario, responsable, laboratorio;
     private Recursos rec = new Recursos();
 
-    public Reserva(String descripcion, String horafin, String horaInicio, String fechaReserva, int usuario, int responsable, int laboratorio) {
-        this.descripcion = descripcion;
-        this.horafin = horafin;
-        this.horaInicio = horaInicio;
-        this.fechaReserva = fechaReserva;
-        this.usuario = usuario;
-        this.responsable = responsable;
-        this.laboratorio = laboratorio;
+    
+    
+    public String getNombreResponsable() {
+        return this.nombreResponsable;
     }
+
+    public void setNombreResponsable(String nombreResponsable) {
+        this.nombreResponsable = nombreResponsable;
+    }
+
+   
 
     public Reserva() {
     }
@@ -94,6 +101,21 @@ public class Reserva {
 
     public void setRec(Recursos rec) {
         this.rec = rec;
+    }
+
+    public String decifrarDia(String fecha) {
+          // Formato de la fecha de entrada
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        // Parsear la fecha
+        LocalDate fechaLocalDate = LocalDate.parse(fecha, formatter);
+
+        // Obtener el día de la semana
+        String diaDeLaSemana = fechaLocalDate.getDayOfWeek().getDisplayName(TextStyle.FULL, new Locale("es", "ES"));
+
+       System.out.println("El dia de la fecha:"+fecha.toString()+"es:"+diaDeLaSemana);
+        return diaDeLaSemana;
+        
     }
 
 
