@@ -4,6 +4,8 @@
  */
 package Modelos;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author ASUS
@@ -11,6 +13,7 @@ package Modelos;
 public class  UsuarioSesion {
     private static String nombre_Usuario;
     private static int id_usuario;
+    private static ArrayList<Block> bloques = new ArrayList<>();
 
     // Getter para el nombre del usuario
     public static String getNombreUsuario() {

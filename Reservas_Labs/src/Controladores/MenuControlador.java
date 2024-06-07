@@ -1,6 +1,9 @@
 package Controladores;
 
+import Modelos.Horario;
 import Modelos.Reserva;
+import Vista.Horarios;
+import Vista.Laboratorios;
 import Vista.Menu;
 import Vista.Reservas;
 import java.awt.Color;
@@ -23,6 +26,9 @@ public class MenuControlador implements MouseListener {
         menu = new Menu();
         this.menu.panItemReservas.addMouseListener(this);
         this.menu.lblReservas.addMouseListener(this);
+        this.menu.lblLaboratorios.addMouseListener(this);
+        this.menu.lblHorarios.addMouseListener(this);
+        this.menu.lblSalir.addMouseListener(this);
     }
 
     public void iniciar() {
@@ -49,11 +55,27 @@ public class MenuControlador implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
+        if (e.getSource()==menu.lblHorarios) {
+            Horarios vista_horarios = new Horarios();
+            Horario horario = new Horario();
+            Cont_Horarios contH = new Cont_Horarios(vista_horarios, horario);
+            this.menu.dispose();
+            vista_horarios.setVisible(true);
+        }
+        if (e.getSource()==this.menu.lblSalir) {
+           System.exit(0);
+        }
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        if (e.getSource()== menu.lblLaboratorios) {
+            Laboratorios vistaLabs = new Laboratorios();
+            ControllerPanelLabs ctrl_labs = new ControllerPanelLabs(vistaLabs);
+            menu.dispose();
+        }
     }
+    
 
     @Override
     public void mouseEntered(MouseEvent me) {
@@ -61,7 +83,6 @@ public class MenuControlador implements MouseListener {
         cambiarColorMenuItems(menu.lblReservas, menu.panItemReservas, me);
         cambiarColorMenuItems(menu.lblHorarios, menu.panItemHorarios, me);
         cambiarColorMenuItems(menu.lblLaboratorios, menu.panItemLaboratorios, me);
-        cambiarColorMenuItems(menu.lblCerrar, menu.panItemCerrar, me);
         cambiarColorMenuItems(menu.lblSalir, menu.panItemSalir, me);
 
     }
@@ -87,7 +108,6 @@ public class MenuControlador implements MouseListener {
         cambiarColorMenuItems(menu.lblReservas, menu.panItemReservas, me);
         cambiarColorMenuItems(menu.lblHorarios, menu.panItemHorarios, me);
         cambiarColorMenuItems(menu.lblLaboratorios, menu.panItemLaboratorios, me);
-        cambiarColorMenuItems(menu.lblCerrar, menu.panItemCerrar, me);
         cambiarColorMenuItems(menu.lblSalir, menu.panItemSalir, me);
     }
 

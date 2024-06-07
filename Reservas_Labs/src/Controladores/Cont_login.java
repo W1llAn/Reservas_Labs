@@ -3,10 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Controladores;
-import Modelos.Usuario;
 import Modelos.UsuarioSesion;
+import Modelos.usuario;
 import Utilidades.Recurso;
 import Vista.Login;
+import Vista.Menu;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,13 +22,12 @@ import javax.swing.ImageIcon;
  * @author William
  */
 public class Cont_login implements ActionListener{
-    ArrayList<Usuario> usuario = new ArrayList<>();
+    ArrayList<usuario> usuario = new ArrayList<>();
     Login vista_login = new Login();
     Recurso rec = new Recurso();
-    Usuario user;
-    UsuarioSesion DatosUsuario;
+    usuario user;
 
-    public Cont_login( Login vista_login, Usuario user) throws SQLException {
+    public Cont_login( Login vista_login, usuario user) throws SQLException, ClassNotFoundException {
         this.ingresoImagenes( vista_login);
         this.llenarUsuarios();
         this.vista_login=vista_login;
@@ -51,21 +51,16 @@ public class Cont_login implements ActionListener{
          vista_login.Lb_logoUta.setIcon(logoFinal);
     }
     
-    private void llenarUsuarios() throws SQLException {
-        try {
-            this.usuario= new Usuario().DataUsuarios();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Cont_login.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    private void llenarUsuarios() throws SQLException, ClassNotFoundException {
+        this.usuario= new usuario().consultaUsuarios();
     }
     
     private boolean VerificacionCredenciales(String username, String contraseña) throws SQLException{
-        for(Usuario user : this.usuario){
+        for(usuario user : this.usuario){
             System.out.println(username +"  "+contraseña+"---"+user.getNombre_usuario()+"  "+user.getContraseña());
             if (user.getNombre_usuario().equals(username) && user.getContraseña().equals(contraseña) ) {
-                DatosUsuario.setNombreUsuario(username);
-                System.out.println("El usuario id desde cont_login"+user.getId_usuario());
-                DatosUsuario.setIdUsuario(user.getId_usuario());
+                UsuarioSesion.setIdUsuario(user.getId_usuario());
+                UsuarioSesion.setNombreUsuario(user.getNombre_usuario());
                 return true;
             }
         }
@@ -78,9 +73,10 @@ public class Cont_login implements ActionListener{
             String username = vista_login.txt_usuario.getText(), contraseña = String.valueOf(vista_login.txt_contraseña.getPassword());
             try {
                 if (this.VerificacionCredenciales(username, contraseña)) {
-                MenuControlador menu = new MenuControlador();
-                this.vista_login.dispose();
-                menu.iniciar();
+                    MenuControlador ctrl_menu = new MenuControlador();
+                    ctrl_menu.iniciar();
+                    this.vista_login.dispose();
+                    
                 }else{
                     rec.aviso("Nombre de usuario o contraseña incorrecta");
                 }
@@ -89,7 +85,7 @@ public class Cont_login implements ActionListener{
             }
         }
         if (e.getSource()==vista_login.btn_salir) {
-            vista_login.dispose();
+            System.exit(0);
         }
     }
     
