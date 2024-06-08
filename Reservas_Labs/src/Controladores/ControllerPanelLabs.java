@@ -36,6 +36,7 @@ public final class ControllerPanelLabs implements ActionListener {
     private final LabDB labdb;
     private final BlockDB blockDB;
     private boolean select = false;
+    private String codeSelect;
 
     public ControllerPanelLabs(Laboratorios vista) {
         this.view = vista;
@@ -47,7 +48,7 @@ public final class ControllerPanelLabs implements ActionListener {
         fillCombo();
         events();
         this.view.setVisible(true);
-        
+
     }
 
     private void events() {
@@ -69,30 +70,32 @@ public final class ControllerPanelLabs implements ActionListener {
     private void fillFields(MouseEvent e) {
         JTable target = (JTable) e.getSource();
         select = true;
-        view.txtCode.setText(getRowTable(target.getSelectedRow(), 1));
-        view.txtName.setText(getRowTable(target.getSelectedRow(), 2));
-        seleccionarPorCoincidencia(view.cbxBlock, getRowTable(target.getSelectedRow(), 3));
-        seleccionarPorCoincidenciaLaboratorios(view.cbxTipo, getRowTable(target.getSelectedRow(), 2));
+        codeSelect = getRowTable(target.getSelectedRow(), 0);
+        view.txtCode.setText(getRowTable(target.getSelectedRow(), 0));
+        view.txtName.setText(getRowTable(target.getSelectedRow(), 1));
+        seleccionarPorCoincidencia(view.cbxBlock, getRowTable(target.getSelectedRow(), 2));
+        seleccionarPorCoincidenciaLaboratorios(view.cbxTipo, getRowTable(target.getSelectedRow(), 3));
     }
 
     private void seleccionarPorCoincidencia(JComboBox<Block> comboBox, String seleccion) {
         for (int i = 0; i < comboBox.getItemCount(); i++) {
             String item = comboBox.getItemAt(i).getName();
             if (item.contains(seleccion)) {
+                comboBox.setSelectedIndex(i);
+                break;
+            }
+        }
+    }
+
+    private void seleccionarPorCoincidenciaLaboratorios(JComboBox<String> comboBox, String seleccion) {
+        for (int i = 0; i < comboBox.getItemCount(); i++) {
+            String item = comboBox.getItemAt(i);
+            if (item != null && item.contains(seleccion)) {
                 comboBox.setSelectedItem(item);
                 break;
             }
         }
     }
-private void seleccionarPorCoincidenciaLaboratorios(JComboBox<String> comboBox, String seleccion) {
-    for (int i = 0; i < comboBox.getItemCount(); i++) {
-        String item = comboBox.getItemAt(i);
-        if (item != null && item.contains(seleccion)) {
-            comboBox.setSelectedItem(item);
-            break;
-        }
-    }
-}
 
     private String getRowTable(int row, int column) {
         return view.tbLabs.getModel().getValueAt(row, column).toString();
@@ -101,9 +104,14 @@ private void seleccionarPorCoincidenciaLaboratorios(JComboBox<String> comboBox, 
     private void fillTable() {
         table.setRowCount(0);
         labdb.labList().forEach(lab
-                -> table.addRow(new Object[]{lab.getCode(), lab.getName(), lab.getBlockName(), lab.isLab()})
+                -> table.addRow(new Object[]{lab.getCode(), lab.getName(), lab.getBlockName(), lab.isType()})
         );
         view.tbLabs.setModel(table);
+
+        // Eliminar el filtro
+        if (view.tbLabs.getRowSorter() != null) {
+            ((TableRowSorter) view.tbLabs.getRowSorter()).setRowFilter(null);
+        }
     }
 
     private void fillCombo() {
@@ -124,18 +132,18 @@ private void seleccionarPorCoincidenciaLaboratorios(JComboBox<String> comboBox, 
         view.txtName.setText("");
         view.cbxTipo.setSelectedIndex(0);
         view.cbxBlock.setSelectedIndex(0);
-       
+        codeSelect = null;
+
     }
 
     private void addLabs() {
         if (validateFields()) {
-boolean valor = (view.cbxTipo.getSelectedIndex() != 0);
             Lab lb = new Lab.LabBuilder()
                     .Name(view.txtName.getText())
                     .Code(view.txtCode.getText())
-                    .BlockName(((Block) view.cbxTipo.getSelectedItem()).getName())
-                    .IdBlock(((Block) view.cbxTipo.getSelectedItem()).getId())
-                    .Type(valor)
+                    .BlockName(((Block) view.cbxBlock.getSelectedItem()).getName())
+                    .IdBlock(((Block) view.cbxBlock.getSelectedItem()).getId())
+                    .Type(view.cbxTipo.getSelectedItem().toString())
                     .build();
             if (labdb.addLab(lb)) {
                 JOptionPane.showMessageDialog(view, "Se guardo");
@@ -148,31 +156,30 @@ boolean valor = (view.cbxTipo.getSelectedIndex() != 0);
             JOptionPane.showMessageDialog(view, "Campos Incompletos");
         }
     }
+
     private int buscarCodigoEnColumna(JTable tabla, String codigo) {
-    int columna = 1; // La columna 2 tiene índice 1 (las columnas comienzan en 0)
-    DefaultTableModel model = (DefaultTableModel) tabla.getModel();
+        int columna = 0; // La columna 2 tiene índice 1 (las columnas comienzan en 0)
+        DefaultTableModel model = (DefaultTableModel) tabla.getModel();
 
-    for (int fila = 0; fila < model.getRowCount(); fila++) {
-        String valorCelda = (String) model.getValueAt(fila, columna);
-        if (valorCelda != null && valorCelda.equals(codigo)) {
-            return fila; // Devuelve el índice de la fila donde se encontró el código
+        for (int fila = 0; fila < model.getRowCount(); fila++) {
+            String valorCelda = (String) model.getValueAt(fila, columna);
+            if (valorCelda != null && valorCelda.equals(codigo)) {
+                return fila; // Devuelve el índice de la fila donde se encontró el código
+            }
         }
-    }
 
-    return -1; // Si no se encontró el código, devuelve -1
-}
+        return -1; // Si no se encontró el código, devuelve -1
+    }
 
     private void editLabs() {
         if (validateFields() && select) {
-            
-boolean valor = (view.cbxTipo.getSelectedIndex() != 0);
             Lab lb = new Lab.LabBuilder()
                     .Name(view.txtName.getText())
-                    .Code(view.txtCode.getText())
+                    .Code(codeSelect)
                     .Floor(0)
-                    .BlockName(((Block) view.cbxTipo.getSelectedItem()).getName())
-                    .IdBlock(((Block) view.cbxTipo.getSelectedItem()).getId())
-                    .Type(valor)
+                    .BlockName(((Block) view.cbxBlock.getSelectedItem()).getName())
+                    .IdBlock(((Block) view.cbxBlock.getSelectedItem()).getId())
+                    .Type(view.cbxTipo.getSelectedItem().toString())
                     .build();
             if (labdb.editLab(lb)) {
                 JOptionPane.showMessageDialog(view, "Se Actualizo");
@@ -186,11 +193,10 @@ boolean valor = (view.cbxTipo.getSelectedIndex() != 0);
         }
     }
 
-
     private void deleteLabs() {
         if (select) {
 
-            if (labdb.deleteLab(view.txtCode.getText())) {
+            if (labdb.deleteLab(codeSelect)) {
                 JOptionPane.showMessageDialog(view, "Se Borro");
                 cleanFields();
                 fillTable();
@@ -201,26 +207,27 @@ boolean valor = (view.cbxTipo.getSelectedIndex() != 0);
             JOptionPane.showMessageDialog(view, "Seleccione una fila");
         }
     }
-    
-    private void search(){
-        int row = buscarCodigoEnColumna(view.tbLabs, view.txtCode.getText());
-        if (row!=-1) {
-             TableRowSorter<TableModel> sorter = new TableRowSorter<>(view.tbLabs.getModel());
-        view.tbLabs.setRowSorter(sorter);
 
-        // Establecer el filtro para mostrar solo la fila encontrada
+    private void search() {
+        int row = buscarCodigoEnColumna(view.tbLabs, view.txtCode.getText());
+        if (row != -1) {
+            TableRowSorter<TableModel> sorter = new TableRowSorter<>(view.tbLabs.getModel());
+            view.tbLabs.setRowSorter(sorter);
+
+            // Establecer el filtro para mostrar solo la fila encontrada
             List<RowFilter<Object, Object>> filters = new ArrayList<>();
-        filters.add(RowFilter.regexFilter(view.txtCode.getText(), 1)); // Columna 2 (índice 1)
-        sorter.setRowFilter(RowFilter.andFilter(filters));
-        }else{
+            filters.add(RowFilter.regexFilter(view.txtCode.getText(), 0)); // Columna 2 (índice 1)
+            sorter.setRowFilter(RowFilter.andFilter(filters));
+        } else {
             JOptionPane.showMessageDialog(view, "No se encontro el laboratorio");
         }
     }
-    
+
     public static void main(String[] args) {
         Laboratorios l = new Laboratorios();
         ControllerPanelLabs v = new ControllerPanelLabs(l);
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == view.btnAdd) {
@@ -236,11 +243,11 @@ boolean valor = (view.cbxTipo.getSelectedIndex() != 0);
         if (e.getSource() == view.btnEdit) {
             editLabs();
         }
-        if (e.getSource()==view.btnSearch) {
+        if (e.getSource() == view.btnSearch) {
             search();
         }
-        if (e.getSource()==view.btnCancelar) {
-             MenuControlador menu = new MenuControlador();
+        if (e.getSource() == view.btnCancelar) {
+            MenuControlador menu = new MenuControlador();
             view.setVisible(false);
             menu.iniciar();
         }
