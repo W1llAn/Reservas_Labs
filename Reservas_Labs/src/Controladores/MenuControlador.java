@@ -1,6 +1,7 @@
 package Controladores;
 
 import Modelos.Horario;
+import Modelos.LabDB;
 import Modelos.Reserva;
 import Vista.Horarios;
 import Vista.Laboratorios;
@@ -61,7 +62,7 @@ public class MenuControlador implements MouseListener {
             Horarios vista_horarios = new Horarios();
             Horario horario = new Horario();
             try {
-                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario);
+                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList());
             } catch (SQLException ex) {
                 Logger.getLogger(MenuControlador.class.getName()).log(Level.SEVERE, null, ex);
             }

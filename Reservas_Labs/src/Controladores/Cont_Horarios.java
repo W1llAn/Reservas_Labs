@@ -14,7 +14,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.sql.SQLException;
+import java.time.DayOfWeek;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -31,15 +37,18 @@ public class Cont_Horarios implements ActionListener, MouseListener{
     
     private Horarios vista_horarios = new Horarios();
     private Horario horarios = new Horario();
-    private BlockDB bloque = new BlockDB();
     private LabDB lab = new LabDB();
 
-    public Cont_Horarios(Horarios vista_horarios, Horario horarios) throws SQLException {
+    public Cont_Horarios(Horarios vista_horarios, Horario horarios, ArrayList<Lab> laboratorios) throws SQLException {
         this.vista_horarios = vista_horarios;
         this.horarios = horarios;
         this.vista_horarios.btnRegresar.addActionListener(this);
-        this.vista_horarios.btnReserva.addActionListener(this);
+        this.vista_horarios.btnReserva.addMouseListener(this);
         this.llenarComboBloques();
+        this.vista_horarios.fechaDia.addMouseListener(this);
+        //LocalDate fechaActual = LocalDate.now();
+        LocalDate fechaActual =  LocalDate.of(2024, 5, 27);
+        LocalDate [] fechaSemana = this.obtenerFechasSemana(fechaActual);
         this.vista_horarios.tablaHorarios.addMouseListener(this);
         this.vista_horarios.comboBloque.setSelectedIndex(-1);
        this.vista_horarios.comboBloque.addActionListener(new ActionListener() {
@@ -48,9 +57,8 @@ public class Cont_Horarios implements ActionListener, MouseListener{
                 if (itemSeleccionado != -1) {
                     vista_horarios.comboLaboratorio.removeAllItems();
                     borrarTabla();
-                    llenarLaboratorios(vista_horarios.comboBloque.getItemAt(itemSeleccionado).getId());
+                    llenarLaboratorios(laboratorios,vista_horarios.comboBloque.getItemAt(itemSeleccionado).getId());
                 }
-                vista_horarios.comboLaboratorio.setSelectedIndex(-1);
             }
         });
        this.vista_horarios.btnRegresar.addActionListener(this);
@@ -60,7 +68,9 @@ public class Cont_Horarios implements ActionListener, MouseListener{
                 if (itemSeleccionado != -1) {
                     try {                
                         borrarTabla();
-                        asignarDias(horarios.contultaHorarios(vista_horarios.comboLaboratorio.getItemAt(itemSeleccionado).getId()));
+                        ArrayList<Horario> hora = horarios.contultaHorarios(vista_horarios.comboLaboratorio.getItemAt(itemSeleccionado).getId(),fechaSemana[0].toString(),fechaSemana[1].toString());
+                        System.out.println(hora.size());
+                        asignarDias(hora);
                     } catch (SQLException ex) {
                         Logger.getLogger(Cont_Horarios.class.getName()).log(Level.SEVERE, null, ex);
                     }  
@@ -68,13 +78,24 @@ public class Cont_Horarios implements ActionListener, MouseListener{
             }
         });
          
+          this.vista_horarios.fechaDia.addPropertyChangeListener("date", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                if ("date".equals(evt.getPropertyName())) {
+                    Instant instant = vista_horarios.fechaDia.getDate().toInstant();
+                    LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+                    vista_horarios.txt_fechas.setText(obtenerFechasSemana(localDate)[0].toString() + " - " + obtenerFechasSemana(localDate)[1].toString());
+                }
+            }
+        });
+         
         }
     
-    private void llenarLaboratorios(int codigo){
-        ArrayList<Lab> laboratorios = new ArrayList<>();
-        laboratorios= this.lab.laboratoriosBloque(codigo);
+    private void llenarLaboratorios(ArrayList<Lab> laboratorios,int codigo){
         for (int i = 0; i < laboratorios.size(); i++) {
-            this.vista_horarios.comboLaboratorio.addItem(laboratorios.get(i));
+            if (laboratorios.get(i).getIdBlock()==codigo) {
+                this.vista_horarios.comboLaboratorio.addItem(laboratorios.get(i));
+            }
         }
     }
     
@@ -86,11 +107,26 @@ public class Cont_Horarios implements ActionListener, MouseListener{
         }
     }
     private void llenarComboBloques(){
-        ArrayList<Block> bloques = new ArrayList<>();
-        bloques= this.bloque.blockList();
-        for (int i = 0; i < bloques.size(); i++) {
-            this.vista_horarios.comboBloque.addItem(bloques.get(i));
-        }
+        this.vista_horarios.comboBloque.addItem( new Block(1, "Bloque1"));
+         this.vista_horarios.comboBloque.addItem( new Block(2, "Bloque2"));
+         this.vista_horarios.comboBloque.addItem(new Block(3, "Ciencias Aplicadas" ));
+         this.vista_horarios.comboBloque.addItem (new Block(3, " Talleres Tecnológicos"));
+    }
+    
+    private LocalDate[] obtenerFechasSemana(LocalDate fecha) {
+        // Obtener el día de la semana para la fecha proporcionada
+        DayOfWeek diaDeLaSemana = fecha.getDayOfWeek();
+
+        // Calcular la diferencia de días hasta el lunes (inicio de la semana)
+        int diasHastaLunes = diaDeLaSemana.getValue() - DayOfWeek.MONDAY.getValue();
+        LocalDate inicioDeSemana = fecha.minusDays(diasHastaLunes);
+
+        // Calcular la diferencia de días hasta el sábado
+        int diasHastaSabado = DayOfWeek.SATURDAY.getValue() - diaDeLaSemana.getValue();
+        LocalDate finDeSemana = fecha.plusDays(diasHastaSabado);
+
+        // Devolver un arreglo con las dos fechas
+        return new LocalDate[]{inicioDeSemana, finDeSemana};
     }
     
     private void asignarDias (ArrayList<Horario> horarios){
@@ -138,28 +174,30 @@ public class Cont_Horarios implements ActionListener, MouseListener{
             MenuControlador menu = new MenuControlador();
             menu.iniciar();
             this.vista_horarios.dispose();
-        }
-        
+        }            
     }
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if (e.getSource()==this.vista_horarios.tablaHorarios) {
-            int fila = this.vista_horarios.tablaHorarios.rowAtPoint(e.getPoint());
-           
-            
-        }
-        if (e.getSource()==this.vista_horarios.btnRegresar) {
-            
+         if (e.getSource()==this.vista_horarios.btnReserva) {
+             Instant instant = this.vista_horarios.fechaDia.getDate().toInstant();
+             LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+            System.out.println(this.vista_horarios.comboLaboratorio.getItemAt(this.vista_horarios.comboLaboratorio.getSelectedIndex()).getBlockName()
+                                          + this.vista_horarios.comboLaboratorio.getItemAt(this.vista_horarios.comboLaboratorio.getSelectedIndex()).getName()                              
+                                          + localDate.toString()
+                                          + this.vista_horarios.tablaHorarios.getSelectedRow()+7
+                                          + this.vista_horarios.tablaHorarios.getSelectedColumn()+7);
         }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
+        
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
+        
     }
 
     @Override
