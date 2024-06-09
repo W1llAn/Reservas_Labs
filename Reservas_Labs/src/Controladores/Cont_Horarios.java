@@ -9,6 +9,7 @@ import Modelos.BlockDB;
 import Modelos.Horario;
 import Modelos.Lab;
 import Modelos.LabDB;
+import Utilidades.Recurso;
 import Vista.Horarios;
 import Vista.Reservas;
 import java.awt.event.ActionEvent;
@@ -22,14 +23,13 @@ import java.time.DayOfWeek;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -40,6 +40,7 @@ public class Cont_Horarios implements ActionListener, MouseListener{
     private Horarios vista_horarios = new Horarios();
     private Horario horarios = new Horario();
     private LabDB lab = new LabDB();
+    private Recurso rec = new Recurso();
 
     public Cont_Horarios(Horarios vista_horarios, Horario horarios, ArrayList<Lab> laboratorios) throws SQLException {
         this.vista_horarios = vista_horarios;
@@ -50,8 +51,9 @@ public class Cont_Horarios implements ActionListener, MouseListener{
         this.vista_horarios.fechaDia.addMouseListener(this);
         LocalDate fechaActual = LocalDate.now();
         Instant instant = fechaActual.atStartOfDay(ZoneId.systemDefault()).toInstant();
+         LocalDate localDate1 = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+         vista_horarios.txt_fechas.setText(obtenerFechasSemana(localDate1)[0].toString() + " - " + obtenerFechasSemana(localDate1)[1].toString());
         this.vista_horarios.fechaDia.setDate(Date.from(instant));
-        LocalDate [] fechaSemana = this.obtenerFechasSemana(fechaActual);
         this.vista_horarios.tablaHorarios.addMouseListener(this);
         this.vista_horarios.comboBloque.setSelectedIndex(-1);
        this.vista_horarios.comboBloque.addActionListener(new ActionListener() {
@@ -71,7 +73,10 @@ public class Cont_Horarios implements ActionListener, MouseListener{
                 if (itemSeleccionado != -1) {
                     try {                
                         borrarTabla();
-                        ArrayList<Horario> hora = horarios.contultaHorarios(vista_horarios.comboLaboratorio.getItemAt(itemSeleccionado).getId(),fechaSemana[0].toString(),fechaSemana[1].toString());
+                         Instant instant = vista_horarios.fechaDia.getDate().toInstant();
+                         LocalDate localDate1 = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+                         LocalDate [] fechas = obtenerFechasSemana(localDate1);
+                        ArrayList<Horario> hora = horarios.contultaHorarios(vista_horarios.comboLaboratorio.getItemAt(itemSeleccionado).getId(),fechas[0].toString(),fechas[1].toString());
                         asignarDias(hora);
                     } catch (SQLException ex) {
                         Logger.getLogger(Cont_Horarios.class.getName()).log(Level.SEVERE, null, ex);
@@ -166,6 +171,24 @@ public class Cont_Horarios implements ActionListener, MouseListener{
             }
         }
     }
+    private boolean ControlesReserva(){
+        if (this.vista_horarios.tablaHorarios.getValueAt(this.vista_horarios.tablaHorarios.getSelectedRow(), this.vista_horarios.tablaHorarios.getSelectedColumn()) != null) {
+            this.rec.aviso("El laboratorio a esa hora se encuntra ocupado");
+            return false;
+        }
+        if (this.vista_horarios.comboBloque.getSelectedIndex()==-1 || this.vista_horarios.comboLaboratorio.getSelectedIndex()==-1) {
+            this.rec.aviso("Debe seleccionar un Laboratorio");
+            return false;
+        }
+        LocalDate localDate = this.vista_horarios.fechaDia.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEEE", new Locale("es", "ES"));
+        String DiaF = localDate.format(formatter);
+        if (DiaF.toLowerCase().equals("domingo")) {
+            this.rec.aviso("No puede reservar en día domingo");
+            return false;
+        }
+    return true;
+    }
     
     private void asignarHoras(Horario horario, int dia){
             int horaInicio=this.obtenerHoras(horario.getHora_inicio()),horaFin=this.obtenerHoras(horario.getHora_final());
@@ -202,8 +225,8 @@ public class Cont_Horarios implements ActionListener, MouseListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
-         if (e.getSource()==this.vista_horarios.btnReserva) {
-             if (this.vista_horarios.tablaHorarios.getValueAt(this.vista_horarios.tablaHorarios.getSelectedRow(), this.vista_horarios.tablaHorarios.getSelectedColumn()) == null) {
+         if (e.getSource()==this.vista_horarios.btnReserva) {          
+             if (this.ControlesReserva()) {
               Instant instant = this.vista_horarios.fechaDia.getDate().toInstant();
              LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
             Horario horario = new Horario();
@@ -223,6 +246,7 @@ public class Cont_Horarios implements ActionListener, MouseListener{
                 System.out.println("es en inicar reserva");
             }
             this.vista_horarios.dispose();
+            
         }
             }   
         }           

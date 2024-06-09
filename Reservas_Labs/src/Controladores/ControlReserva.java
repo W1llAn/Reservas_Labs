@@ -4,9 +4,11 @@ import Modelos.Almacen;
 import Modelos.Carrera;
 import Modelos.Conexion;
 import Modelos.Horario;
+import Modelos.LabDB;
 import Modelos.Recursos;
 import Modelos.Responsable;
 import Modelos.UsuarioSesion;
+import Vista.Horarios;
 import Vista.Reservas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +19,8 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -107,9 +111,16 @@ public class ControlReserva implements ActionListener {
         }
         if (e.getSource() == this.vistaRes.btCancelar) {
             MenuControlador menu = new MenuControlador();
-            borrarDatos();
-            this.vistaRes.dispose();
-            menu.iniciar();
+            borrarDatos();         
+             Horarios vista_horarios = new Horarios();
+            Horario horario = new Horario();
+            try {
+                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList());
+            } catch (SQLException ex) {
+                Logger.getLogger(MenuControlador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+             this.vistaRes.dispose();
+            vista_horarios.setVisible(true);
 
         }
 
@@ -233,9 +244,7 @@ public class ControlReserva implements ActionListener {
         System.out.println("El id del responsable es: " + id_responsable);
         horario.setHora_inicio(this.vistaRes.txtHoraInicio.getText());
         horario.setHora_final(this.vistaRes.txtHoraFin.getText());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-        LocalDate fecha = LocalDate.parse(this.vistaRes.txtFechaReserva.getText(), formatter);
-        horario.setFecha_dia(fecha);
+        horario.setFecha_dia(LocalDate.parse(this.vistaRes.txtFechaReserva.getText()));
         horario.setNombre_dia(horario.decifrarDia(this.vistaRes.txtFechaReserva.getText()));
         horario.setMateria("Reserva");
         horario.setId_laboratorio(id_laboratorio);
