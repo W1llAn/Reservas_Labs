@@ -4,6 +4,10 @@
  */
 package Modelos;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
+import java.util.Locale;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,10 +21,12 @@ import java.util.ArrayList;
  * @author William
  */
 public class Horario {
-    private String  hora_inicio,hora_final, nombre_dia,materia, nombre_responsable ;
+    private String  hora_inicio,hora_final, nombre_dia,materia,nombre_responsable,descripcion ;
     private LocalDate fecha_dia; 
     private int id_laboratorio;
     private Recursos rec = new Recursos();
+    private boolean esReserva;
+    private int id_laboratorio,id_responsable;  
 
     public Horario(String hora_inicio, String hora_final, String nombre_dia, String materia,String nombre_responsable, LocalDate fecha_dia, int id_laboratorio) {
         this.hora_inicio = hora_inicio;
@@ -32,6 +38,37 @@ public class Horario {
         this.id_laboratorio = id_laboratorio;
     }
 
+    public Horario(String fecha_dia, String hora_inicio, String hora_final, String nombre_dia, String materia, int id_laboratorio, int id_responsable,String descripcion) {
+        this.fecha_dia = fecha_dia;
+        this.hora_inicio = hora_inicio;
+        this.hora_final = hora_final;
+        this.nombre_dia = nombre_dia;
+        this.materia = materia;
+        this.id_laboratorio = id_laboratorio;
+        this.id_responsable = id_responsable;
+        this.descripcion= descripcion;
+    }
+    
+
+    public Horario() {
+    }
+
+    public String getDescripcion() {
+        return this.descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getMateria() {
+        return this.materia;
+    }
+
+    public void setMateria(String materia) {
+        this.materia = materia;
+    }
+
     public int getId_laboratorio() {
         return this.id_laboratorio;
     }
@@ -40,10 +77,14 @@ public class Horario {
         this.id_laboratorio = id_laboratorio;
     }
 
-  
-
-    public Horario() {
+    public int getId_responsable() {
+        return this.id_responsable;
     }
+
+    public void setId_responsable(int id_responsable) {
+        this.id_responsable = id_responsable;
+    }
+    
 
     public String getMateria() {
         return materia;
@@ -94,8 +135,32 @@ public class Horario {
         this.nombre_dia = nombre_dia;
     }
 
-    
+   
+      public String decifrarDia(String fecha) {
+          // Formato de la fecha de entrada
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        // Parsear la fecha
+        LocalDate fechaLocalDate = LocalDate.parse(fecha, formatter);
+
+        // Obtener el día de la semana
+        String diaDeLaSemana = fechaLocalDate.getDayOfWeek().getDisplayName(TextStyle.FULL, new Locale("es", "ES"));
+
+       System.out.println("El dia de la fecha:"+fecha.toString()+"es:"+diaDeLaSemana);
+        return diaDeLaSemana;
+        
+    }
+      
+      private boolean busquedaCedula(String cedula) {
+          for (int i = 0; i < Almacen.getInstance().listResponsables.size(); i++) {
+              if (Almacen.getInstance().listResponsables.get(i).getCedula().equals(cedula)) {
+                  return true;
+              }
+          }
+        return false;
+      }
     public ArrayList<Horario> contultaHorarios(int id_laboratorio, String fechaInicio, String fechaFin) throws SQLException{
+
         ArrayList<Horario> horarios = new ArrayList<>();
         Conexion conexion = new Conexion();
         Connection con = conexion.Conectar();
@@ -126,6 +191,7 @@ public class Horario {
         this.asignarHorarios(horarios);
         return horarios;
     }
+        
     public void asignarHorarios(ArrayList<Horario> horarios) throws SQLException{
             for(Horario h: horarios){
                  this.obtenerLaboratorio(h.id_laboratorio).setHorarios(h);
@@ -143,6 +209,7 @@ public class Horario {
             }
         }
         return null;
+
     }
     @Override
     public String toString() {

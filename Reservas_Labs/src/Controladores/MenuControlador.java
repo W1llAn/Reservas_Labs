@@ -41,10 +41,12 @@ public class MenuControlador implements MouseListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if (e.getSource() == this.menu.lblReservas) {
-            Reserva res = new Reserva();
+            Horario horario = new Horario();
             Reservas vistReser = new Reservas();
             try {
-                ControlReserva contr= new ControlReserva(vistReser, res);// Mostrar la ventana de reserva cuando se hace clic en lblReservas
+                ControlReserva contr= new ControlReserva(vistReser, 
+                        horario,"Edificio1","Laboratorio 2",
+                        "2024-06-21","9:00","11:00",3);// Mostrar la ventana de reserva cuando se hace clic en lblReservas
                 vistReser.setVisible(true);
                 this.menu.dispose();
             } catch (SQLException ex) {
