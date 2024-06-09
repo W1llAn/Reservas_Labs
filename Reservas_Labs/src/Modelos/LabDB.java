@@ -3,7 +3,6 @@ package Modelos;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
-import java.util.List;
 import java.sql.ResultSet;
 
 public class LabDB {
@@ -17,7 +16,7 @@ public class LabDB {
     public boolean addLab(Lab l) {
 
         try (Connection cn = con.Conectar(); PreparedStatement preparedStatement = cn.prepareStatement(
-                "INSERT INTO laboratorios ( codigo,nombre_laboratorio, piso, id_bloque, es_aula) VALUES (?, ?, ?, ?, ?)"
+                "INSERT INTO laboratorios ( codigo,nombre_laboratorio, piso, id_bloque, tipo) VALUES (?, ?, ?, ?, ?)"
         )) {
 
             // Establecer los parámetros
@@ -25,7 +24,7 @@ public class LabDB {
             preparedStatement.setString(2, l.getName());
             preparedStatement.setInt(3, l.getFloor());
             preparedStatement.setInt(4, l.getIdBlock());
-            preparedStatement.setBoolean(5, l.isType()); // false para lab, true para aula
+            preparedStatement.setString(5, l.isType()); // false para lab, true para aula
 
             preparedStatement.executeUpdate();
             return true;
@@ -48,7 +47,7 @@ public class LabDB {
                 Lab lab = new Lab.LabBuilder()
                         .Id(resultSet.getInt("id_laboratorio"))
                         .Name(resultSet.getString("nombre_laboratorio"))
-                        .Type(resultSet.getBoolean("es_aula"))
+                        .Type(resultSet.getString("tipo"))
                         .Code(resultSet.getString("codigo"))
                         .IdBlock(resultSet.getInt("id_bloque"))
                         .BlockName(resultSet.getString("name"))
@@ -73,17 +72,15 @@ public class LabDB {
     }*/
     
     public boolean editLab(Lab lb) {
-        String sql = "UPDATE laboratorios SET nombre_laboratorio = ?, piso = ?, id_bloque = ?, es_aula = ?, codigo = ? WHERE id_laboratorio = ?";
+        String sql = "UPDATE laboratorios SET nombre_laboratorio = ?, id_bloque = ?, tipo = ? WHERE codigo = ?";
 
         try (Connection cn = con.Conectar(); PreparedStatement preparedStatement = cn.prepareStatement(sql)) {
 
             // Establecer los parámetros
             preparedStatement.setString(1, lb.getName());
-            preparedStatement.setInt(2, lb.getFloor());
-            preparedStatement.setInt(3, lb.getIdBlock());
-            preparedStatement.setBoolean(4, lb.isType());
-            preparedStatement.setString(5, lb.getCode());
-            preparedStatement.setInt(6, lb.getId());
+            preparedStatement.setInt(2, lb.getIdBlock());
+            preparedStatement.setString(3, lb.isType());
+            preparedStatement.setString(4, lb.getCode());
 
             // Ejecutar la actualización
             int rowsAffected = preparedStatement.executeUpdate();
@@ -94,19 +91,40 @@ public class LabDB {
         }
     }
 
-    public boolean deleteLab(int id) {
-        String sql = "DELETE FROM laboratorios WHERE id_laboratorio = ?";
+    public boolean deleteLab(String id) {
+        String sql = "DELETE FROM laboratorios WHERE codigo = ?";
 
         try (Connection cn = con.Conectar(); PreparedStatement preparedStatement = cn.prepareStatement(sql)) {
 
             // Establecer los parámetros
-            preparedStatement.setInt(1, id);
+            preparedStatement.setString(1, id);
             // Ejecutar la actualización
             int rowsAffected = preparedStatement.executeUpdate();
             return rowsAffected > 0; // Devuelve true si al menos una fila fue actualizada
         } catch (Exception e) {
             System.out.println("Error: " + e.getMessage());
             return false;
+        }
+    }
+    
+    
+    public void llenarBloques(){
+        ArrayList<Lab> laboratorios = this.labList();
+        for (int i = 0; i < laboratorios.size(); i++) {
+            switch(laboratorios.get(i).getIdBlock()){
+                case 1:
+                    UsuarioSesion.getBloques().get(0).setLaboratorios(laboratorios.get(i));
+                break;
+                case 2:
+                    UsuarioSesion.getBloques().get(1).setLaboratorios(laboratorios.get(i));
+                break;
+                case 3:
+                    UsuarioSesion.getBloques().get(2).setLaboratorios(laboratorios.get(i));
+                break;
+                case 4:
+                    UsuarioSesion.getBloques().get(3).setLaboratorios(laboratorios.get(i));
+                break;
+            }
         }
     }
 }
