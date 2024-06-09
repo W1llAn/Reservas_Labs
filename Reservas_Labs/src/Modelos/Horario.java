@@ -95,7 +95,7 @@ public class Horario {
     }
 
     
-    public ArrayList<Horario> contultaHorarios(int id_laboratorio) throws SQLException{
+    public ArrayList<Horario> contultaHorarios(int id_laboratorio, String fechaInicio, String fechaFin) throws SQLException{
         ArrayList<Horario> horarios = new ArrayList<>();
         Conexion conexion = new Conexion();
         Connection con = conexion.Conectar();
@@ -105,7 +105,8 @@ public class Horario {
             Statement st = con.createStatement();
             ResultSet rs = null;
             String consulta = "SELECT id_horario_PK, ID_laboratorio, fecha_dia,hora_inicio, hora_final, materia, nombre_dia, nombre, apellido FROM Horarios " +
-                                        "JOIN responsables ON Horarios.id_responsable = responsables.id_responsable WHERE id_laboratorio ="+id_laboratorio+" ;";
+                                        "JOIN responsables ON Horarios.id_responsable = responsables.id_responsable "
+                                        + "WHERE id_laboratorio ="+id_laboratorio+" AND fecha_dia BETWEEN '"+fechaInicio+"' AND '"+fechaFin+"' ;";
             rs = st.executeQuery(consulta);
             while (rs.next()) {
                 Horario hor = new Horario();

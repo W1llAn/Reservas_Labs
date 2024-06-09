@@ -62,31 +62,6 @@ public class LabDB {
         return labs;
     }
     
-    public ArrayList<Lab> laboratoriosBloque(int id) {
-        ArrayList<Lab> labs = new ArrayList<>();
-        try (Connection cn = con.Conectar(); PreparedStatement preparedStatement = cn.prepareStatement(
-                "SELECT * FROM laboratorios WHERE id_bloque = "+id+";"
-        )) {
-
-            ResultSet resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                Lab lab = new Lab.LabBuilder()
-                        .Id(resultSet.getInt("id_laboratorio"))
-                        .Name(resultSet.getString("nombre_laboratorio"))
-                        .Type(resultSet.getString("tipo"))
-                        .Code(resultSet.getString("codigo"))
-                        .IdBlock(resultSet.getInt("id_bloque"))
-                        .Floor(resultSet.getInt("piso"))
-                        .build();
-
-                labs.add(lab);
-                Almacen.getInstance().listaLabo.add(lab);
-            }
-        } catch (Exception e) {
-            System.out.println("Error: " + e);
-        }
-        return labs;
-    }
 
    
     /*
