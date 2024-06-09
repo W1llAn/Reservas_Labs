@@ -10,6 +10,7 @@ import Modelos.Horario;
 import Modelos.Lab;
 import Modelos.LabDB;
 import Vista.Horarios;
+import Vista.Reservas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -205,23 +206,33 @@ public class Cont_Horarios implements ActionListener, MouseListener{
              if (this.vista_horarios.tablaHorarios.getValueAt(this.vista_horarios.tablaHorarios.getSelectedRow(), this.vista_horarios.tablaHorarios.getSelectedColumn()) == null) {
               Instant instant = this.vista_horarios.fechaDia.getDate().toInstant();
              LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
-            System.out.println(this.vista_horarios.comboLaboratorio.getItemAt(this.vista_horarios.comboLaboratorio.getSelectedIndex()).getBlockName()
-                                          + this.vista_horarios.comboLaboratorio.getItemAt(this.vista_horarios.comboLaboratorio.getSelectedIndex()).getName()                              
-                                          + localDate.toString()
-                                          + this.armarHoraInicio(this.vista_horarios.tablaHorarios.getSelectedRow())
-                                          + this.armarHoraFin(this.vista_horarios.tablaHorarios.getSelectedRow()));
+            Horario horario = new Horario();
+            Reservas vistReser = new Reservas();
+            try {
+                ControlReserva contr= new ControlReserva(vistReser, 
+                        horario,this.vista_horarios.comboLaboratorio.getItemAt(this.vista_horarios.comboLaboratorio.getSelectedIndex()).getBlockName(),
+                        this.vista_horarios.comboLaboratorio.getItemAt(this.vista_horarios.comboLaboratorio.getSelectedIndex()).getName(),
+                        localDate.toString(),
+                        this.armarHoraInicio(this.vista_horarios.tablaHorarios.getSelectedRow()),
+                        this.armarHoraFin(this.vista_horarios.tablaHorarios.getSelectedRow())
+                        ,this.vista_horarios.comboLaboratorio.getItemAt(this.vista_horarios.comboLaboratorio.getSelectedIndex()).getId());// Mostrar la ventana de reserva cuando se hace clic en lblReservas
+                vistReser.setVisible(true);
+            } catch (SQLException ex) {
+                System.out.println("es en inicar reserva");
+            } catch (ClassNotFoundException ex) {
+                System.out.println("es en inicar reserva");
+            }
+            this.vista_horarios.dispose();
+        }
             }   
         }           
-    }
 
     @Override
     public void mousePressed(MouseEvent e) {
-        
     }
 
     @Override
     public void mouseReleased(MouseEvent e) {
-        
     }
 
     @Override
@@ -231,6 +242,7 @@ public class Cont_Horarios implements ActionListener, MouseListener{
     @Override
     public void mouseExited(MouseEvent e) {
     }
+    
 
     
 }

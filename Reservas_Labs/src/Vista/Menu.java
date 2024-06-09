@@ -29,8 +29,6 @@ public class Menu extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        panItemReservas = new javax.swing.JPanel();
-        lblReservas = new javax.swing.JLabel();
         panItemLaboratorios = new javax.swing.JPanel();
         lblLaboratorios = new javax.swing.JLabel();
         panItemHorarios = new javax.swing.JPanel();
@@ -60,28 +58,6 @@ public class Menu extends javax.swing.JFrame {
         jLabel1.setText("MENÚ");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 41, -1, -1));
 
-        panItemReservas.setBackground(new java.awt.Color(147, 10, 13));
-        panItemReservas.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-
-        lblReservas.setBackground(new java.awt.Color(43, 43, 43));
-        lblReservas.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
-        lblReservas.setForeground(new java.awt.Color(255, 255, 255));
-        lblReservas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblReservas.setText("Reservas");
-
-        javax.swing.GroupLayout panItemReservasLayout = new javax.swing.GroupLayout(panItemReservas);
-        panItemReservas.setLayout(panItemReservasLayout);
-        panItemReservasLayout.setHorizontalGroup(
-            panItemReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblReservas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        panItemReservasLayout.setVerticalGroup(
-            panItemReservasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblReservas, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-        );
-
-        jPanel2.add(panItemReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 101, 254, -1));
-
         panItemLaboratorios.setBackground(new java.awt.Color(147, 10, 13));
         panItemLaboratorios.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
 
@@ -95,14 +71,18 @@ public class Menu extends javax.swing.JFrame {
         panItemLaboratorios.setLayout(panItemLaboratoriosLayout);
         panItemLaboratoriosLayout.setHorizontalGroup(
             panItemLaboratoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblLaboratorios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panItemLaboratoriosLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblLaboratorios, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         panItemLaboratoriosLayout.setVerticalGroup(
             panItemLaboratoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblLaboratorios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panItemLaboratoriosLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblLaboratorios, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel2.add(panItemLaboratorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 209, 254, -1));
+        jPanel2.add(panItemLaboratorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 254, -1));
 
         panItemHorarios.setBackground(new java.awt.Color(147, 10, 13));
         panItemHorarios.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
@@ -117,70 +97,54 @@ public class Menu extends javax.swing.JFrame {
         panItemHorarios.setLayout(panItemHorariosLayout);
         panItemHorariosLayout.setHorizontalGroup(
             panItemHorariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblHorarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panItemHorariosLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblHorarios, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         panItemHorariosLayout.setVerticalGroup(
             panItemHorariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblHorarios, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panItemHorariosLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblHorarios, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jPanel2.add(panItemHorarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(24, 155, 254, -1));
+        jPanel2.add(panItemHorarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 254, -1));
 
         panItemSalir.setBackground(new java.awt.Color(147, 10, 13));
         panItemSalir.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        panItemSalir.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         lblSalir.setBackground(new java.awt.Color(43, 43, 43));
         lblSalir.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         lblSalir.setForeground(new java.awt.Color(255, 255, 255));
         lblSalir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSalir.setText("Salir");
+        panItemSalir.add(lblSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(7, 1, 234, 40));
 
         lblSalir1.setBackground(new java.awt.Color(43, 43, 43));
         lblSalir1.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         lblSalir1.setForeground(new java.awt.Color(255, 255, 255));
         lblSalir1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSalir1.setText("Salir");
+        panItemSalir.add(lblSalir1, new org.netbeans.lib.awtextra.AbsoluteConstraints(505, 1, 246, 40));
 
         lblSalir2.setBackground(new java.awt.Color(43, 43, 43));
         lblSalir2.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         lblSalir2.setForeground(new java.awt.Color(255, 255, 255));
         lblSalir2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSalir2.setText("Salir");
+        panItemSalir.add(lblSalir2, new org.netbeans.lib.awtextra.AbsoluteConstraints(751, 1, 246, 40));
 
         lblSalir3.setBackground(new java.awt.Color(43, 43, 43));
         lblSalir3.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         lblSalir3.setForeground(new java.awt.Color(255, 255, 255));
         lblSalir3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblSalir3.setText("Salir");
+        panItemSalir.add(lblSalir3, new org.netbeans.lib.awtextra.AbsoluteConstraints(259, 1, 246, 40));
 
-        javax.swing.GroupLayout panItemSalirLayout = new javax.swing.GroupLayout(panItemSalir);
-        panItemSalir.setLayout(panItemSalirLayout);
-        panItemSalirLayout.setHorizontalGroup(
-            panItemSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panItemSalirLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblSalir3, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblSalir1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblSalir2, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        panItemSalirLayout.setVerticalGroup(
-            panItemSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panItemSalirLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(panItemSalirLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSalir1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSalir2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblSalir3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
-        );
+        jPanel2.add(panItemSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 260, -1));
 
-        jPanel2.add(panItemSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 254, -1));
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(525, 85, 300, 360));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 160, 300, 280));
 
         jPanel3.setBackground(new java.awt.Color(147, 10, 13));
 
@@ -289,14 +253,12 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     public javax.swing.JLabel lblHorarios;
     public javax.swing.JLabel lblLaboratorios;
-    public javax.swing.JLabel lblReservas;
     public javax.swing.JLabel lblSalir;
     public javax.swing.JLabel lblSalir1;
     public javax.swing.JLabel lblSalir2;
     public javax.swing.JLabel lblSalir3;
     public javax.swing.JPanel panItemHorarios;
     public javax.swing.JPanel panItemLaboratorios;
-    public javax.swing.JPanel panItemReservas;
     public javax.swing.JPanel panItemSalir;
     // End of variables declaration//GEN-END:variables
 }
