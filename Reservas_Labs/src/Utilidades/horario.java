@@ -72,6 +72,9 @@ public class horario extends JTable {
         if (valor != null && valor.contains("Reserva")) {
             componente.setBackground(new Color(147,10,13));
             componente.setForeground(Color.white);
+        }else if (valor != null && valor.contains("Dia")) {
+            componente.setBackground(new Color(255, 247, 0));
+            componente.setForeground(Color.black);
         } else if (valor != null && valor.length() > 5) {
             componente.setBackground(new Color(43, 43, 43));
             componente.setForeground(Color.white);

@@ -54,6 +54,28 @@ public class FestivosDB {
         }
         return festivos;
     }
+    
+     public ArrayList<Festivo> listaFestivosSemana(String fechaInicio, String fechaFin) {
+                ArrayList<Festivo> festivos = new ArrayList<>();
+        try (Connection cn = con.Conectar(); 
+             PreparedStatement preparedStatement = cn.prepareStatement(
+             "SELECT * FROM Festivos WHERE fecha_inicio BETWEEN '"+fechaInicio+"' AND ' "+fechaFin+"' ;"
+        )) {
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                Festivo f = new Festivo();
+                f.setId(resultSet.getInt(1));
+                f.setNombre(resultSet.getString(2));
+                f.setFechaInicio(resultSet.getString(3));
+                f.setFechaFin(resultSet.getString(4));
+                festivos.add(f);
+            }
+        } catch (Exception e) {
+            System.out.println("Error: " + e);
+        }
+        return festivos;
+    }
 
     public boolean eliminarDiaFestivo(int id) {
                 String sql = "DELETE FROM Festivos WHERE id_festivos = ?";

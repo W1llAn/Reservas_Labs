@@ -5,11 +5,13 @@
 package Controladores;
 
 import Modelos.Block;
-import Modelos.BlockDB;
+import Modelos.Festivo;
+import Modelos.FestivosDB;
 import Modelos.Horario;
 import Modelos.Lab;
 import Modelos.LabDB;
 import Utilidades.Recurso;
+import Vista.Festivos;
 import Vista.Horarios;
 import Vista.Reservas;
 import java.awt.event.ActionEvent;
@@ -47,6 +49,7 @@ public class Cont_Horarios implements ActionListener, MouseListener{
         this.horarios = horarios;
         this.vista_horarios.btnRegresar.addActionListener(this);
         this.vista_horarios.btnReserva.addMouseListener(this);
+        this.vista_horarios.btnDiaFestivo.addActionListener(this);
         this.llenarComboBloques();
         this.vista_horarios.fechaDia.addMouseListener(this);
         LocalDate fechaActual = LocalDate.now();
@@ -76,8 +79,16 @@ public class Cont_Horarios implements ActionListener, MouseListener{
                          Instant instant = vista_horarios.fechaDia.getDate().toInstant();
                          LocalDate localDate1 = instant.atZone(ZoneId.systemDefault()).toLocalDate();
                          LocalDate [] fechas = obtenerFechasSemana(localDate1);
+                         System.out.println(fechas[0].toString()+"  "+fechas[1].toString());
+                         ArrayList<Festivo> diasFestivos = new FestivosDB().listaFestivosSemana(fechas[0].toString(), fechas[1].toString());
                         ArrayList<Horario> hora = horarios.contultaHorarios(vista_horarios.comboLaboratorio.getItemAt(itemSeleccionado).getId(),fechas[0].toString(),fechas[1].toString());
-                        asignarDias(hora);
+                        System.out.println(diasFestivos.size());
+                        if (hora.size()!=0) {
+                            asignarDias(hora);
+                        }
+                        if (diasFestivos.size()!=0) {
+                            asignarDiaFestivo(diasFestivos);
+                        }
                     } catch (SQLException ex) {
                         Logger.getLogger(Cont_Horarios.class.getName()).log(Level.SEVERE, null, ex);
                     }  
@@ -97,8 +108,14 @@ public class Cont_Horarios implements ActionListener, MouseListener{
                         if (itemSeleccionado != -1) {
                             try {                
                                 borrarTabla();
+                                ArrayList<Festivo> diasFestivos = new FestivosDB().listaFestivosSemana(fechaNueva[0].toString(), fechaNueva[1].toString());
                                 ArrayList<Horario> hora = horarios.contultaHorarios(vista_horarios.comboLaboratorio.getItemAt(itemSeleccionado).getId(),fechaNueva[0].toString(),fechaNueva[1].toString());
-                                asignarDias(hora);
+                               if (hora.size()!=0) {
+                                    asignarDias(hora);
+                                }
+                                if (diasFestivos.size()!=0) {
+                                    asignarDiaFestivo(diasFestivos);
+                                }
                             } catch (SQLException ex) {
                                 Logger.getLogger(Cont_Horarios.class.getName()).log(Level.SEVERE, null, ex);
                             }  
@@ -121,6 +138,18 @@ public class Cont_Horarios implements ActionListener, MouseListener{
         for (int i = 1; i <= 6; i++) {
             for (int j = 1; j <= 10; j++) {
                 this.vista_horarios.tablaHorarios.setValueAt(null, j, i);
+            }
+        }
+    }
+    
+    private void asignarDiaFestivo(ArrayList<Festivo> dias){
+        for (Festivo dia: dias) {
+            LocalDate fechaInicio = LocalDate.parse(dia.getFechaInicio());
+            LocalDate fechaFin = LocalDate.parse(dia.getFechaFin());
+            for (int i = fechaInicio.getDayOfWeek().getValue(); i <=fechaFin.getDayOfWeek().getValue(); i++) {
+                for (int j = 1; j <= 13; j++) {
+                     this.vista_horarios.tablaHorarios.setValueAt(dia, j, i);
+                }
             }
         }
     }
@@ -187,6 +216,10 @@ public class Cont_Horarios implements ActionListener, MouseListener{
             this.rec.aviso("No puede reservar en día domingo");
             return false;
         }
+        
+        if (this.vista_horarios.tablaHorarios.getSelectedRow()==-1) {
+            this.rec.aviso("Seleccione la hora que quiere reservar");
+        }
     return true;
     }
     
@@ -221,6 +254,12 @@ public class Cont_Horarios implements ActionListener, MouseListener{
             menu.iniciar();
             this.vista_horarios.dispose();
         }            
+        if (e.getSource()==this.vista_horarios.btnDiaFestivo) {
+            Festivos vista_DiaFestivo = new Festivos();
+            FestivosControlador  ctrl_festivo = new FestivosControlador(vista_DiaFestivo);
+            this.vista_horarios.dispose();
+            vista_DiaFestivo.setVisible(true);
+        }
     }
 
     @Override
