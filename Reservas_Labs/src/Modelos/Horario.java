@@ -26,18 +26,16 @@ public class Horario {
     private int id_laboratorio;
     private Recursos rec = new Recursos();
     private boolean esReserva;
-    private int id_laboratorio,id_responsable;
-    
+    private int id_laboratorio,id_responsable;  
 
-    public Horario(String hora_inicio, String hora_final, String nombre_dia, String materia, String nombre_responsable, LocalDate fecha_dia, int id_laboratorio, boolean esReserva) {
+    public Horario(String hora_inicio, String hora_final, String nombre_dia, String materia,String nombre_responsable, LocalDate fecha_dia, int id_laboratorio) {
         this.hora_inicio = hora_inicio;
         this.hora_final = hora_final;
         this.nombre_dia = nombre_dia;
+        this.nombre_responsable=nombre_responsable;
         this.materia = materia;
-        this.nombre_responsable = nombre_responsable;
         this.fecha_dia = fecha_dia;
         this.id_laboratorio = id_laboratorio;
-        this.esReserva = esReserva;
     }
 
     public Horario(String fecha_dia, String hora_inicio, String hora_final, String nombre_dia, String materia, int id_laboratorio, int id_responsable,String descripcion) {
@@ -96,13 +94,14 @@ public class Horario {
         this.materia = materia;
     }
 
-    public String getNombre_profesor() {
+    public String getNombre_responsable() {
         return nombre_responsable;
     }
 
-    public void setNombre_responsable(String nombre_profesor) {
-        this.nombre_responsable = nombre_profesor;
+    public void setNombre_responsable(String nombre_responsable) {
+        this.nombre_responsable = nombre_responsable;
     }
+    
     
     public LocalDate getFecha_dia() {
         return this.fecha_dia;
@@ -136,14 +135,7 @@ public class Horario {
         this.nombre_dia = nombre_dia;
     }
 
-    public boolean isEsReserva() {
-        return this.esReserva;
-    }
-
-    public void setEsReserva(boolean esReserva) {
-        this.esReserva = esReserva;
-    }
-    
+   
       public String decifrarDia(String fecha) {
           // Formato de la fecha de entrada
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -166,7 +158,9 @@ public class Horario {
               }
           }
         return false;
-    public ArrayList<Horario> contultaHorarios() throws SQLException{
+      }
+    public ArrayList<Horario> contultaHorarios(int id_laboratorio, String fechaInicio, String fechaFin) throws SQLException{
+
         ArrayList<Horario> horarios = new ArrayList<>();
         Conexion conexion = new Conexion();
         Connection con = conexion.Conectar();
@@ -175,19 +169,20 @@ public class Horario {
         } else {
             Statement st = con.createStatement();
             ResultSet rs = null;
-            String consulta = "SELECT * FROM Horarios";
+            String consulta = "SELECT id_horario_PK, ID_laboratorio, fecha_dia,hora_inicio, hora_final, materia, nombre_dia, nombre, apellido FROM Horarios " +
+                                        "JOIN responsables ON Horarios.id_responsable = responsables.id_responsable "
+                                        + "WHERE id_laboratorio ="+id_laboratorio+" AND fecha_dia BETWEEN '"+fechaInicio+"' AND '"+fechaFin+"' ;";
             rs = st.executeQuery(consulta);
             while (rs.next()) {
                 Horario hor = new Horario();
                 java.sql.Date fecha = rs.getDate("fecha_dia");
                 hor.setFecha_dia(fecha.toLocalDate());
-                hor.setEsReserva(rs.getInt("ID_reserva")== 1?true:false);
                 hor.setHora_inicio(rs.getString("hora_inicio"));
                 hor.setHora_final(rs.getString("hora_final"));
                 hor.setId_laboratorio(rs.getInt("ID_laboratorio"));
                 hor.setMateria(rs.getString("materia"));
                 hor.setNombre_dia(rs.getString("nombre_dia"));
-                hor.setNombre_responsable(rs.getString("nombre_responsable"));
+                hor.setNombre_responsable(rs.getString("nombre")+" "+rs.getString("apellido"));
                 horarios.add(hor);
             }
             st.close();
@@ -196,6 +191,7 @@ public class Horario {
         this.asignarHorarios(horarios);
         return horarios;
     }
+        
     public void asignarHorarios(ArrayList<Horario> horarios) throws SQLException{
             for(Horario h: horarios){
                  this.obtenerLaboratorio(h.id_laboratorio).setHorarios(h);
@@ -214,5 +210,9 @@ public class Horario {
         }
         return null;
 
+    }
+    @Override
+    public String toString() {
+        return this.materia + "\n" + this.nombre_responsable;
     }
 }
