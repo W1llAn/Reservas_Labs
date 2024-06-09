@@ -37,6 +37,7 @@ public class LabDB {
 
     public ArrayList<Lab> labList() {
         ArrayList<Lab> labs = new ArrayList<>();
+        System.out.println("Estoy en la consulta labs");
         try (Connection cn = con.Conectar(); PreparedStatement preparedStatement = cn.prepareStatement(
                 "SELECT l.*,b.nombre_bloque AS name FROM laboratorios l,bloques b where l.id_bloque=b.id"
         )) {
@@ -52,12 +53,11 @@ public class LabDB {
                         .BlockName(resultSet.getString("name"))
                         .Floor(resultSet.getInt("piso"))
                         .build();
-
                 labs.add(lab);
                 Almacen.getInstance().listaLabo.add(lab);
             }
         } catch (Exception e) {
-            System.out.println("Error: " + e);
+            System.out.println("Error al cargar lista de laboratorios: " + e);
         }
         return labs;
     }
