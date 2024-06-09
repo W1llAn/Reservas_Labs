@@ -2,7 +2,6 @@ package Controladores;
 
 import Modelos.Horario;
 import Modelos.LabDB;
-import Modelos.Reserva;
 import Vista.Horarios;
 import Vista.Laboratorios;
 import Vista.Menu;
