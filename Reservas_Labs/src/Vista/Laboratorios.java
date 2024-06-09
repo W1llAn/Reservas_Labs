@@ -45,13 +45,13 @@ public class Laboratorios extends javax.swing.JFrame  {
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
         jSeparator6 = new javax.swing.JSeparator();
-        cbxTipo = new javax.swing.JComboBox<>();
+        cbxTipo = new javax.swing.JComboBox<String>();
         btnSearch = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbLabs = new javax.swing.JTable();
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
-        cbxBlock = new javax.swing.JComboBox<>();
+        cbxBlock = new javax.swing.JComboBox<Modelos.Block>();
         btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -163,7 +163,7 @@ public class Laboratorios extends javax.swing.JFrame  {
         cbxTipo.setBackground(new java.awt.Color(147, 10, 13));
         cbxTipo.setFont(new java.awt.Font("Constantia", 0, 17)); // NOI18N
         cbxTipo.setForeground(new java.awt.Color(255, 255, 255));
-        cbxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laboratorio", "Aula", "Aula especial" }));
+        cbxTipo.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[] { "Laboratorio", "Aula", "Aula especial" }));
         cbxTipo.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
         cbxTipo.setPreferredSize(new java.awt.Dimension(72, 29));
         cbxTipo.addActionListener(new java.awt.event.ActionListener() {
