@@ -17,6 +17,7 @@ public class Horarios extends javax.swing.JFrame {
     public Horarios() {
         initComponents();
         this.setLocationRelativeTo(null);
+        
     }
 
     /**
@@ -34,11 +35,12 @@ public class Horarios extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         comboBloque = new javax.swing.JComboBox<>();
         comboLaboratorio = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaHorarios = new javax.swing.JTable();
         btnRegresar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         btnReserva = new javax.swing.JButton();
+        btnDiaFestivo = new javax.swing.JButton();
+        Scroll = new javax.swing.JScrollPane();
+        tablaHorarios = new Utilidades.horario();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -76,24 +78,11 @@ public class Horarios extends javax.swing.JFrame {
         comboLaboratorio.setFont(new java.awt.Font("Corbel", 0, 14)); // NOI18N
         jPanel1.add(comboLaboratorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 280, -1));
 
-        tablaHorarios.setFont(new java.awt.Font("Corbel", 0, 14)); // NOI18N
-        tablaHorarios.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes"
-            }
-        ));
-        jScrollPane1.setViewportView(tablaHorarios);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 820, 380));
-
         btnRegresar.setBackground(new java.awt.Color(147, 10, 13));
         btnRegresar.setFont(new java.awt.Font("Corbel", 1, 16)); // NOI18N
         btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegresar.setText("Regresar");
-        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 140, 100, 30));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 90, 100, 30));
 
         jLabel5.setFont(new java.awt.Font("Corbel", 1, 16)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
@@ -104,7 +93,17 @@ public class Horarios extends javax.swing.JFrame {
         btnReserva.setFont(new java.awt.Font("Corbel", 1, 16)); // NOI18N
         btnReserva.setForeground(new java.awt.Color(255, 255, 255));
         btnReserva.setText("Reservar");
-        jPanel1.add(btnReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, 100, 30));
+        jPanel1.add(btnReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 90, 100, 30));
+
+        btnDiaFestivo.setBackground(new java.awt.Color(147, 10, 13));
+        btnDiaFestivo.setFont(new java.awt.Font("Corbel", 1, 16)); // NOI18N
+        btnDiaFestivo.setForeground(new java.awt.Color(255, 255, 255));
+        btnDiaFestivo.setText("Ingresar dia festivo");
+        jPanel1.add(btnDiaFestivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 140, 230, 30));
+
+        Scroll.setViewportView(tablaHorarios);
+
+        jPanel1.add(Scroll, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 190, 860, 420));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -114,7 +113,7 @@ public class Horarios extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 600, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 641, Short.MAX_VALUE)
         );
 
         pack();
@@ -157,6 +156,8 @@ public class Horarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JScrollPane Scroll;
+    public javax.swing.JButton btnDiaFestivo;
     public javax.swing.JButton btnRegresar;
     public javax.swing.JButton btnReserva;
     public javax.swing.JComboBox<Block> comboBloque;
@@ -166,7 +167,6 @@ public class Horarios extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTable tablaHorarios;
+    public Utilidades.horario tablaHorarios;
     // End of variables declaration//GEN-END:variables
 }
