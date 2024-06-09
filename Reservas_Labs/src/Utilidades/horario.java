@@ -4,7 +4,6 @@
  */
 package Utilidades;
 
-import Modelos.Horario;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
@@ -38,7 +37,7 @@ public class horario extends JTable {
 
     private void aplicarEstilos() {
         DefaultTableCellRenderer renderizador = new DefaultTableCellRenderer() {
-            public Component getTableCellRendererComponent(JTable table, Horario value, boolean isSelected, boolean hasFocus, int row, int column) {
+            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 JLabel label = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
                 label.setBorder(BorderFactory.createMatteBorder(1, 1, 0, 0, Color.BLACK));
                 label.setHorizontalAlignment(SwingConstants.CENTER);
