@@ -7,11 +7,15 @@ package Controladores;
 import Modelos.Block;
 import Modelos.Festivo;
 import Modelos.FestivosDB;
+import Modelos.Horario;
+import Modelos.LabDB;
 import Vista.Festivos;
+import Vista.Horarios;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -161,6 +165,19 @@ public class FestivosControlador implements ActionListener {
         if (e.getSource() == vista.btnClean) {
            cleanFields();
         }
+          if (e.getSource() == vista.btnRegresar) {
+          Horario horario = new Horario();
+            Horarios vista_horarios = new Horarios();
+            try {
+                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList());
+            } catch (SQLException ex) {
+                Logger.getLogger(MenuControlador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.vista.dispose();
+            vista_horarios.setVisible(true);
+        }
+     
+            
     }
 
 }
