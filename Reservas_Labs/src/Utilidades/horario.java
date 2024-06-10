@@ -117,8 +117,8 @@ public class horario extends JTable {
 
     private void cambiarTamanioCeldasAncho() {
         for (int i = 0; i < this.getRowCount(); i++) {
-            this.setRowHeight(i + 1, 45);
+            this.setRowHeight(i + 1, 65);
         }
-        this.setRowHeight(0, 45);
+        this.setRowHeight(0, 65);
     }
 }
