@@ -68,7 +68,9 @@ public class Reservas extends javax.swing.JFrame  {
         jSeparator3 = new javax.swing.JSeparator();
         jSeparator5 = new javax.swing.JSeparator();
         jSeparator6 = new javax.swing.JSeparator();
+        cbTipo_Reserva = new javax.swing.JComboBox<>();
         jSeparator7 = new javax.swing.JSeparator();
+        txtMateria = new javax.swing.JTextField();
         cbCarreras = new javax.swing.JComboBox<>();
         cbCargo = new javax.swing.JComboBox<>();
         txtApellidoResponsable = new javax.swing.JTextField();
@@ -76,6 +78,8 @@ public class Reservas extends javax.swing.JFrame  {
         txtEdificio = new javax.swing.JTextField();
         jLabel19 = new javax.swing.JLabel();
         jlMensaje = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -111,7 +115,7 @@ public class Reservas extends javax.swing.JFrame  {
         jLabel8.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Descripción");
-        panelReservas.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(624, 224, -1, -1));
+        panelReservas.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(624, 320, -1, -1));
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logo-sitio-fisei-2020.png"))); // NOI18N
         panelReservas.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(35, 6, -1, -1));
@@ -140,7 +144,7 @@ public class Reservas extends javax.swing.JFrame  {
         textDescripcion.setPreferredSize(new java.awt.Dimension(302, 117));
         jScrollPane2.setViewportView(textDescripcion);
 
-        panelReservas.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(624, 240, 240, 96));
+        panelReservas.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(624, 336, 240, 96));
 
         btReservas.setBackground(new java.awt.Color(147, 10, 13));
         btReservas.setFont(new java.awt.Font("Constantia", 1, 15)); // NOI18N
@@ -168,8 +172,8 @@ public class Reservas extends javax.swing.JFrame  {
 
         jLabel11.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setText("Cargo:");
-        panelReservas.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(368, 416, -1, -1));
+        jLabel11.setText("Tipo:");
+        panelReservas.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(624, 224, -1, -1));
 
         txtUsuario.setBackground(new java.awt.Color(43, 43, 43));
         txtUsuario.setFont(new java.awt.Font("Constantia", 1, 18)); // NOI18N
@@ -262,8 +266,8 @@ public class Reservas extends javax.swing.JFrame  {
 
         jLabel16.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel16.setText("Nombre:");
-        panelReservas.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(368, 272, -1, -1));
+        jLabel16.setText("Materia:");
+        panelReservas.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(624, 272, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Constantia", 1, 18)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(255, 255, 255));
@@ -299,11 +303,36 @@ public class Reservas extends javax.swing.JFrame  {
         jSeparator6.setAlignmentX(0.3F);
         panelReservas.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 160, 16, 384));
 
+        cbTipo_Reserva.setBackground(new java.awt.Color(147, 10, 13));
+        cbTipo_Reserva.setFont(new java.awt.Font("Constantia", 0, 17)); // NOI18N
+        cbTipo_Reserva.setForeground(new java.awt.Color(255, 255, 255));
+        cbTipo_Reserva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Reservar", "Horario" }));
+        cbTipo_Reserva.setSelectedIndex(-1);
+        cbTipo_Reserva.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+        cbTipo_Reserva.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipo_ReservaActionPerformed(evt);
+            }
+        });
+        panelReservas.add(cbTipo_Reserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(624, 240, 192, 25));
+
         jSeparator7.setBackground(new java.awt.Color(255, 255, 255));
         jSeparator7.setForeground(new java.awt.Color(255, 255, 255));
         jSeparator7.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jSeparator7.setAlignmentX(0.3F);
         panelReservas.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(592, 160, 16, 385));
+
+        txtMateria.setBackground(new java.awt.Color(147, 10, 13));
+        txtMateria.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
+        txtMateria.setForeground(new java.awt.Color(255, 255, 255));
+        txtMateria.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txtMateria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        txtMateria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtMateriaActionPerformed(evt);
+            }
+        });
+        panelReservas.add(txtMateria, new org.netbeans.lib.awtextra.AbsoluteConstraints(624, 288, 192, 25));
 
         cbCarreras.setBackground(new java.awt.Color(147, 10, 13));
         cbCarreras.setFont(new java.awt.Font("Constantia", 0, 17)); // NOI18N
@@ -371,6 +400,16 @@ public class Reservas extends javax.swing.JFrame  {
         jlMensaje.setForeground(new java.awt.Color(255, 255, 255));
         panelReservas.add(jlMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 496, 224, -1));
 
+        jLabel20.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
+        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setText("Cargo:");
+        panelReservas.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(368, 416, -1, -1));
+
+        jLabel21.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
+        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setText("Nombre:");
+        panelReservas.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(368, 272, -1, -1));
+
         getContentPane().add(panelReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -16, 928, 576));
 
         pack();
@@ -412,12 +451,21 @@ public class Reservas extends javax.swing.JFrame  {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtHoraFinActionPerformed
 
+    private void cbTipo_ReservaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipo_ReservaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbTipo_ReservaActionPerformed
+
+    private void txtMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMateriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtMateriaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btCancelar;
     public javax.swing.JButton btReservas;
     public javax.swing.JComboBox<String> cbCargo;
     public javax.swing.JComboBox<Modelos.Carrera> cbCarreras;
+    public javax.swing.JComboBox<String> cbTipo_Reserva;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -430,6 +478,8 @@ public class Reservas extends javax.swing.JFrame  {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -453,6 +503,7 @@ public class Reservas extends javax.swing.JFrame  {
     public javax.swing.JTextField txtHoraFin;
     public javax.swing.JTextField txtHoraInicio;
     public javax.swing.JTextField txtLaboratorio;
+    public javax.swing.JTextField txtMateria;
     public javax.swing.JTextField txtNombreRespon;
     public javax.swing.JTextField txtUsuario;
     // End of variables declaration//GEN-END:variables
