@@ -306,7 +306,7 @@ public class Reservas extends javax.swing.JFrame  {
         cbTipo_Reserva.setBackground(new java.awt.Color(147, 10, 13));
         cbTipo_Reserva.setFont(new java.awt.Font("Constantia", 0, 17)); // NOI18N
         cbTipo_Reserva.setForeground(new java.awt.Color(255, 255, 255));
-        cbTipo_Reserva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Reservar", "Horario" }));
+        cbTipo_Reserva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Reserva", "Horario" }));
         cbTipo_Reserva.setSelectedIndex(-1);
         cbTipo_Reserva.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
         cbTipo_Reserva.addActionListener(new java.awt.event.ActionListener() {

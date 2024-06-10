@@ -31,6 +31,7 @@ public class ControlReserva implements ActionListener {
     private Responsable responsable;
     private int id_responsable = 0;
     private int id_laboratorio = 0;
+    private String tipo_reserva = null;
 //CONSTRUCTOR PARA GUARDAR LAS RESERVAS DE LABORATORIOS
 
     public ControlReserva(Reservas vistRes, Horario modelohorario, String Edificio,
@@ -86,9 +87,11 @@ public class ControlReserva implements ActionListener {
                 if (vistaRes.cbTipo_Reserva.getSelectedIndex() == 0) { // Reserva
                     vistaRes.txtMateria.setText("No debe ingresar nada");
                     vistaRes.txtMateria.setEnabled(false);
+                    tipo_reserva = "Reserva";
                 } else { // Horario
                     vistaRes.txtMateria.setText("");
                     vistaRes.txtMateria.setEnabled(true);
+                    tipo_reserva = null;
                 }
             }
         });
@@ -99,11 +102,10 @@ public class ControlReserva implements ActionListener {
                     vistRes.cbTipo_Reserva.setEnabled(false);
                     vistaRes.txtMateria.setText("No debe ingresar nada");
                     vistRes.cbTipo_Reserva.setSelectedIndex(0);
-                    
                 } else {
                     vistRes.cbTipo_Reserva.setEnabled(true);
                     vistaRes.txtMateria.setEnabled(true);
-                   
+                    vistRes.cbTipo_Reserva.setSelectedIndex(-1);
                 }
 
             }
@@ -117,6 +119,7 @@ public class ControlReserva implements ActionListener {
         if (e.getSource() == this.vistaRes.btReservas) {
             if (comprobarEleccion(this.vistaRes) == 1 && comprobarCamposVacios(this.vistaRes)) {
                 System.out.println("El id de responsable fue:" + id_responsable);
+                String tipo_ReservaFinal = (tipo_reserva == null) ? vistaRes.txtMateria.getText() : tipo_reserva;
                 //significa que en la busqueda dinamica no se encontro a la persona de la cedula
                 if (id_responsable == 0) {
                     try {
@@ -131,29 +134,17 @@ public class ControlReserva implements ActionListener {
                     }
                     //guardamos el horario  en la base
                     int id_responsable_guardado = consultarIdResponsableAlmacen(this.vistaRes.txtCedulaResponsable.getText());
-                    guardarHorario(id_responsable_guardado, id_laboratorio,this.tipo_reserva);
+                    guardarHorario(id_responsable_guardado, id_laboratorio, tipo_ReservaFinal);
                 } else {
-                    guardarHorario(id_responsable, id_laboratorio,"");
+                    guardarHorario(id_responsable, id_laboratorio, tipo_ReservaFinal);
                 }
             }
         }
         if (e.getSource() == this.vistaRes.btCancelar) {
-            MenuControlador menu = new MenuControlador();
             borrarDatos();
-            Horarios vista_horarios = new Horarios();
-            Horario horario = new Horario();
-            try {
-                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList());
-            } catch (SQLException ex) {
-                Logger.getLogger(MenuControlador.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            this.vistaRes.dispose();
-            vista_horarios.setVisible(true);
-
         }
-
     }
-//INSERTAR RESERVA en la Tabla de HORARIO--------------------------------------------------------------------------
+    //INSERTAR RESERVA en la Tabla de HORARIO--------------------------------------------------------------------------
 
     public void guardarHorario(Horario h) throws SQLException {
         Conexion conec = new Conexion();
@@ -189,7 +180,8 @@ public class ControlReserva implements ActionListener {
 
     private int comprobarEleccion(Reservas vistareser) {
         if (vistareser.cbCarreras.getSelectedIndex() == -1
-                || vistareser.cbCargo.getSelectedIndex() == -1) {
+                || vistareser.cbCargo.getSelectedIndex() == -1
+                || vistareser.cbTipo_Reserva.getSelectedIndex() == -1) {
             rec.aviso("Por favor ELIJA todos los campos para validar su reserva.");
             return -1;
         }
@@ -266,7 +258,7 @@ public class ControlReserva implements ActionListener {
         return 0;
     }
 
-    private void guardarHorario(int id_responsable, int id_laboratorio,String tipo_Reserva) {
+    private void guardarHorario(int id_responsable, int id_laboratorio, String tipo_ReservaFinal) {
         Horario horario = new Horario();
         horario.setId_responsable(id_responsable);
         System.out.println("El id del responsable es: " + id_responsable);
@@ -274,13 +266,23 @@ public class ControlReserva implements ActionListener {
         horario.setHora_final(this.vistaRes.txtHoraFin.getText());
         horario.setFecha_dia(LocalDate.parse(this.vistaRes.txtFechaReserva.getText()));
         horario.setNombre_dia(horario.decifrarDia(this.vistaRes.txtFechaReserva.getText()));
-        horario.setMateria(tipo_Reserva);
+        horario.setMateria(tipo_ReservaFinal);
         horario.setId_laboratorio(id_laboratorio);
         horario.setDescripcion(this.vistaRes.textDescripcion.getText());
         try {
             guardarHorario(horario);
             borrarDatos();
             rec.aviso("Su reserva se ha realizado con éxito");
+            //Volver al menu
+            MenuControlador menu = new MenuControlador();
+            Horarios vista_horarios = new Horarios();
+            try {
+                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList());
+            } catch (SQLException ex) {
+                Logger.getLogger(MenuControlador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.vistaRes.dispose();
+            vista_horarios.setVisible(true);
 
         } catch (SQLException ex) {
             rec.aviso("Fallo en la inserción de la reserva " + ex);
