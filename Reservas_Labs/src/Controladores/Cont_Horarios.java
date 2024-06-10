@@ -81,6 +81,7 @@ public class Cont_Horarios implements ActionListener, MouseListener{
                          LocalDate [] fechas = obtenerFechasSemana(localDate1);
                          System.out.println(fechas[0].toString()+"  "+fechas[1].toString());
                          ArrayList<Festivo> diasFestivos = new FestivosDB().listaFestivosSemana(fechas[0].toString(), fechas[1].toString());
+                         System.out.println("Festivos "+fechas[0]+ "  "+fechas[1]);
                         ArrayList<Horario> hora = horarios.contultaHorarios(vista_horarios.comboLaboratorio.getItemAt(itemSeleccionado).getId(),fechas[0].toString(),fechas[1].toString());
                         System.out.println(diasFestivos.size());
                         if (hora.size()!=0) {
@@ -147,7 +148,7 @@ public class Cont_Horarios implements ActionListener, MouseListener{
             LocalDate fechaInicio = LocalDate.parse(dia.getFechaInicio());
             LocalDate fechaFin = LocalDate.parse(dia.getFechaFin());
             for (int i = fechaInicio.getDayOfWeek().getValue(); i <=fechaFin.getDayOfWeek().getValue(); i++) {
-                for (int j = 1; j <= 13; j++) {
+                for (int j = 0; j <= 11; j++) {
                      this.vista_horarios.tablaHorarios.setValueAt(dia, j, i);
                 }
             }
@@ -225,8 +226,14 @@ public class Cont_Horarios implements ActionListener, MouseListener{
     
     private void asignarHoras(Horario horario, int dia){
             int horaInicio=this.obtenerHoras(horario.getHora_inicio()),horaFin=this.obtenerHoras(horario.getHora_final());
+            System.out.println(horario.getNombre_dia() +"  "+ horaInicio+"  "+ horaFin);
             for (int i = horaInicio; i < horaFin; i++) {
-                 this.vista_horarios.tablaHorarios.setValueAt(horario, i-7, dia);
+                if (horaInicio<=12) {
+                    this.vista_horarios.tablaHorarios.setValueAt(horario, i-7, dia);   
+                }else{
+                    this.vista_horarios.tablaHorarios.setValueAt(horario, i-8, dia);
+                }
+                 
         }
      }
     
@@ -237,12 +244,20 @@ public class Cont_Horarios implements ActionListener, MouseListener{
     }
      
      private String armarHoraInicio(int hora){
-         hora = hora+7;
+         if (hora<=5) {
+            hora = hora+7;
+         }else{
+             hora = hora+8;
+         }
          return hora+":00";
      }
      
      private String armarHoraFin(int hora){
-         hora = hora+8;
+         if (hora<=5) {
+             hora = hora+8;
+         }else{
+             hora=hora+9;
+         }
          return hora+":00";
      }
     

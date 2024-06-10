@@ -177,7 +177,6 @@ public class Horario {
             st.close();
             rs.close();
         }
-        this.asignarHorarios(horarios);
         return horarios;
     }
         
