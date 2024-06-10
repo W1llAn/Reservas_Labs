@@ -39,6 +39,7 @@ public class Reservas extends javax.swing.JFrame  {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        bnRegresar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
@@ -102,6 +103,13 @@ public class Reservas extends javax.swing.JFrame  {
         jLabel4.setText("Hora inicio:");
         panelReservas.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 416, -1, -1));
 
+        bnRegresar.setBackground(new java.awt.Color(43, 43, 43));
+        bnRegresar.setFont(new java.awt.Font("Constantia", 1, 15)); // NOI18N
+        bnRegresar.setForeground(new java.awt.Color(255, 255, 255));
+        bnRegresar.setText("Cancelar");
+        bnRegresar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 255), new java.awt.Color(255, 255, 255), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255)));
+        panelReservas.add(bnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(688, 512, 111, -1));
+
         jLabel5.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Hora fin:");
@@ -156,7 +164,7 @@ public class Reservas extends javax.swing.JFrame  {
         btCancelar.setBackground(new java.awt.Color(43, 43, 43));
         btCancelar.setFont(new java.awt.Font("Constantia", 1, 15)); // NOI18N
         btCancelar.setForeground(new java.awt.Color(255, 255, 255));
-        btCancelar.setText("Cancelar");
+        btCancelar.setText("Limpiar");
         btCancelar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 255), new java.awt.Color(255, 255, 255), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255)));
         panelReservas.add(btCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(752, 480, 111, -1));
 
@@ -461,6 +469,7 @@ public class Reservas extends javax.swing.JFrame  {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JButton bnRegresar;
     public javax.swing.JButton btCancelar;
     public javax.swing.JButton btReservas;
     public javax.swing.JComboBox<String> cbCargo;

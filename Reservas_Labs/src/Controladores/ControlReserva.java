@@ -43,6 +43,7 @@ public class ControlReserva implements ActionListener {
         // Inicializa y configura componentes que dependen de vistaRes
         this.vistaRes.btReservas.addActionListener(this);
         this.vistaRes.btCancelar.addActionListener(this);
+        this.vistaRes.bnRegresar.addActionListener(this);
         this.id_laboratorio = id_laboratorio;
         // Llenar datos de carreras
         this.llenarDatosCarreas();
@@ -142,6 +143,18 @@ public class ControlReserva implements ActionListener {
         }
         if (e.getSource() == this.vistaRes.btCancelar) {
             borrarDatos();
+        }
+        if (e.getSource() == this.vistaRes.bnRegresar){
+            
+            Horario horario = new Horario();
+            Horarios vista_horarios = new Horarios();
+            try {
+                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList());
+            } catch (SQLException ex) {
+                Logger.getLogger(MenuControlador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.vistaRes.dispose();
+            vista_horarios.setVisible(true);
         }
     }
     //INSERTAR RESERVA en la Tabla de HORARIO--------------------------------------------------------------------------
@@ -274,7 +287,6 @@ public class ControlReserva implements ActionListener {
             borrarDatos();
             rec.aviso("Su reserva se ha realizado con éxito");
             //Volver al menu
-            MenuControlador menu = new MenuControlador();
             Horarios vista_horarios = new Horarios();
             try {
                 Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList());
