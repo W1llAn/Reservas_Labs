@@ -60,7 +60,7 @@ public class Festivo {
     }
     @Override
     public String toString(){
-    return "Dia Festivo"+this.nombre;
+    return "Dia Festivo \n"+this.nombre;
     }
     
 }
