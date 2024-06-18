@@ -12,6 +12,7 @@ public class Festivos extends javax.swing.JFrame {
   
     public Festivos() {
         initComponents();
+           this.setLocationRelativeTo(null);
     }
 
     /**

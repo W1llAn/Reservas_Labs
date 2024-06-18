@@ -4,9 +4,11 @@ import Modelos.Almacen;
 import Modelos.Carrera;
 import Modelos.Conexion;
 import Modelos.Horario;
+import Modelos.LabDB;
 import Modelos.Recursos;
 import Modelos.Responsable;
 import Modelos.UsuarioSesion;
+import Vista.Horarios;
 import Vista.Reservas;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +16,10 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
@@ -26,6 +31,7 @@ public class ControlReserva implements ActionListener {
     private Responsable responsable;
     private int id_responsable = 0;
     private int id_laboratorio = 0;
+    private String tipo_reserva = null;
 //CONSTRUCTOR PARA GUARDAR LAS RESERVAS DE LABORATORIOS
 
     public ControlReserva(Reservas vistRes, Horario modelohorario, String Edificio,
@@ -37,6 +43,7 @@ public class ControlReserva implements ActionListener {
         // Inicializa y configura componentes que dependen de vistaRes
         this.vistaRes.btReservas.addActionListener(this);
         this.vistaRes.btCancelar.addActionListener(this);
+        this.vistaRes.bnRegresar.addActionListener(this);
         this.id_laboratorio = id_laboratorio;
         // Llenar datos de carreras
         this.llenarDatosCarreas();
@@ -74,6 +81,36 @@ public class ControlReserva implements ActionListener {
                 buscarCedula();
             }
         });
+        // Agregar ActionListener al JComboBox para habilitar/deshabilitar txtMateria
+        this.vistaRes.cbTipo_Reserva.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (vistaRes.cbTipo_Reserva.getSelectedIndex() == 0) { // Reserva
+                    vistaRes.txtMateria.setText("No debe ingresar nada");
+                    vistaRes.txtMateria.setEnabled(false);
+                    tipo_reserva = "Reserva";
+                } else { // Horario
+                    vistaRes.txtMateria.setText("");
+                    vistaRes.txtMateria.setEnabled(true);
+                    tipo_reserva = null;
+                }
+            }
+        });
+        this.vistaRes.cbCargo.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (vistRes.cbCargo.getSelectedIndex() == 1) {
+                    vistRes.cbTipo_Reserva.setEnabled(false);
+                    vistaRes.txtMateria.setText("No debe ingresar nada");
+                    vistRes.cbTipo_Reserva.setSelectedIndex(0);
+                } else {
+                    vistRes.cbTipo_Reserva.setEnabled(true);
+                    vistaRes.txtMateria.setEnabled(true);
+                    vistRes.cbTipo_Reserva.setSelectedIndex(-1);
+                }
+
+            }
+        });
 
     }
 
@@ -83,6 +120,7 @@ public class ControlReserva implements ActionListener {
         if (e.getSource() == this.vistaRes.btReservas) {
             if (comprobarEleccion(this.vistaRes) == 1 && comprobarCamposVacios(this.vistaRes)) {
                 System.out.println("El id de responsable fue:" + id_responsable);
+                String tipo_ReservaFinal = (tipo_reserva == null) ? vistaRes.txtMateria.getText() : tipo_reserva;
                 //significa que en la busqueda dinamica no se encontro a la persona de la cedula
                 if (id_responsable == 0) {
                     try {
@@ -97,22 +135,29 @@ public class ControlReserva implements ActionListener {
                     }
                     //guardamos el horario  en la base
                     int id_responsable_guardado = consultarIdResponsableAlmacen(this.vistaRes.txtCedulaResponsable.getText());
-                    guardarHorario(id_responsable_guardado, id_laboratorio);
+                    guardarHorario(id_responsable_guardado, id_laboratorio, tipo_ReservaFinal);
                 } else {
-                    guardarHorario(id_responsable, id_laboratorio);
+                    guardarHorario(id_responsable, id_laboratorio, tipo_ReservaFinal);
                 }
             }
         }
         if (e.getSource() == this.vistaRes.btCancelar) {
-            MenuControlador menu = new MenuControlador();
             borrarDatos();
-            this.vistaRes.dispose();
-            menu.iniciar();
-
         }
-
+        if (e.getSource() == this.vistaRes.bnRegresar){
+            
+            Horario horario = new Horario();
+            Horarios vista_horarios = new Horarios();
+            try {
+                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList());
+            } catch (SQLException ex) {
+                Logger.getLogger(MenuControlador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.vistaRes.dispose();
+            vista_horarios.setVisible(true);
+        }
     }
-//INSERTAR RESERVA en la Tabla de HORARIO--------------------------------------------------------------------------
+    //INSERTAR RESERVA en la Tabla de HORARIO--------------------------------------------------------------------------
 
     public void guardarHorario(Horario h) throws SQLException {
         Conexion conec = new Conexion();
@@ -148,7 +193,8 @@ public class ControlReserva implements ActionListener {
 
     private int comprobarEleccion(Reservas vistareser) {
         if (vistareser.cbCarreras.getSelectedIndex() == -1
-                || vistareser.cbCargo.getSelectedIndex() == -1) {
+                || vistareser.cbCargo.getSelectedIndex() == -1
+                || vistareser.cbTipo_Reserva.getSelectedIndex() == -1) {
             rec.aviso("Por favor ELIJA todos los campos para validar su reserva.");
             return -1;
         }
@@ -225,21 +271,30 @@ public class ControlReserva implements ActionListener {
         return 0;
     }
 
-    private void guardarHorario(int id_responsable, int id_laboratorio) {
+    private void guardarHorario(int id_responsable, int id_laboratorio, String tipo_ReservaFinal) {
         Horario horario = new Horario();
         horario.setId_responsable(id_responsable);
         System.out.println("El id del responsable es: " + id_responsable);
         horario.setHora_inicio(this.vistaRes.txtHoraInicio.getText());
         horario.setHora_final(this.vistaRes.txtHoraFin.getText());
-        horario.setFecha_dia(this.vistaRes.txtFechaReserva.getText());
+        horario.setFecha_dia(LocalDate.parse(this.vistaRes.txtFechaReserva.getText()));
         horario.setNombre_dia(horario.decifrarDia(this.vistaRes.txtFechaReserva.getText()));
-        horario.setMateria("Reserva");
+        horario.setMateria(tipo_ReservaFinal);
         horario.setId_laboratorio(id_laboratorio);
         horario.setDescripcion(this.vistaRes.textDescripcion.getText());
         try {
             guardarHorario(horario);
             borrarDatos();
             rec.aviso("Su reserva se ha realizado con éxito");
+            //Volver al menu
+            Horarios vista_horarios = new Horarios();
+            try {
+                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList());
+            } catch (SQLException ex) {
+                Logger.getLogger(MenuControlador.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            this.vistaRes.dispose();
+            vista_horarios.setVisible(true);
 
         } catch (SQLException ex) {
             rec.aviso("Fallo en la inserción de la reserva " + ex);
@@ -259,7 +314,7 @@ public class ControlReserva implements ActionListener {
                 // Suponiendo que cbCarreras contiene objetos Carrera
                 for (int i = 0; i < vistaRes.cbCarreras.getItemCount(); i++) {
                     Carrera carrera = vistaRes.cbCarreras.getItemAt(i);
-                    System.out.println("El id_responsable es:"+responsable.getId_responsable());
+                    System.out.println("El id_responsable es:" + responsable.getId_responsable());
                     if (carrera.getId_carrera() == responsable.getId_carrera()) {
                         vistaRes.cbCarreras.setSelectedItem(carrera);
                         break;

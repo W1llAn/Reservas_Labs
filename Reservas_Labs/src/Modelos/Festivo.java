@@ -58,6 +58,9 @@ public class Festivo {
     public void setFechaFin(String fechaFin) {
         this.fechaFin = fechaFin;
     }
-
+    @Override
+    public String toString(){
+    return "Dia Festivo \n"+this.nombre;
+    }
     
 }

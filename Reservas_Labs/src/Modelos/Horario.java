@@ -23,9 +23,7 @@ import java.util.ArrayList;
 public class Horario {
     private String  hora_inicio,hora_final, nombre_dia,materia,nombre_responsable,descripcion ;
     private LocalDate fecha_dia; 
-    private int id_laboratorio;
     private Recursos rec = new Recursos();
-    private boolean esReserva;
     private int id_laboratorio,id_responsable;  
 
     public Horario(String hora_inicio, String hora_final, String nombre_dia, String materia,String nombre_responsable, LocalDate fecha_dia, int id_laboratorio) {
@@ -38,7 +36,7 @@ public class Horario {
         this.id_laboratorio = id_laboratorio;
     }
 
-    public Horario(String fecha_dia, String hora_inicio, String hora_final, String nombre_dia, String materia, int id_laboratorio, int id_responsable,String descripcion) {
+    public Horario(LocalDate fecha_dia, String hora_inicio, String hora_final, String nombre_dia, String materia, int id_laboratorio, int id_responsable,String descripcion) {
         this.fecha_dia = fecha_dia;
         this.hora_inicio = hora_inicio;
         this.hora_final = hora_final;
@@ -83,15 +81,6 @@ public class Horario {
 
     public void setId_responsable(int id_responsable) {
         this.id_responsable = id_responsable;
-    }
-    
-
-    public String getMateria() {
-        return materia;
-    }
-
-    public void setMateria(String materia) {
-        this.materia = materia;
     }
 
     public String getNombre_responsable() {
@@ -188,7 +177,6 @@ public class Horario {
             st.close();
             rs.close();
         }
-        this.asignarHorarios(horarios);
         return horarios;
     }
         

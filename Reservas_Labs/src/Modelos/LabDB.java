@@ -16,15 +16,14 @@ public class LabDB {
     public boolean addLab(Lab l) {
 
         try (Connection cn = con.Conectar(); PreparedStatement preparedStatement = cn.prepareStatement(
-                "INSERT INTO laboratorios ( codigo,nombre_laboratorio, piso, id_bloque, tipo) VALUES (?, ?, ?, ?, ?)"
+                "INSERT INTO laboratorios ( codigo,nombre_laboratorio, id_bloque, tipo) VALUES (?, ?, ?, ?)"
         )) {
 
             // Establecer los parámetros
             preparedStatement.setString(1, l.getCode());
             preparedStatement.setString(2, l.getName());
-            preparedStatement.setInt(3, l.getFloor());
-            preparedStatement.setInt(4, l.getIdBlock());
-            preparedStatement.setString(5, l.isType()); // false para lab, true para aula
+            preparedStatement.setInt(3, l.getIdBlock());
+            preparedStatement.setString(4, l.isType()); // false para lab, true para aula
 
             preparedStatement.executeUpdate();
             return true;
@@ -51,7 +50,6 @@ public class LabDB {
                         .Code(resultSet.getString("codigo"))
                         .IdBlock(resultSet.getInt("id_bloque"))
                         .BlockName(resultSet.getString("name"))
-                        .Floor(resultSet.getInt("piso"))
                         .build();
                 labs.add(lab);
                 Almacen.getInstance().listaLabo.add(lab);

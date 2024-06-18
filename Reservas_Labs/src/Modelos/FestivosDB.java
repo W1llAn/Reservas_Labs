@@ -4,9 +4,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class FestivosDB {
-
+    private Recursos rec = new Recursos();
     private Conexion con;
 
     public FestivosDB() {
@@ -52,6 +54,32 @@ public class FestivosDB {
         } catch (Exception e) {
             System.out.println("Error: " + e);
         }
+        return festivos;
+    }
+    //"SELECT * FROM Festivos WHERE fecha_inicio BETWEEN '"+fechaInicio+"' AND ' "+fechaFin+"' ;"
+     public ArrayList<Festivo> listaFestivosSemana(String fechaInicio, String fechaFin) throws SQLException {
+        ArrayList<Festivo> festivos = new ArrayList<>();
+        Conexion conexion = new Conexion();
+        Connection con = conexion.Conectar();
+        if (con == null) {
+            rec.aviso("No tiene conexion RECUERDE cada accion que realize en el programa no se va a guardar");
+        } else {
+            Statement st = con.createStatement();
+            ResultSet rs = null;
+            String consulta = "SELECT  id_festivos, descripcion, fecha_inicio, fecha_fin FROM Festivos WHERE fecha_inicio BETWEEN '"+fechaInicio+"' AND '"+fechaFin+"' ;";
+            rs = st.executeQuery(consulta);
+            while (rs.next()) {
+                Festivo fest = new Festivo();
+                fest.setId(rs.getInt("id_festivos"));
+                fest.setFechaInicio(rs.getString("fecha_inicio"));
+                fest.setFechaFin(rs.getString("fecha_fin"));
+                fest.setNombre(rs.getString("descripcion"));
+                festivos.add(fest);
+            }
+            st.close();
+            rs.close();
+        }
+         System.out.println("festivos "+festivos.size());
         return festivos;
     }
 
