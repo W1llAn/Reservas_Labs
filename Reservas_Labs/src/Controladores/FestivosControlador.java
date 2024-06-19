@@ -168,8 +168,9 @@ public class FestivosControlador implements ActionListener {
           if (e.getSource() == vista.btnRegresar) {
           Horario horario = new Horario();
             Horarios vista_horarios = new Horarios();
+            LocalDate fecha = this.vista.txtFechaInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             try {
-                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList());
+                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList(),fecha);
             } catch (SQLException ex) {
                 Logger.getLogger(MenuControlador.class.getName()).log(Level.SEVERE, null, ex);
             }

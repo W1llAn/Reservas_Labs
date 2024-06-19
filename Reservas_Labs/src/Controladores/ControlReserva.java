@@ -17,6 +17,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -113,6 +115,16 @@ public class ControlReserva implements ActionListener {
         });
 
     }
+    public static LocalDate convertStringToLocalDate(String dateString) {
+        String pattern = "yyyy-MM-dd";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        try {
+            return LocalDate.parse(dateString, formatter);
+        } catch (DateTimeParseException e) {
+            System.err.println("Formato de fecha inválido: " + e.getMessage());
+            return null;
+        }
+    }
 
     //GUARDAR INFORMACION DE LA RESERVA
     @Override
@@ -149,7 +161,7 @@ public class ControlReserva implements ActionListener {
             Horario horario = new Horario();
             Horarios vista_horarios = new Horarios();
             try {
-                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList());
+                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList(),convertStringToLocalDate(this.vistaRes.txtFechaReserva.getText()));
             } catch (SQLException ex) {
                 Logger.getLogger(MenuControlador.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -289,7 +301,7 @@ public class ControlReserva implements ActionListener {
             //Volver al menu
             Horarios vista_horarios = new Horarios();
             try {
-                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList());
+                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList(),convertStringToLocalDate(this.vistaRes.txtFechaReserva.getText()));
             } catch (SQLException ex) {
                 Logger.getLogger(MenuControlador.class.getName()).log(Level.SEVERE, null, ex);
             }
