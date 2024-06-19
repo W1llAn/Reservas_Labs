@@ -14,6 +14,7 @@ import Utilidades.Recurso;
 import Vista.Festivos;
 import Vista.Horarios;
 import Vista.Reservas;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -28,6 +29,7 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
@@ -43,22 +45,27 @@ public class Cont_Horarios implements ActionListener, MouseListener{
     private Horario horarios = new Horario();
     private LabDB lab = new LabDB();
     private Recurso rec = new Recurso();
+    private int semana=7;
+    
 
-    public Cont_Horarios(Horarios vista_horarios, Horario horarios, ArrayList<Lab> laboratorios) throws SQLException {
+    public Cont_Horarios(Horarios vista_horarios, Horario horarios, ArrayList<Lab> laboratorios, LocalDate diaP) throws SQLException {
         this.vista_horarios = vista_horarios;
         this.horarios = horarios;
         this.vista_horarios.btnRegresar.addActionListener(this);
         this.vista_horarios.btnReserva.addMouseListener(this);
         this.vista_horarios.btnDiaFestivo.addActionListener(this);
-        this.llenarComboBloques();
+        this.vista_horarios.jitmReserva.addActionListener(this);
+        this.vista_horarios.btnSiguienteS.addActionListener(this);
+        this.vista_horarios.btnAnteriorS.addActionListener(this);
         this.vista_horarios.fechaDia.addMouseListener(this);
-        LocalDate fechaActual = LocalDate.now();
-        Instant instant = fechaActual.atStartOfDay(ZoneId.systemDefault()).toInstant();
+        this.llenarComboBloques();
+        this.vista_horarios.txt_semana.setText("Semana "+semana);
+        this.vista_horarios.fechaDia.addMouseListener(this);
+        Instant instant = diaP.atStartOfDay(ZoneId.systemDefault()).toInstant();
          LocalDate localDate1 = instant.atZone(ZoneId.systemDefault()).toLocalDate();
          vista_horarios.txt_fechas.setText(obtenerFechasSemana(localDate1)[0].toString() + " - " + obtenerFechasSemana(localDate1)[1].toString());
         this.vista_horarios.fechaDia.setDate(Date.from(instant));
         this.vista_horarios.tablaHorarios.addMouseListener(this);
-        this.vista_horarios.comboBloque.setSelectedIndex(-1);
        this.vista_horarios.comboBloque.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int itemSeleccionado = vista_horarios.comboBloque.getSelectedIndex();
@@ -96,35 +103,6 @@ public class Cont_Horarios implements ActionListener, MouseListener{
                 }
             }
         });
-         
-          this.vista_horarios.fechaDia.addPropertyChangeListener("date", new PropertyChangeListener() {
-            @Override
-            public void propertyChange(PropertyChangeEvent evt) {
-                if ("date".equals(evt.getPropertyName())) {
-                    Instant instant = vista_horarios.fechaDia.getDate().toInstant();
-                    LocalDate localDate1 = instant.atZone(ZoneId.systemDefault()).toLocalDate();
-                    vista_horarios.txt_fechas.setText(obtenerFechasSemana(localDate1)[0].toString() + " - " + obtenerFechasSemana(localDate1)[1].toString());
-                    LocalDate [] fechaNueva = obtenerFechasSemana(localDate1);
-                     int itemSeleccionado = vista_horarios.comboLaboratorio.getSelectedIndex();
-                        if (itemSeleccionado != -1) {
-                            try {                
-                                borrarTabla();
-                                ArrayList<Festivo> diasFestivos = new FestivosDB().listaFestivosSemana(fechaNueva[0].toString(), fechaNueva[1].toString());
-                                ArrayList<Horario> hora = horarios.contultaHorarios(vista_horarios.comboLaboratorio.getItemAt(itemSeleccionado).getId(),fechaNueva[0].toString(),fechaNueva[1].toString());
-                               if (hora.size()!=0) {
-                                    asignarDias(hora);
-                                }
-                                if (diasFestivos.size()!=0) {
-                                    asignarDiaFestivo(diasFestivos);
-                                }
-                            } catch (SQLException ex) {
-                                Logger.getLogger(Cont_Horarios.class.getName()).log(Level.SEVERE, null, ex);
-                            }  
-                        }
-                }
-            }
-        });
-         
         }
     
     private void llenarLaboratorios(ArrayList<Lab> laboratorios,int codigo){
@@ -260,6 +238,71 @@ public class Cont_Horarios implements ActionListener, MouseListener{
          }
          return hora+":00";
      }
+     
+     // Método para obtener la fecha del mismo día en la semana siguiente
+    private Date semanaSiguiente(Date date) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            calendar.add(Calendar.WEEK_OF_YEAR, 1);
+            this.semana++;
+            return calendar.getTime();
+    }
+
+    // Método para obtener la fecha del mismo día en la semana anterior
+    private Date semanaAnterior(Date date) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(date);
+        calendar.add(Calendar.WEEK_OF_YEAR, -1);
+        this.semana--;
+        return calendar.getTime();
+    }
+    
+    private void consultaHorarios(){
+        Instant instant = vista_horarios.fechaDia.getDate().toInstant();
+        LocalDate localDate1 = instant.atZone(ZoneId.systemDefault()).toLocalDate();
+        vista_horarios.txt_fechas.setText(obtenerFechasSemana(localDate1)[0].toString() + " - " + obtenerFechasSemana(localDate1)[1].toString());
+        LocalDate [] fechaNueva = obtenerFechasSemana(localDate1);
+        int itemSeleccionado = vista_horarios.comboLaboratorio.getSelectedIndex();
+        if (itemSeleccionado != -1) {
+             try {                
+                borrarTabla();
+                ArrayList<Festivo> diasFestivos = new FestivosDB().listaFestivosSemana(fechaNueva[0].toString(), fechaNueva[1].toString());
+                ArrayList<Horario> hora = horarios.contultaHorarios(vista_horarios.comboLaboratorio.getItemAt(itemSeleccionado).getId(),fechaNueva[0].toString(),fechaNueva[1].toString());
+                if (hora.size()!=0) {
+                    asignarDias(hora);
+                }
+                if (diasFestivos.size()!=0) {
+                    asignarDiaFestivo(diasFestivos);
+                }
+             } catch (SQLException ex) {
+                 Logger.getLogger(Cont_Horarios.class.getName()).log(Level.SEVERE, null, ex);
+             }  
+        }
+    }
+     // Método para convertir Date a LocalDate
+    private LocalDate convertDateToLocalDate(Date date) {
+        return date.toInstant()
+                   .atZone(ZoneId.systemDefault())
+                   .toLocalDate();
+    }
+
+    // Método para convertir LocalDate a Date
+    private Date convertLocalDateToDate(LocalDate localDate) {
+        return Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+    }
+    
+    private Date fechaDiaT(Date date, int daysToAdd) {
+        LocalDate localDate = this.convertDateToLocalDate(date);
+        
+        // Obtener el lunes de la semana que contiene la fecha
+        LocalDate monday = localDate.with(DayOfWeek.MONDAY);
+        
+        // Sumar los días especificados al lunes
+        LocalDate modifiedDate = monday.plusDays(daysToAdd);
+        
+        // Convertir de vuelta a Date
+        return this.convertLocalDateToDate(modifiedDate);
+    }
     
 
     @Override
@@ -274,6 +317,25 @@ public class Cont_Horarios implements ActionListener, MouseListener{
             FestivosControlador  ctrl_festivo = new FestivosControlador(vista_DiaFestivo);
             this.vista_horarios.dispose();
             vista_DiaFestivo.setVisible(true);
+        }
+        if (e.getSource() == this.vista_horarios.btnAnteriorS) {
+            if (semana>=1) {
+                this.vista_horarios.fechaDia.setDate(this.semanaAnterior(this.vista_horarios.fechaDia.getDate()));
+                this.consultaHorarios();
+               this.vista_horarios.txt_semana.setText("Semana " + semana);
+            }
+        }
+        
+        if (e.getSource() == this.vista_horarios.btnSiguienteS) {
+            if (semana<=8) {
+                  this.vista_horarios.fechaDia.setDate(this.semanaSiguiente(this.vista_horarios.fechaDia.getDate()));
+                 this.consultaHorarios();
+                 this.vista_horarios.txt_semana.setText("Semana " + semana);
+            }
+        }
+        
+        if (e.getSource() == this.vista_horarios.jitmReserva) {
+            System.out.println("dhsuhfskd");
         }
     }
 
@@ -307,6 +369,10 @@ public class Cont_Horarios implements ActionListener, MouseListener{
 
     @Override
     public void mousePressed(MouseEvent e) {
+        if (e.getSource() == this.vista_horarios.tablaHorarios) {
+            int col = this.vista_horarios.tablaHorarios.getSelectedColumn();
+            this.vista_horarios.fechaDia.setDate(this.fechaDiaT(this.vista_horarios.fechaDia.getDate(), col-1));
+        }
     }
 
     @Override
