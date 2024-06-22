@@ -3,6 +3,7 @@ package Vista;
 import Modelos.Usuario_2;
 import Modelos.Usuario_2DB;
 import Modelos.Validacion;
+import Modelos.hash;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -20,15 +21,16 @@ public class Usuarios extends javax.swing.JFrame {
 
     public Usuarios() {
         initComponents();
-        user = new Usuario_2();
+        //user = new Usuario_2();
         userDB = new Usuario_2DB();
-        lu = userDB.listaUsuarios();
+        
         modelo = new DefaultTableModel(new String[]{"ID", "USUARIO", "CORREO", "CONTRASEÑA"}, 0);
         comboRol.setModel(modeloCombo = new DefaultComboBoxModel<>(new String[]{"SELECCIONE", "DOCENTE", "ESTUDIANTE"}));
         cargarTabla();
     }
 
     private void cargarTabla() {
+        lu = userDB.listaUsuarios();
         modelo.setRowCount(0);
         for (Usuario_2 u : lu) {
             modelo.addRow(new Object[]{u.getId(), u.getNombreUsuario(), u.getCorreo(), u.getPassword()});
@@ -47,6 +49,9 @@ public class Usuarios extends javax.swing.JFrame {
         }
 
         return false;  // Todos los campos tienen contenido
+    }
+
+    private void limpar() {
     }
 
     /**
@@ -150,6 +155,11 @@ public class Usuarios extends javax.swing.JFrame {
         botonEditar.setForeground(new java.awt.Color(255, 255, 255));
         botonEditar.setText("Editar");
         botonEditar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 255), new java.awt.Color(255, 255, 255), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255)));
+        botonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEditarActionPerformed(evt);
+            }
+        });
 
         botonLimpiar.setBackground(new java.awt.Color(43, 43, 43));
         botonLimpiar.setFont(new java.awt.Font("Constantia", 1, 15)); // NOI18N
@@ -336,7 +346,7 @@ public class Usuarios extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void txtBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtBuscarActionPerformed
@@ -349,19 +359,38 @@ public class Usuarios extends javax.swing.JFrame {
             // Mostrar un mensaje de error o realizar alguna acción
             JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            
+
             if (Validacion.isValidWord(this.txtNombre.getText()) || Validacion.isValidWord(this.txtApellido.getText())) {
-                if(Validacion.isValidEmail(this.txtEmail.getText())){
-                    if(Validacion.isValidPassword(new String(this.txtPass.getPassword()))){
-                        if(new String(this.txtPass.getPassword()).equals(new String(this.txtRepeatPass.getPassword()))){
-                            
-                        }else{
-                        JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
+                if (Validacion.isValidEmail(this.txtEmail.getText())) {
+                    if (Validacion.isValidUsername(this.txtNombreUsuario.getText())) {
+                        if (this.comboRol.getSelectedIndex() != 0) {
+                            if (Validacion.isValidPassword(new String(this.txtPass.getPassword()))) {
+                                if (new String(this.txtPass.getPassword()).equals(new String(this.txtRepeatPass.getPassword()))) {
+                                    String contraCifrada = hash.sha1(new String(this.txtPass.getPassword()));
+                                    String rol = this.comboRol.getSelectedItem().toString();
+                                    user = new Usuario_2(this.txtNombreUsuario.getText(), contraCifrada, this.txtEmail.getText(),
+                                            this.txtNombre.getText(), this.txtApellido.getText(), rol);
+
+                                    if (userDB.crearUsuario(user)) {
+                                        cargarTabla();
+                                        limpar();
+                                    } else {
+                                        JOptionPane.showMessageDialog(this, "No se pudo Crear sus usario, intentelo de nuevo", "Información", JOptionPane.INFORMATION_MESSAGE);
+                                    }
+                                } else {
+                                    JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(this, "Su contraseña debe tener al menos diez caracteres", "Información", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Porfavor elija un rol", "Información", JOptionPane.INFORMATION_MESSAGE);
                         }
-                    }else{
-                    JOptionPane.showMessageDialog(this, "Su contraseña debe tener al menos diez caracteres", "Información", JOptionPane.INFORMATION_MESSAGE);
-                }
-                }else{
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Su nombre de usuario puede contener solo numeros o letras y no debe tener espacios", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                } else {
                     JOptionPane.showMessageDialog(this, "Por favor, ingrese un email valido", "Información", JOptionPane.INFORMATION_MESSAGE);
                 }
             } else {
@@ -369,6 +398,43 @@ public class Usuarios extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_botonAgregarActionPerformed
+
+    private void botonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarActionPerformed
+        if (camposEstanVacios()) {
+            // Mostrar un mensaje de error o realizar alguna acción
+            JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+
+            if (Validacion.isValidWord(this.txtNombre.getText()) || Validacion.isValidWord(this.txtApellido.getText())) {
+                if (Validacion.isValidEmail(this.txtEmail.getText())) {
+                    if (Validacion.isValidUsername(this.txtNombreUsuario.getText())) {
+                        if (this.comboRol.getSelectedIndex() != 0) {
+                            if (Validacion.isValidPassword(new String(this.txtPass.getPassword()))) {
+                                if (new String(this.txtPass.getPassword()).equals(new String(this.txtRepeatPass.getPassword()))) {
+                                    String contraCifrada = hash.sha1(new String(this.txtPass.getPassword()));
+                                    String rol = this.comboRol.getSelectedItem().toString();
+                                    System.out.println("rol:" + rol);
+                                } else {
+                                    JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
+                                }
+                            } else {
+                                JOptionPane.showMessageDialog(this, "Su contraseña debe tener al menos diez caracteres", "Información", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Porfavor elija un rol", "Información", JOptionPane.INFORMATION_MESSAGE);
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Su nombre de usuario puede contener solo numeros o letras y no debe tener espacios", "Error", JOptionPane.ERROR_MESSAGE);
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(this, "Por favor, ingrese un email valido", "Información", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese un solo nombre o apellido\n No incluya números", "Información", JOptionPane.INFORMATION_MESSAGE);
+            }
+        }
+    }//GEN-LAST:event_botonEditarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -435,4 +501,5 @@ public class Usuarios extends javax.swing.JFrame {
     private javax.swing.JPasswordField txtPass;
     private javax.swing.JPasswordField txtRepeatPass;
     // End of variables declaration//GEN-END:variables
+
 }

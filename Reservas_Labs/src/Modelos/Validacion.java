@@ -29,4 +29,12 @@ public class Validacion {
         return matcher.matches();
     }
 
+    public static boolean isValidUsername(String username) {
+        // Patrón para validar un nombre de usuario con letras y números, sin espacios
+        String usernameRegex = "^[a-zA-Z0-9]+$";
+        Pattern pattern = Pattern.compile(usernameRegex);
+        Matcher matcher = pattern.matcher(username);
+        return matcher.matches();
+    }
+
 }

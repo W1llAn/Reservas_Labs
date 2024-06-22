@@ -14,13 +14,16 @@ public class Usuario_2 {
     public Usuario_2() {
     }
 
-    public Usuario_2(String nombreUsuario, String password, String correo, String nombre, String apellido) {
+    public Usuario_2(String nombreUsuario, String password, String correo, String nombre, String apellido, String rol) {
         this.nombreUsuario = nombreUsuario;
         this.password = password;
         this.correo = correo;
         this.nombre = nombre;
         this.apellido = apellido;
+        this.rol = rol;
     }
+
+
 
     public int getId() {
         return id;
