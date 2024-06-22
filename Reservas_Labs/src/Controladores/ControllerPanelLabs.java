@@ -16,10 +16,12 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.Icon;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
+import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -103,7 +105,7 @@ public final class ControllerPanelLabs implements ActionListener {
 
     private void fillTable() {
         table.setRowCount(0);
-        this.labs =labdb.labList();
+        this.labs = labdb.labList();
         this.labs.forEach(lab
                 -> table.addRow(new Object[]{lab.getCode(), lab.getName(), lab.getBlockName(), lab.isType()})
         );
@@ -124,7 +126,7 @@ public final class ControllerPanelLabs implements ActionListener {
     }
 
     private boolean validateFields() {
-        return !( view.txtName.getText().equals(""));
+        return !(view.txtName.getText().equals(""));
     }
 
     private void cleanFields() {
@@ -136,10 +138,9 @@ public final class ControllerPanelLabs implements ActionListener {
     }
 
     private void addLabs() {
-        
         ArrayList<String> codes = new ArrayList<>();
-        this.labs.forEach(lab-> codes.add(lab.getCode()));
-        
+        this.labs.forEach(lab -> codes.add(lab.getCode()));
+
         if (validateFields()) {
             Lab lb = new Lab.LabBuilder()
                     .Name(view.txtName.getText())
@@ -149,14 +150,14 @@ public final class ControllerPanelLabs implements ActionListener {
                     .build();
             lb.generateCode(codes);
             if (labdb.addLab(lb)) {
-                JOptionPane.showMessageDialog(view, "Se guardo");
+                JOptionPane.showMessageDialog(view, "El laboratorio con " + view.txtName.getText() + "Se creo Exitosamente", "LABORATORIO", JOptionPane.YES_OPTION);
                 cleanFields();
                 fillTable();
             } else {
-                JOptionPane.showMessageDialog(view, "No se guardo");
+                JOptionPane.showMessageDialog(view, "El laboratorio con " + view.txtName.getText() + "Se creo Exitosamente", "LABORATORIO", JOptionPane.YES_OPTION);
             }
         } else {
-            JOptionPane.showMessageDialog(view, "Campos Incompletos");
+            JOptionPane.showMessageDialog(view, "Campos Para CREAR el Laboratorio Incompletos", "LABORATORIO", JOptionPane.YES_OPTION);
         }
     }
 
@@ -185,14 +186,15 @@ public final class ControllerPanelLabs implements ActionListener {
                     .Type(view.cbxTipo.getSelectedItem().toString())
                     .build();
             if (labdb.editLab(lb)) {
-                JOptionPane.showMessageDialog(view, "Se Actualizo");
+                JOptionPane.showMessageDialog(view, "El laboratorio con codigo" + codeSelect + "se edito Exitosamente", "LABORATORIO", JOptionPane.YES_OPTION);
                 cleanFields();
                 fillTable();
             } else {
-                JOptionPane.showMessageDialog(view, "No se Actualizo");
+                JOptionPane.showMessageDialog(view, "El laboratorio con codigo" + codeSelect + "no se Edito", "LABORATORIO", JOptionPane.YES_OPTION);
+
             }
         } else {
-            JOptionPane.showMessageDialog(view, "Seleccione una fila");
+            JOptionPane.showMessageDialog(view, "Campos Para EDITAR el Laboratorio Incompletos", "LABORATORIO", JOptionPane.YES_OPTION);
         }
     }
 
@@ -200,7 +202,8 @@ public final class ControllerPanelLabs implements ActionListener {
         if (select) {
 
             if (labdb.deleteLab(codeSelect)) {
-                JOptionPane.showMessageDialog(view, "Se Borro");
+                                JOptionPane.showMessageDialog(view, "El laboratorio con codigo" + codeSelect + "se edito Exitosamente", "LABORATORIO", JOptionPane.YES_OPTION);
+
                 cleanFields();
                 fillTable();
             } else {
@@ -210,7 +213,8 @@ public final class ControllerPanelLabs implements ActionListener {
             JOptionPane.showMessageDialog(view, "Seleccione una fila");
         }
     }
-/*
+
+    /*
     private void search() {
         int row = buscarCodigoEnColumna(view.tbLabs, view.txtCode.getText());
         if (row != -1) {
@@ -225,7 +229,6 @@ public final class ControllerPanelLabs implements ActionListener {
             JOptionPane.showMessageDialog(view, "No se encontro el laboratorio");
         }
     }*/
-
     public static void main(String[] args) {
         Laboratorios l = new Laboratorios();
         ControllerPanelLabs v = new ControllerPanelLabs(l);
@@ -247,7 +250,10 @@ public final class ControllerPanelLabs implements ActionListener {
             editLabs();
         }
         if (e.getSource() == view.btnSearch) {
+
             //search();
+            JOptionPane.showMessageDialog(view, "El laboratorio " + view.txtName.getText() + "se creo Exitosamente", "LABORATORIO", JOptionPane.INFORMATION_MESSAGE);
+
         }
         if (e.getSource() == view.btnCancelar) {
             MenuControlador menu = new MenuControlador();
