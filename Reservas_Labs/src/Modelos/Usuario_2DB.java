@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -42,7 +43,7 @@ public class Usuario_2DB {
     }
 
     public boolean modificarUsuario(Usuario_2 user) {
-        
+
         String sql = "UPDATE Usuarios SET nombre_usuario=?, contraseña=?, correo_electronico=?, rol=?, nombre=?, apellido=?, cedula=? WHERE id_usuario_PK=?";
         try {
             Connection cn = con.Conectar();
@@ -61,13 +62,13 @@ public class Usuario_2DB {
             System.out.println(ex.toString());
             return false;
         }
-        
+
     }
 
     public boolean eliminarUsuario(int id) {
-        
+
         String sql = "DELETE FROM Usuarios WHERE id_usuario_PK=?";
-       try {
+        try {
             Connection cn = con.Conectar();
             ps = cn.prepareStatement(sql);
             ps.setInt(1, id);
@@ -76,10 +77,36 @@ public class Usuario_2DB {
         } catch (SQLException e) {
             System.out.println(e.toString());
             return false;
-        } 
+        }
     }
 
     public List listaUsuarios() {
+
+        List<Usuario_2> listaUsuarios = new ArrayList();
+        String sql = "SELECT * FROM Usarios";
+
+        try {
+            Connection cn = con.Conectar();
+            ps = cn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                Usuario_2 user = new Usuario_2();
+                user.setId(rs.getInt("id_usuario_PK"));
+                user.setNombreUsuario(rs.getString("nombre_usuario"));
+                user.setPassword(rs.getString("contraseña"));
+                user.setCorreo(rs.getString("correo_electronico"));
+                user.setNombre(rs.getString("nombre"));
+                user.setRol(rs.getString("rol"));
+                user.setApellido(rs.getString("apellido"));
+                user.setCedula(rs.getString("cedula"));
+
+                listaUsuarios.add(user);
+            }
+        } catch (Exception e) {
+            System.out.println("Error: "+e);
+        }
+        
+        return listaUsuarios;
     }
 
 }
