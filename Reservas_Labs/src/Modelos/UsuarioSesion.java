@@ -11,13 +11,22 @@ import java.util.ArrayList;
  * @author ASUS
  */
 public class  UsuarioSesion {
-    private static String nombre_Usuario;
+    private static String nombre_Usuario,rol;
     private static int id_usuario;
+    
     private static ArrayList<Block> bloques = new ArrayList<>();
 
     // Getter para el nombre del usuario
     public static String getNombreUsuario() {
         return nombre_Usuario;
+    }
+
+    public static String getRol() {
+        return rol;
+    }
+
+    public static void setRol(String rol) {
+        UsuarioSesion.rol = rol;
     }
 
     public static ArrayList<Block> getBloques() {
