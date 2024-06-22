@@ -37,6 +37,7 @@ public final class ControllerPanelLabs implements ActionListener {
     private final BlockDB blockDB;
     private boolean select = false;
     private String codeSelect;
+    private List<Lab> labs;
 
     public ControllerPanelLabs(Laboratorios vista) {
         this.view = vista;
@@ -71,7 +72,6 @@ public final class ControllerPanelLabs implements ActionListener {
         JTable target = (JTable) e.getSource();
         select = true;
         codeSelect = getRowTable(target.getSelectedRow(), 0);
-        view.txtCode.setText(getRowTable(target.getSelectedRow(), 0));
         view.txtName.setText(getRowTable(target.getSelectedRow(), 1));
         seleccionarPorCoincidencia(view.cbxBlock, getRowTable(target.getSelectedRow(), 2));
         seleccionarPorCoincidenciaLaboratorios(view.cbxTipo, getRowTable(target.getSelectedRow(), 3));
@@ -103,7 +103,8 @@ public final class ControllerPanelLabs implements ActionListener {
 
     private void fillTable() {
         table.setRowCount(0);
-        labdb.labList().forEach(lab
+        this.labs =labdb.labList();
+        this.labs.forEach(lab
                 -> table.addRow(new Object[]{lab.getCode(), lab.getName(), lab.getBlockName(), lab.isType()})
         );
         view.tbLabs.setModel(table);
@@ -123,12 +124,10 @@ public final class ControllerPanelLabs implements ActionListener {
     }
 
     private boolean validateFields() {
-        return !(view.txtCode.getText().equals("")
-                || view.txtName.getText().equals(""));
+        return !( view.txtName.getText().equals(""));
     }
 
     private void cleanFields() {
-        view.txtCode.setText("");
         view.txtName.setText("");
         view.cbxTipo.setSelectedIndex(0);
         view.cbxBlock.setSelectedIndex(0);
@@ -137,14 +136,18 @@ public final class ControllerPanelLabs implements ActionListener {
     }
 
     private void addLabs() {
+        
+        ArrayList<String> codes = new ArrayList<>();
+        this.labs.forEach(lab-> codes.add(lab.getCode()));
+        
         if (validateFields()) {
             Lab lb = new Lab.LabBuilder()
                     .Name(view.txtName.getText())
-                    .Code(view.txtCode.getText())
                     .BlockName(((Block) view.cbxBlock.getSelectedItem()).getName())
                     .IdBlock(((Block) view.cbxBlock.getSelectedItem()).getId())
                     .Type(view.cbxTipo.getSelectedItem().toString())
                     .build();
+            lb.generateCode(codes);
             if (labdb.addLab(lb)) {
                 JOptionPane.showMessageDialog(view, "Se guardo");
                 cleanFields();
@@ -207,7 +210,7 @@ public final class ControllerPanelLabs implements ActionListener {
             JOptionPane.showMessageDialog(view, "Seleccione una fila");
         }
     }
-
+/*
     private void search() {
         int row = buscarCodigoEnColumna(view.tbLabs, view.txtCode.getText());
         if (row != -1) {
@@ -221,7 +224,7 @@ public final class ControllerPanelLabs implements ActionListener {
         } else {
             JOptionPane.showMessageDialog(view, "No se encontro el laboratorio");
         }
-    }
+    }*/
 
     public static void main(String[] args) {
         Laboratorios l = new Laboratorios();
@@ -244,7 +247,7 @@ public final class ControllerPanelLabs implements ActionListener {
             editLabs();
         }
         if (e.getSource() == view.btnSearch) {
-            search();
+            //search();
         }
         if (e.getSource() == view.btnCancelar) {
             MenuControlador menu = new MenuControlador();
