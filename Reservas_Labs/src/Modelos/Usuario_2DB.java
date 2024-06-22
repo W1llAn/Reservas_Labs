@@ -17,10 +17,9 @@ public class Usuario_2DB {
     public Usuario_2DB() {
         this.con = new Conexion();
     }
-
     public boolean crearUsuario(Usuario_2 user) {
 
-        String sql = "INSERT INTO Usuarios (nombre_usuario, contraseña, correo_electronico, rol, nombre, apellido, cedula) VALUES (?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO Usuarios (nombre_usuario, contraseña, correo_electronico, rol, nombre, apellido) VALUES (?,?,?,?,?,?)";
         try {
             Connection cn = con.Conectar();
             ps = cn.prepareStatement(sql);
@@ -30,7 +29,6 @@ public class Usuario_2DB {
             ps.setString(4, user.getRol());
             ps.setString(5, user.getNombre());
             ps.setString(6, user.getApellido());
-            ps.setString(7, user.getCedula());
 
             ps.execute();
             return true;
@@ -55,7 +53,6 @@ public class Usuario_2DB {
             ps.setString(4, user.getRol());
             ps.setString(5, user.getNombre());
             ps.setString(6, user.getApellido());
-            ps.setString(7, user.getCedula());
             ps.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -83,7 +80,7 @@ public class Usuario_2DB {
     public List listaUsuarios() {
 
         List<Usuario_2> listaUsuarios = new ArrayList();
-        String sql = "SELECT * FROM Usarios";
+        String sql = "SELECT * FROM Usuarios";
 
         try {
             Connection cn = con.Conectar();
@@ -98,7 +95,6 @@ public class Usuario_2DB {
                 user.setNombre(rs.getString("nombre"));
                 user.setRol(rs.getString("rol"));
                 user.setApellido(rs.getString("apellido"));
-                user.setCedula(rs.getString("cedula"));
 
                 listaUsuarios.add(user);
             }

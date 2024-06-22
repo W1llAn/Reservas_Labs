@@ -9,19 +9,17 @@ public class Usuario_2 {
     private String correo;
     private String nombre;
     private String apellido;
-    private String cedula;
     private String rol;
 
     public Usuario_2() {
     }
 
-    public Usuario_2(String nombreUsuario, String password, String correo, String nombre, String apellido, String cedula) {
+    public Usuario_2(String nombreUsuario, String password, String correo, String nombre, String apellido) {
         this.nombreUsuario = nombreUsuario;
         this.password = password;
         this.correo = correo;
         this.nombre = nombre;
         this.apellido = apellido;
-        this.cedula = cedula;
     }
 
     public int getId() {
@@ -83,16 +81,5 @@ public class Usuario_2 {
     public void setApellido(String apellido) {
         this.apellido = apellido;
     }
-
-    public String getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-    
-    
-    
     
 }
