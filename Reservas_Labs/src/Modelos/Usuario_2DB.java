@@ -65,7 +65,18 @@ public class Usuario_2DB {
     }
 
     public boolean eliminarUsuario(int id) {
-       
+        
+        String sql = "DELETE FROM Usuarios WHERE id_usuario_PK=?";
+       try {
+            Connection cn = con.Conectar();
+            ps = cn.prepareStatement(sql);
+            ps.setInt(1, id);
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.out.println(e.toString());
+            return false;
+        } 
     }
 
     public List listaUsuarios() {
