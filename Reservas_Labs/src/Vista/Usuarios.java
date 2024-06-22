@@ -4,6 +4,7 @@ import Modelos.Usuario_2;
 import Modelos.Usuario_2DB;
 import Modelos.Validacion;
 import Modelos.hash;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -24,9 +25,10 @@ public class Usuarios extends javax.swing.JFrame {
         //user = new Usuario_2();
         userDB = new Usuario_2DB();
         this.lbl_ID.setVisible(false);
+        this.lblMensaje.setVisible(false);
         modelo = new DefaultTableModel(new String[]{"ID", "USUARIO", "CORREO", "ROL"}, 0);
         comboRol.setModel(modeloCombo = new DefaultComboBoxModel<>(new String[]{"SELECCIONE", "DOCENTE", "ESTUDIANTE"}));
-        filtro.setModel(modeloCombo = new DefaultComboBoxModel<>(new String[]{"FILTAR POR","USUARIO","APELLIDO","ROL"}));
+        filtro.setModel(modeloCombo = new DefaultComboBoxModel<>(new String[]{"FILTAR POR", "USUARIO", "APELLIDO", "ROL"}));
         cargarTabla();
     }
 
@@ -61,7 +63,8 @@ public class Usuarios extends javax.swing.JFrame {
         txtEmail.setText("");
         txtBuscar.setText("");
         comboRol.setSelectedIndex(0);
-
+        this.lblMensaje.setVisible(false);
+        cargarTabla();
     }
 
     /**
@@ -100,6 +103,7 @@ public class Usuarios extends javax.swing.JFrame {
         comboRol = new javax.swing.JComboBox<>();
         lbl_ID = new javax.swing.JLabel();
         filtro = new javax.swing.JComboBox<>();
+        lblMensaje = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -227,10 +231,25 @@ public class Usuarios extends javax.swing.JFrame {
                 txtBuscarActionPerformed(evt);
             }
         });
+        txtBuscar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtBuscarKeyPressed(evt);
+            }
+        });
 
         jLabel23.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
         jLabel23.setForeground(new java.awt.Color(255, 255, 255));
         jLabel23.setText("Tipo de Usuario");
+
+        filtro.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                filtroItemStateChanged(evt);
+            }
+        });
+
+        lblMensaje.setFont(new java.awt.Font("Dialog", 2, 11)); // NOI18N
+        lblMensaje.setForeground(new java.awt.Color(255, 255, 255));
+        lblMensaje.setText("No Hay Coincidencias");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -282,15 +301,19 @@ public class Usuarios extends javax.swing.JFrame {
                                 .addGap(68, 68, 68)))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(botonLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(96, 96, 96)
                                 .addComponent(jLabel18)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(12, 12, 12)
+                                        .addComponent(lblMensaje, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
-                                .addComponent(filtro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 620, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(filtro, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(29, 29, 29))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -306,8 +329,13 @@ public class Usuarios extends javax.swing.JFrame {
                     .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(botonLimpiar)
                     .addComponent(filtro, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(17, 17, 17)
-                .addComponent(jLabel16)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(jLabel16))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(lblMensaje)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -390,8 +418,10 @@ public class Usuarios extends javax.swing.JFrame {
                                             this.txtNombre.getText(), this.txtApellido.getText(), rol);
 
                                     if (userDB.crearUsuario(user)) {
-                                        cargarTabla();
+                                        JOptionPane.showMessageDialog(this, "el usaurio se creo exitosamente", "Información", JOptionPane.INFORMATION_MESSAGE);
+
                                         limpiar();
+
                                     } else {
                                         JOptionPane.showMessageDialog(this, "No se pudo Crear sus usario, intentelo de nuevo", "Información", JOptionPane.INFORMATION_MESSAGE);
                                     }
@@ -522,6 +552,53 @@ public class Usuarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonElminarActionPerformed
 
+    private String getFiltro() {
+        if (this.filtro.getSelectedIndex() == 1) {
+            return "nombre_usuario";
+        }
+        if (this.filtro.getSelectedIndex() == 2) {
+            return "apellido";
+        }
+        if (this.filtro.getSelectedIndex() == 3) {
+            return "rol";
+        }
+        return null;
+    }
+
+    private void buscarUsuarioPorFiltro() {
+
+        if (this.filtro.getSelectedIndex() != 0) {
+            if (!this.txtBuscar.getText().isEmpty()) {
+                lu = userDB.buscarUsuariosPor(getFiltro(), this.txtBuscar.getText());
+                if (!lu.isEmpty()) {
+                    modelo.setRowCount(0);
+                    for (Usuario_2 u : lu) {
+                        modelo.addRow(new Object[]{u.getId(), u.getNombreUsuario(), u.getCorreo(), u.getRol()});
+                    }
+                } else {
+                    cargarTabla();
+                    this.lblMensaje.setVisible(true);
+                }
+
+                this.tablaUsuarios.setModel(modelo);
+            }
+        } else {
+            cargarTabla();
+        }
+
+    }
+
+    private void filtroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_filtroItemStateChanged
+
+
+    }//GEN-LAST:event_filtroItemStateChanged
+
+    private void txtBuscarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            buscarUsuarioPorFiltro();
+        }
+    }//GEN-LAST:event_txtBuscarKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -576,6 +653,7 @@ public class Usuarios extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblMensaje;
     private javax.swing.JLabel lbl_ID;
     public javax.swing.JTable tablaUsuarios;
     private javax.swing.JTextField txtApellido;

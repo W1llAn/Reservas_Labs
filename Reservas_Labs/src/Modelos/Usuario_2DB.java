@@ -17,6 +17,7 @@ public class Usuario_2DB {
     public Usuario_2DB() {
         this.con = new Conexion();
     }
+
     public boolean crearUsuario(Usuario_2 user) {
 
         String sql = "INSERT INTO Usuarios (nombre_usuario, contraseña, correo_electronico, rol, nombre, apellido) VALUES (?,?,?,?,?,?)";
@@ -99,9 +100,39 @@ public class Usuario_2DB {
                 listaUsuarios.add(user);
             }
         } catch (Exception e) {
-            System.out.println("Error: "+e);
+            System.out.println("Error: " + e);
         }
-        
+
+        return listaUsuarios;
+    }
+
+    public List<Usuario_2> buscarUsuariosPor(String filtro, String coincidencia) {
+        List<Usuario_2> listaUsuarios = new ArrayList<>();
+        String sql = "SELECT * FROM Usuarios WHERE " + filtro + " LIKE ?";
+
+        try ( Connection cn = con.Conectar();  PreparedStatement ps = cn.prepareStatement(sql)) {
+
+            ps.setString(1, "%" + coincidencia + "%");
+
+            try ( ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Usuario_2 user = new Usuario_2();
+                    user.setId(rs.getInt("id_usuario_PK"));
+                    user.setNombreUsuario(rs.getString("nombre_usuario"));
+                    user.setPassword(rs.getString("contraseña"));
+                    user.setCorreo(rs.getString("correo_electronico"));
+                    user.setNombre(rs.getString("nombre"));
+                    user.setRol(rs.getString("rol"));
+                    user.setApellido(rs.getString("apellido"));
+                    listaUsuarios.add(user);
+                }
+            }
+        } catch (SQLException e) {
+            // Considera usar un logger en lugar de System.out.println
+            System.err.println("Error al buscar usuarios: " + e.getMessage());
+            // Considera lanzar una excepción personalizada aquí
+        }
+
         return listaUsuarios;
     }
 
