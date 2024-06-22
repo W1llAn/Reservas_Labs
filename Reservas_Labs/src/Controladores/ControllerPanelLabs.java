@@ -15,13 +15,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.Icon;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.RowFilter;
-import javax.swing.UIManager;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -47,9 +48,9 @@ public final class ControllerPanelLabs implements ActionListener {
         combo = new DefaultComboBoxModel();
         labdb = new LabDB();
         blockDB = new BlockDB();
+        events();
         fillTable();
         fillCombo();
-        events();
         this.view.setVisible(true);
 
     }
@@ -60,12 +61,27 @@ public final class ControllerPanelLabs implements ActionListener {
         view.btnClean.addActionListener(this);
         view.btnEdit.addActionListener(this);
         view.btnDelete.addActionListener(this);
-        view.btnSearch.addActionListener(this);
         view.btnCancelar.addActionListener(this);
         view.tbLabs.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 fillFields(e);
+            }
+        });
+       view.txtSearch.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                search();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                search();
             }
         });
     }
@@ -111,10 +127,6 @@ public final class ControllerPanelLabs implements ActionListener {
         );
         view.tbLabs.setModel(table);
 
-        // Eliminar el filtro
-        if (view.tbLabs.getRowSorter() != null) {
-            ((TableRowSorter) view.tbLabs.getRowSorter()).setRowFilter(null);
-        }
     }
 
     private void fillCombo() {
@@ -162,20 +174,6 @@ public final class ControllerPanelLabs implements ActionListener {
         }
     }
 
-    private int buscarCodigoEnColumna(JTable tabla, String codigo) {
-        int columna = 0; // La columna 2 tiene índice 1 (las columnas comienzan en 0)
-        DefaultTableModel model = (DefaultTableModel) tabla.getModel();
-
-        for (int fila = 0; fila < model.getRowCount(); fila++) {
-            String valorCelda = (String) model.getValueAt(fila, columna);
-            if (valorCelda != null && valorCelda.equals(codigo)) {
-                return fila; // Devuelve el índice de la fila donde se encontró el código
-            }
-        }
-
-        return -1; // Si no se encontró el código, devuelve -1
-    }
-
     private void editLabs() {
         if (validateFields() && select) {
             Lab lb = new Lab.LabBuilder()
@@ -214,21 +212,31 @@ public final class ControllerPanelLabs implements ActionListener {
         }
     }
 
-    /*
-    private void search() {
-        int row = buscarCodigoEnColumna(view.tbLabs, view.txtCode.getText());
-        if (row != -1) {
-            TableRowSorter<TableModel> sorter = new TableRowSorter<>(view.tbLabs.getModel());
-            view.tbLabs.setRowSorter(sorter);
+    
+private void search() {
+        String searchText = view.txtSearch.getText().toLowerCase();
 
-            // Establecer el filtro para mostrar solo la fila encontrada
-            List<RowFilter<Object, Object>> filters = new ArrayList<>();
-            filters.add(RowFilter.regexFilter(view.txtCode.getText(), 0)); // Columna 2 (índice 1)
-            sorter.setRowFilter(RowFilter.andFilter(filters));
-        } else {
-            JOptionPane.showMessageDialog(view, "No se encontro el laboratorio");
+        // Filtrar la lista de labs
+        List<Lab> filteredLabs = labs.stream()
+            .filter(lab -> lab.getCode().toLowerCase().contains(searchText) ||
+                           lab.getName().toLowerCase().contains(searchText))
+            .collect(Collectors.toList());
+
+        // Actualizar la tabla con los datos filtrados
+        updateTable(filteredLabs);
+    }
+
+    private void updateTable(List<Lab> labsToShow) {
+        DefaultTableModel model = (DefaultTableModel) view.tbLabs.getModel();
+        model.setRowCount(0); // Limpiar la tabla
+
+        // Agregar filas a la tabla
+        for (Lab lab : labsToShow) {
+            model.addRow(new Object[]{lab.getCode(), lab.getName(), lab.getBlockName(), lab.isType()});
         }
-    }*/
+    }
+
+        
     public static void main(String[] args) {
         Laboratorios l = new Laboratorios();
         ControllerPanelLabs v = new ControllerPanelLabs(l);
@@ -241,16 +249,12 @@ public final class ControllerPanelLabs implements ActionListener {
         }
         if (e.getSource() == view.btnClean) {
             cleanFields();
-            fillTable();
         }
         if (e.getSource() == view.btnDelete) {
             deleteLabs();
         }
         if (e.getSource() == view.btnEdit) {
             editLabs();
-        }
-        if (e.getSource() == view.btnSearch) {
-            //search();
         }
         if (e.getSource() == view.btnCancelar) {
             MenuControlador menu = new MenuControlador();
