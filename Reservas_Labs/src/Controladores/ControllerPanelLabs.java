@@ -131,6 +131,7 @@ public final class ControllerPanelLabs implements ActionListener {
 
     private void cleanFields() {
         view.txtName.setText("");
+        this.select=false;
         view.cbxTipo.setSelectedIndex(0);
         view.cbxBlock.setSelectedIndex(0);
         codeSelect = null;
@@ -150,11 +151,11 @@ public final class ControllerPanelLabs implements ActionListener {
                     .build();
             lb.generateCode(codes);
             if (labdb.addLab(lb)) {
-                JOptionPane.showMessageDialog(view, "El laboratorio con " + view.txtName.getText() + "Se creo Exitosamente", "LABORATORIO", JOptionPane.YES_OPTION);
+                JOptionPane.showMessageDialog(view, "El laboratorio " + view.txtName.getText() + " se creo Exitosamente", "LABORATORIO", JOptionPane.INFORMATION_MESSAGE);
                 cleanFields();
                 fillTable();
             } else {
-                JOptionPane.showMessageDialog(view, "El laboratorio con " + view.txtName.getText() + "Se creo Exitosamente", "LABORATORIO", JOptionPane.YES_OPTION);
+                JOptionPane.showMessageDialog(view, "El laboratorio " + view.txtName.getText() + " se creo Exitosamente", "LABORATORIO", JOptionPane.YES_OPTION);
             }
         } else {
             JOptionPane.showMessageDialog(view, "Campos Para CREAR el Laboratorio Incompletos", "LABORATORIO", JOptionPane.YES_OPTION);
@@ -186,31 +187,30 @@ public final class ControllerPanelLabs implements ActionListener {
                     .Type(view.cbxTipo.getSelectedItem().toString())
                     .build();
             if (labdb.editLab(lb)) {
-                JOptionPane.showMessageDialog(view, "El laboratorio con codigo" + codeSelect + "se edito Exitosamente", "LABORATORIO", JOptionPane.YES_OPTION);
+                JOptionPane.showMessageDialog(view, "El laboratorio con codigo" + codeSelect + " se edito Exitosamente", "LABORATORIO", JOptionPane.INFORMATION_MESSAGE);
                 cleanFields();
                 fillTable();
             } else {
-                JOptionPane.showMessageDialog(view, "El laboratorio con codigo" + codeSelect + "no se Edito", "LABORATORIO", JOptionPane.YES_OPTION);
+                JOptionPane.showMessageDialog(view, "El laboratorio con codigo" + codeSelect + " no se Edito", "LABORATORIO", JOptionPane.YES_OPTION);
 
             }
         } else {
-            JOptionPane.showMessageDialog(view, "Campos Para EDITAR el Laboratorio Incompletos", "LABORATORIO", JOptionPane.YES_OPTION);
+            JOptionPane.showMessageDialog(view, "Campos Para EDITAR el Laboratorio Incompletos o Seleccione una fila", "LABORATORIO", JOptionPane.YES_OPTION);
         }
     }
 
     private void deleteLabs() {
         if (select) {
-
             if (labdb.deleteLab(codeSelect)) {
-                                JOptionPane.showMessageDialog(view, "El laboratorio con codigo" + codeSelect + "se edito Exitosamente", "LABORATORIO", JOptionPane.YES_OPTION);
-
+                JOptionPane.showMessageDialog(view, "El laboratorio con codigo" + codeSelect + " se BORRO Exitosamente", "LABORATORIO", JOptionPane.INFORMATION_MESSAGE);
                 cleanFields();
                 fillTable();
             } else {
-                JOptionPane.showMessageDialog(view, "El laboratorio tiene una reserva, no se puede borrar");
+                JOptionPane.showMessageDialog(view, "El laboratorio tiene una reserva, no se puede borrar", "LABORATORIO", JOptionPane.YES_OPTION);
             }
         } else {
-            JOptionPane.showMessageDialog(view, "Seleccione una fila");
+            JOptionPane.showMessageDialog(view, "Seleccione una fila", "LABORATORIO", JOptionPane.YES_OPTION);
+
         }
     }
 
@@ -250,10 +250,7 @@ public final class ControllerPanelLabs implements ActionListener {
             editLabs();
         }
         if (e.getSource() == view.btnSearch) {
-
             //search();
-            JOptionPane.showMessageDialog(view, "El laboratorio " + view.txtName.getText() + "se creo Exitosamente", "LABORATORIO", JOptionPane.INFORMATION_MESSAGE);
-
         }
         if (e.getSource() == view.btnCancelar) {
             MenuControlador menu = new MenuControlador();
