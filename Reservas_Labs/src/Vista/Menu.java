@@ -142,9 +142,9 @@ public class Menu extends javax.swing.JFrame {
         lblSalir3.setText("Salir");
         panItemSalir.add(lblSalir3, new org.netbeans.lib.awtextra.AbsoluteConstraints(259, 1, 246, 40));
 
-        jPanel2.add(panItemSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 260, -1));
+        jPanel2.add(panItemSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 320, 260, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 160, 300, 280));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(544, 112, 288, 400));
 
         jPanel3.setBackground(new java.awt.Color(147, 10, 13));
 

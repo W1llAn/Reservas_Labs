@@ -5,7 +5,6 @@ import Modelos.LabDB;
 import Vista.Horarios;
 import Vista.Laboratorios;
 import Vista.Menu;
-import Vista.Reservas;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseEvent;
