@@ -43,11 +43,11 @@ public class Usuario_2DB {
 
     public boolean modificarUsuario(Usuario_2 user) {
 
-        String sql = "UPDATE Usuarios SET nombre_usuario=?, contraseña=?, correo_electronico=?, rol=?, nombre=?, apellido=?, cedula=? WHERE id_usuario_PK=?";
+        String sql = "UPDATE Usuarios SET nombre_usuario=?, contraseña=?, correo_electronico=?, rol=?, nombre=?, apellido=? WHERE id_usuario_PK=?";
         try {
             Connection cn = con.Conectar();
             ps = cn.prepareStatement(sql);
-            ps.setInt(8, user.getId());
+            ps.setInt(7, user.getId());
             ps.setString(1, user.getNombreUsuario());
             ps.setString(2, user.getPassword());
             ps.setString(3, user.getCorreo());

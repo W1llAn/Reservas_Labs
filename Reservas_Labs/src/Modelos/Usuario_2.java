@@ -23,6 +23,17 @@ public class Usuario_2 {
         this.rol = rol;
     }
 
+    public Usuario_2(int id, String nombreUsuario, String password, String correo, String nombre, String apellido, String rol) {
+        this.id = id;
+        this.nombreUsuario = nombreUsuario;
+        this.password = password;
+        this.correo = correo;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.rol = rol;
+    }
+
+    
 
 
     public int getId() {
