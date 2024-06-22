@@ -3,12 +3,14 @@ package Modelos;
 
 public class Usuario_2 {
     
+    private int id;
     private String nombreUsuario;
     private String password;
     private String correo;
     private String nombre;
     private String apellido;
     private String cedula;
+    private String rol;
 
     public Usuario_2() {
     }
@@ -22,6 +24,26 @@ public class Usuario_2 {
         this.cedula = cedula;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    
+    
     public String getNombreUsuario() {
         return nombreUsuario;
     }
