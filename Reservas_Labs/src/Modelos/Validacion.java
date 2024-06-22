@@ -14,8 +14,8 @@ public class Validacion {
     }
 
     public static boolean isValidPassword(String password) {
-        // Patrón para validar una contraseña de al menos diez caracteres, solo números
-        String passwordRegex = "^\\d{10,}$";
+        // Patrón para validar una contraseña de exactamente diez caracteres, números o letras
+        String passwordRegex = "^[a-zA-Z0-9]{10}$";
         Pattern pattern = Pattern.compile(passwordRegex);
         Matcher matcher = pattern.matcher(password);
         return matcher.matches();

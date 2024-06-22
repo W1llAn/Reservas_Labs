@@ -349,9 +349,23 @@ public class Usuarios extends javax.swing.JFrame {
             // Mostrar un mensaje de error o realizar alguna acción
             JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
-            if(Validacion.isValidWord(this.txtNombre.getText())||Validacion.isValidWord(this.txtApellido.getText())){
-            }else{
-            JOptionPane.showMessageDialog(this, "Por favor, ingrese solo un nombre o un apellido que sea valido", "Información", JOptionPane.INFORMATION_MESSAGE);
+            
+            if (Validacion.isValidWord(this.txtNombre.getText()) || Validacion.isValidWord(this.txtApellido.getText())) {
+                if(Validacion.isValidEmail(this.txtEmail.getText())){
+                    if(Validacion.isValidPassword(new String(this.txtPass.getPassword()))){
+                        if(new String(this.txtPass.getPassword()).equals(new String(this.txtRepeatPass.getPassword()))){
+                            
+                        }else{
+                        JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden", "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }else{
+                    JOptionPane.showMessageDialog(this, "Su contraseña debe tener al menos diez caracteres", "Información", JOptionPane.INFORMATION_MESSAGE);
+                }
+                }else{
+                    JOptionPane.showMessageDialog(this, "Por favor, ingrese un email valido", "Información", JOptionPane.INFORMATION_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese un solo nombre o apellido\n No incluya números", "Información", JOptionPane.INFORMATION_MESSAGE);
             }
         }
     }//GEN-LAST:event_botonAgregarActionPerformed
