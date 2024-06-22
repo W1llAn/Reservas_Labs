@@ -23,7 +23,7 @@ public class Usuarios extends javax.swing.JFrame {
         initComponents();
         //user = new Usuario_2();
         userDB = new Usuario_2DB();
-        
+
         modelo = new DefaultTableModel(new String[]{"ID", "USUARIO", "CORREO", "CONTRASEÑA"}, 0);
         comboRol.setModel(modeloCombo = new DefaultComboBoxModel<>(new String[]{"SELECCIONE", "DOCENTE", "ESTUDIANTE"}));
         cargarTabla();
@@ -51,7 +51,15 @@ public class Usuarios extends javax.swing.JFrame {
         return false;  // Todos los campos tienen contenido
     }
 
-    private void limpar() {
+    private void limpiar() {
+        txtNombre.setText("");
+        txtApellido.setText("");
+        txtNombreUsuario.setText("");
+        txtPass.setText("");
+        txtRepeatPass.setText("");
+        txtEmail.setText("");
+        txtBuscar.setText("");
+
     }
 
     /**
@@ -90,7 +98,7 @@ public class Usuarios extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         comboRol = new javax.swing.JComboBox<>();
         lblApellido = new javax.swing.JLabel();
-        lbl_Id = new javax.swing.JLabel();
+        lbl_ID = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,6 +132,11 @@ public class Usuarios extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaUsuariosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablaUsuarios);
 
         jLabel16.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
@@ -166,12 +179,22 @@ public class Usuarios extends javax.swing.JFrame {
         botonLimpiar.setForeground(new java.awt.Color(255, 255, 255));
         botonLimpiar.setText("Limpiar");
         botonLimpiar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 255), new java.awt.Color(255, 255, 255), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255)));
+        botonLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonLimpiarActionPerformed(evt);
+            }
+        });
 
         botonElminar.setBackground(new java.awt.Color(43, 43, 43));
         botonElminar.setFont(new java.awt.Font("Constantia", 1, 15)); // NOI18N
         botonElminar.setForeground(new java.awt.Color(255, 255, 255));
         botonElminar.setText("Elminar");
         botonElminar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 255), new java.awt.Color(255, 255, 255), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255)));
+        botonElminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonElminarActionPerformed(evt);
+            }
+        });
 
         botonAgregar.setBackground(new java.awt.Color(43, 43, 43));
         botonAgregar.setFont(new java.awt.Font("Constantia", 1, 15)); // NOI18N
@@ -201,8 +224,6 @@ public class Usuarios extends javax.swing.JFrame {
         jLabel23.setText("Tipo de Usuario");
 
         lblApellido.setText("id");
-
-        lbl_Id.setText("id");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -268,7 +289,7 @@ public class Usuarios extends javax.swing.JFrame {
                         .addGap(132, 132, 132)
                         .addComponent(lblApellido, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(143, 143, 143)
-                        .addComponent(lbl_Id, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lbl_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -318,7 +339,7 @@ public class Usuarios extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblNombre)
                             .addComponent(lblApellido)
-                            .addComponent(lbl_Id))
+                            .addComponent(lbl_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(28, 28, 28)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -373,7 +394,7 @@ public class Usuarios extends javax.swing.JFrame {
 
                                     if (userDB.crearUsuario(user)) {
                                         cargarTabla();
-                                        limpar();
+                                        limpiar();
                                     } else {
                                         JOptionPane.showMessageDialog(this, "No se pudo Crear sus usario, intentelo de nuevo", "Información", JOptionPane.INFORMATION_MESSAGE);
                                     }
@@ -436,6 +457,47 @@ public class Usuarios extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botonEditarActionPerformed
 
+    private void botonLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonLimpiarActionPerformed
+        limpiar();
+    }//GEN-LAST:event_botonLimpiarActionPerformed
+
+    private void tablaUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaUsuariosMouseClicked
+        int fila = this.tablaUsuarios.rowAtPoint(evt.getPoint());
+        this.lbl_ID.setText(this.tablaUsuarios.getValueAt(fila, 0).toString());
+        this.txtNombreUsuario.setText(this.tablaUsuarios.getValueAt(fila, 1).toString());
+        this.txtEmail.setText(this.tablaUsuarios.getValueAt(fila, 2).toString());
+        this.txtPass.setText(this.tablaUsuarios.getValueAt(fila, 3).toString());
+
+    }//GEN-LAST:event_tablaUsuariosMouseClicked
+
+    private void botonElminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonElminarActionPerformed
+
+        if (this.txtApellido == null || this.txtApellido.getText().trim().isEmpty()) {
+            int confirmacion = JOptionPane.showConfirmDialog(
+                    this,
+                    "¿Está seguro de que desea eliminar este usuario?",
+                    "Confirmar eliminación",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE
+            );
+
+            if (confirmacion == JOptionPane.YES_OPTION) {
+                int id = Integer.valueOf(this.lbl_ID.getText());
+                if (userDB.eliminarUsuario(id)) {
+                    cargarTabla();
+                    limpiar();
+                    JOptionPane.showMessageDialog(this, "El usuario ha sido eliminado correctamente", "Información", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(this, "No se pudo eliminar el usuario", "Error", JOptionPane.ERROR_MESSAGE);
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, "Operación de eliminación cancelada", "Información", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione el usuario a eliminar", "Advertencia", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_botonElminarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -491,7 +553,7 @@ public class Usuarios extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblApellido;
     private javax.swing.JLabel lblNombre;
-    private javax.swing.JLabel lbl_Id;
+    private javax.swing.JLabel lbl_ID;
     public javax.swing.JTable tablaUsuarios;
     private javax.swing.JTextField txtApellido;
     private javax.swing.JTextField txtBuscar;
