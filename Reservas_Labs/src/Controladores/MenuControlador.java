@@ -26,24 +26,14 @@ public class MenuControlador implements MouseListener {
     private final Color rojoClaro = new Color(216, 17, 45);
     private final Font BOLD_FONT = new Font("Times New Roman", Font.BOLD, 16);
     private final Font PLAIN_FONT = new Font("Times New Roman", Font.PLAIN, 16);
-    private JPanel panItemLaboratorios;
-    private JLabel lblLaboratorios;
 
     public MenuControlador() {
         String rol = UsuarioSesion.getRol();
-        menu = new Menu();
-        if (rol.equals("ADMIN")) {
-            this.menu.lblLAgregarUsuario.addMouseListener(this);
-            this.menu.lblLaboratorios.addMouseListener(this);
-            this.menu.lblHorarios.addMouseListener(this);
-            this.menu.lblSalir.addMouseListener(this);
-        } else {
-            this.menu.lblLAgregarUsuario.setVisible(false);
-            this.menu.panItemAgregarUsuarios.setVisible(false);
-            this.menu.lblLaboratorios.addMouseListener(this);
-            this.menu.lblHorarios.addMouseListener(this);
-            this.menu.lblSalir.addMouseListener(this);
-        }
+         menu = new Menu();
+     
+        this.menu.lblLaboratorios.addMouseListener(this);
+        this.menu.lblHorarios.addMouseListener(this);
+        this.menu.lblSalir.addMouseListener(this);
 
     }
 
@@ -68,7 +58,6 @@ public class MenuControlador implements MouseListener {
             this.menu.dispose();
             vista_horarios.setVisible(true);
         }
-        
         if (e.getSource() == this.menu.lblSalir) {
             System.exit(0);
         }
@@ -89,7 +78,6 @@ public class MenuControlador implements MouseListener {
         cambiarColorMenuItems(menu.lblHorarios, menu.panItemHorarios, me);
         cambiarColorMenuItems(menu.lblLaboratorios, menu.panItemLaboratorios, me);
         cambiarColorMenuItems(menu.lblSalir, menu.panItemSalir, me);
-        cambiarColorMenuItems(menu.lblLAgregarUsuario, menu.panItemAgregarUsuarios, me);
 
     }
 
@@ -114,7 +102,6 @@ public class MenuControlador implements MouseListener {
         cambiarColorMenuItems(menu.lblHorarios, menu.panItemHorarios, me);
         cambiarColorMenuItems(menu.lblLaboratorios, menu.panItemLaboratorios, me);
         cambiarColorMenuItems(menu.lblSalir, menu.panItemSalir, me);
-        cambiarColorMenuItems(menu.lblLAgregarUsuario, menu.panItemAgregarUsuarios, me);
     }
 
 }
