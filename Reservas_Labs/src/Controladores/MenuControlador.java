@@ -26,8 +26,7 @@ public class MenuControlador implements MouseListener {
     private final Color rojoClaro = new Color(216, 17, 45);
     private final Font BOLD_FONT = new Font("Times New Roman", Font.BOLD, 16);
     private final Font PLAIN_FONT = new Font("Times New Roman", Font.PLAIN, 16);
-    private JPanel panItemLaboratorios;
-    private JLabel lblLaboratorios;
+
 
     public MenuControlador() {
         String rol = UsuarioSesion.getRol();
