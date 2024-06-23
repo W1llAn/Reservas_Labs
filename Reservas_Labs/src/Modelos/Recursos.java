@@ -4,6 +4,7 @@
  */
 package Modelos;
 
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,5 +14,16 @@ import javax.swing.JOptionPane;
 public class Recursos {
     public void aviso(String mensaje){
         JOptionPane.showMessageDialog(null,mensaje,"AVISO",JOptionPane.INFORMATION_MESSAGE);
+    }
+    public void exito(String mensaje) {
+        // Cargar el icono personalizado
+        ImageIcon iconoExito = new ImageIcon(getClass().getResource("/imagenes/exito-icon.png"));
+
+        // Mostrar el mensaje con el icono personalizado
+        JOptionPane.showMessageDialog(null, 
+                                      mensaje, 
+                                      "Éxito", 
+                                      JOptionPane.INFORMATION_MESSAGE, 
+                                      iconoExito);
     }
 }
