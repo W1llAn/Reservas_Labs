@@ -25,14 +25,16 @@ public class Usuarios extends javax.swing.JFrame {
 
     public Usuarios() {
         initComponents();
+         setLocationRelativeTo(null);
         //user = new Usuario_2();
         userDB = new Usuario_2DB();
-        //this.lbl_ID.setVisible(false);
+        this.lbl_ID.setVisible(false);
         this.lblMensaje.setVisible(false);
         modelo = new DefaultTableModel(new String[]{"ID", "USUARIO", "CORREO", "NOMBRE", "APELLIDO", "ROL"}, 0);
         comboRol.setModel(modeloCombo = new DefaultComboBoxModel<>(new String[]{"SELECCIONE", "DOCENTE", "ESTUDIANTE"}));
         filtro.setModel(modeloCombo = new DefaultComboBoxModel<>(new String[]{"FILTAR POR :", "USUARIO", "APELLIDO", "ROL"}));
         cargarTabla();
+        
 
     }
 
@@ -542,7 +544,7 @@ public class Usuarios extends javax.swing.JFrame {
     private Usuario_2 dataUser(int id) {
         for (Usuario_2 u : lu) {
             if (u.getId() == id) {
-                System.out.println(u);
+                //System.out.println(u);
                 return u;
             }
         }
@@ -577,7 +579,7 @@ public class Usuarios extends javax.swing.JFrame {
 
     private void botonElminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonElminarActionPerformed
 
-        if (this.lbl_ID.getText() == null || this.lbl_ID.getText().trim().isEmpty()) {
+        if (this.lbl_ID.getText() != null || !this.lbl_ID.getText().trim().isEmpty()) {
             int confirmacion = JOptionPane.showConfirmDialog(
                     this,
                     "¿Está seguro de que desea eliminar este usuario?",
@@ -652,8 +654,8 @@ public class Usuarios extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         MenuControlador menu = new MenuControlador();
-        menu.iniciar();
-        this.dispose();
+            this.setVisible(false);
+            menu.iniciar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
