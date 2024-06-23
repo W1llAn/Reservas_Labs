@@ -69,6 +69,7 @@ public class Usuarios extends javax.swing.JFrame {
         comboRol.setSelectedIndex(0);
         this.lblMensaje.setVisible(false);
         this.lbl_ID.setText("");
+        this.filtro.setSelectedIndex(0);
         cargarTabla();
     }
 
@@ -187,7 +188,7 @@ public class Usuarios extends javax.swing.JFrame {
 
         txtNombreUsuario.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
 
-        botonEditar.setBackground(new java.awt.Color(43, 43, 43));
+        botonEditar.setBackground(new java.awt.Color(0, 0, 0));
         botonEditar.setFont(new java.awt.Font("Constantia", 1, 15)); // NOI18N
         botonEditar.setForeground(new java.awt.Color(255, 255, 255));
         botonEditar.setText("Editar");
@@ -198,7 +199,7 @@ public class Usuarios extends javax.swing.JFrame {
             }
         });
 
-        botonLimpiar.setBackground(new java.awt.Color(43, 43, 43));
+        botonLimpiar.setBackground(new java.awt.Color(0, 0, 0));
         botonLimpiar.setFont(new java.awt.Font("Constantia", 1, 15)); // NOI18N
         botonLimpiar.setForeground(new java.awt.Color(255, 255, 255));
         botonLimpiar.setText("Limpiar");
@@ -220,7 +221,7 @@ public class Usuarios extends javax.swing.JFrame {
             }
         });
 
-        botonAgregar.setBackground(new java.awt.Color(43, 43, 43));
+        botonAgregar.setBackground(new java.awt.Color(0, 0, 0));
         botonAgregar.setFont(new java.awt.Font("Constantia", 1, 15)); // NOI18N
         botonAgregar.setForeground(new java.awt.Color(255, 255, 255));
         botonAgregar.setText("Agregar");
@@ -324,20 +325,20 @@ public class Usuarios extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel21)
-                                    .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txtPass, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lbl_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGroup(jPanel1Layout.createSequentialGroup()
-                                        .addComponent(botonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(65, 65, 65)
-                                        .addComponent(botonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(botonAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(65, 65, 65)
+                                .addComponent(botonEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(48, 48, 48))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel22)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel22)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addComponent(jLabel21)
+                                        .addGap(148, 148, 148)
+                                        .addComponent(lbl_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addGap(48, 48, 48)
                         .addComponent(botonElminar, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(87, 87, 87))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -394,12 +395,12 @@ public class Usuarios extends javax.swing.JFrame {
                         .addComponent(jLabel22)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txtRepeatPass, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(107, 107, 107)
-                        .addComponent(lbl_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(76, 76, 76))
+                        .addGap(198, 198, 198))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(44, 44, 44)
+                        .addGap(27, 27, 27)
+                        .addComponent(lbl_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(botonElminar)
                             .addComponent(botonEditar)
@@ -629,7 +630,6 @@ public class Usuarios extends javax.swing.JFrame {
                     cargarTabla();
                     this.lblMensaje.setVisible(true);
                 }
-
                 this.tablaUsuarios.setModel(modelo);
             }
         } else {
