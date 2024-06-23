@@ -8,12 +8,7 @@ package Vista;
  *
  * @author ASUS
  */
-import Modelos.Block;
-import Modelos.Lab;
-import java.util.Date;
-import java.util.Calendar;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerDateModel;
+
 
 public class Reservas extends javax.swing.JFrame  {
 
@@ -85,43 +80,43 @@ public class Reservas extends javax.swing.JFrame  {
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelReservas.setBackground(new java.awt.Color(43, 43, 43));
+        panelReservas.setBackground(new java.awt.Color(212, 215, 224));
         panelReservas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Reborn", 1, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Reservas");
         panelReservas.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 29, -1, 78));
 
         jLabel3.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Edifici0:");
         panelReservas.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 224, 64, -1));
 
         jLabel4.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Hora inicio:");
         panelReservas.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 416, -1, -1));
 
-        bnRegresar.setBackground(new java.awt.Color(43, 43, 43));
+        bnRegresar.setBackground(new java.awt.Color(212, 215, 224));
         bnRegresar.setFont(new java.awt.Font("Constantia", 1, 15)); // NOI18N
         bnRegresar.setForeground(new java.awt.Color(255, 255, 255));
-        bnRegresar.setText("Cancelar");
+        bnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/regresar-icon.png"))); // NOI18N
         bnRegresar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 255), new java.awt.Color(255, 255, 255), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255)));
-        panelReservas.add(bnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(688, 512, 111, -1));
+        panelReservas.add(bnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(832, 112, 32, 32));
 
         jLabel5.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Hora fin:");
         panelReservas.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 464, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Fecha de reserva:");
         panelReservas.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 368, -1, -1));
 
         jLabel8.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Descripción");
         panelReservas.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(624, 320, -1, -1));
 
@@ -138,10 +133,10 @@ public class Reservas extends javax.swing.JFrame  {
         jScrollPane2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         jScrollPane2.setForeground(new java.awt.Color(43, 43, 43));
 
-        textDescripcion.setBackground(new java.awt.Color(147, 10, 13));
+        textDescripcion.setBackground(new java.awt.Color(237, 233, 233));
         textDescripcion.setColumns(20);
         textDescripcion.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
-        textDescripcion.setForeground(new java.awt.Color(255, 255, 255));
+        textDescripcion.setForeground(new java.awt.Color(0, 0, 0));
         textDescripcion.setLineWrap(true);
         textDescripcion.setRows(5);
         textDescripcion.setToolTipText("");
@@ -169,23 +164,23 @@ public class Reservas extends javax.swing.JFrame  {
         panelReservas.add(btCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(752, 480, 111, -1));
 
         jLabel9.setFont(new java.awt.Font("Constantia", 1, 16)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Usuario:");
         panelReservas.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(64, 128, -1, -1));
 
         jLabel10.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
         jLabel10.setText("Laboratorio:");
         panelReservas.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 272, 112, -1));
 
         jLabel11.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Tipo:");
         panelReservas.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(624, 224, -1, -1));
 
-        txtUsuario.setBackground(new java.awt.Color(43, 43, 43));
+        txtUsuario.setBackground(new java.awt.Color(212, 215, 224));
         txtUsuario.setFont(new java.awt.Font("Constantia", 1, 18)); // NOI18N
-        txtUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        txtUsuario.setForeground(new java.awt.Color(0, 0, 0));
         txtUsuario.setText("JUAN");
         txtUsuario.setBorder(null);
         txtUsuario.setCaretColor(new java.awt.Color(43, 43, 43));
@@ -196,9 +191,9 @@ public class Reservas extends javax.swing.JFrame  {
         });
         panelReservas.add(txtUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(144, 128, -1, -1));
 
-        txtHoraFin.setBackground(new java.awt.Color(43, 43, 43));
+        txtHoraFin.setBackground(new java.awt.Color(237, 233, 233));
         txtHoraFin.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
-        txtHoraFin.setForeground(new java.awt.Color(255, 255, 255));
+        txtHoraFin.setForeground(new java.awt.Color(0, 0, 0));
         txtHoraFin.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtHoraFin.setBorder(null);
         txtHoraFin.addActionListener(new java.awt.event.ActionListener() {
@@ -208,9 +203,9 @@ public class Reservas extends javax.swing.JFrame  {
         });
         panelReservas.add(txtHoraFin, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 480, 192, 25));
 
-        txtHoraInicio.setBackground(new java.awt.Color(43, 43, 43));
+        txtHoraInicio.setBackground(new java.awt.Color(237, 233, 233));
         txtHoraInicio.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
-        txtHoraInicio.setForeground(new java.awt.Color(255, 255, 255));
+        txtHoraInicio.setForeground(new java.awt.Color(0, 0, 0));
         txtHoraInicio.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtHoraInicio.setBorder(null);
         txtHoraInicio.addActionListener(new java.awt.event.ActionListener() {
@@ -220,16 +215,16 @@ public class Reservas extends javax.swing.JFrame  {
         });
         panelReservas.add(txtHoraInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 432, 192, 25));
 
-        txtCedulaResponsable.setBackground(new java.awt.Color(147, 10, 13));
+        txtCedulaResponsable.setBackground(new java.awt.Color(237, 233, 233));
         txtCedulaResponsable.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
-        txtCedulaResponsable.setForeground(new java.awt.Color(255, 255, 255));
+        txtCedulaResponsable.setForeground(new java.awt.Color(0, 0, 0));
         txtCedulaResponsable.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtCedulaResponsable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         panelReservas.add(txtCedulaResponsable, new org.netbeans.lib.awtextra.AbsoluteConstraints(368, 240, 192, 25));
 
-        txtFechaReserva.setBackground(new java.awt.Color(43, 43, 43));
+        txtFechaReserva.setBackground(new java.awt.Color(237, 233, 233));
         txtFechaReserva.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
-        txtFechaReserva.setForeground(new java.awt.Color(255, 255, 255));
+        txtFechaReserva.setForeground(new java.awt.Color(0, 0, 0));
         txtFechaReserva.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtFechaReserva.setBorder(null);
         txtFechaReserva.addActionListener(new java.awt.event.ActionListener() {
@@ -239,9 +234,9 @@ public class Reservas extends javax.swing.JFrame  {
         });
         panelReservas.add(txtFechaReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 384, 192, 25));
 
-        txtLaboratorio.setBackground(new java.awt.Color(43, 43, 43));
+        txtLaboratorio.setBackground(new java.awt.Color(237, 233, 233));
         txtLaboratorio.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
-        txtLaboratorio.setForeground(new java.awt.Color(255, 255, 255));
+        txtLaboratorio.setForeground(new java.awt.Color(0, 0, 0));
         txtLaboratorio.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtLaboratorio.setBorder(null);
         txtLaboratorio.addActionListener(new java.awt.event.ActionListener() {
@@ -251,40 +246,41 @@ public class Reservas extends javax.swing.JFrame  {
         });
         panelReservas.add(txtLaboratorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 288, 192, 25));
 
+        jLabel12.setBackground(new java.awt.Color(0, 0, 0));
         jLabel12.setFont(new java.awt.Font("Constantia", 1, 18)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("LUGAR");
         panelReservas.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 176, 192, -1));
 
         jLabel13.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
-        jLabel13.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("Apellido");
         panelReservas.add(jLabel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(368, 320, -1, -1));
 
         jLabel14.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
         jLabel14.setText("Cédula:");
         panelReservas.add(jLabel14, new org.netbeans.lib.awtextra.AbsoluteConstraints(368, 224, -1, -1));
 
         jLabel15.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
         jLabel15.setText("Carrera:");
         panelReservas.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(368, 368, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
         jLabel16.setText("Materia:");
         panelReservas.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(624, 272, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Constantia", 1, 18)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setForeground(new java.awt.Color(0, 0, 0));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("RAZON");
         panelReservas.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 176, 208, -1));
 
         jLabel18.setFont(new java.awt.Font("Constantia", 1, 18)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setForeground(new java.awt.Color(0, 0, 0));
         jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel18.setText("HORARIO");
         panelReservas.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 336, 128, -1));
@@ -299,8 +295,8 @@ public class Reservas extends javax.swing.JFrame  {
         jSeparator3.setAlignmentX(0.3F);
         panelReservas.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 544, 843, 16));
 
-        jSeparator5.setBackground(new java.awt.Color(255, 255, 255));
-        jSeparator5.setForeground(new java.awt.Color(255, 255, 255));
+        jSeparator5.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator5.setForeground(new java.awt.Color(0, 0, 0));
         jSeparator5.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jSeparator5.setAlignmentX(0.3F);
         panelReservas.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 160, 16, 385));
@@ -311,9 +307,9 @@ public class Reservas extends javax.swing.JFrame  {
         jSeparator6.setAlignmentX(0.3F);
         panelReservas.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 160, 16, 384));
 
-        cbTipo_Reserva.setBackground(new java.awt.Color(147, 10, 13));
+        cbTipo_Reserva.setBackground(new java.awt.Color(237, 233, 233));
         cbTipo_Reserva.setFont(new java.awt.Font("Constantia", 0, 17)); // NOI18N
-        cbTipo_Reserva.setForeground(new java.awt.Color(255, 255, 255));
+        cbTipo_Reserva.setForeground(new java.awt.Color(0, 0, 0));
         cbTipo_Reserva.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Reserva", "Horario" }));
         cbTipo_Reserva.setSelectedIndex(-1);
         cbTipo_Reserva.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
@@ -330,9 +326,9 @@ public class Reservas extends javax.swing.JFrame  {
         jSeparator7.setAlignmentX(0.3F);
         panelReservas.add(jSeparator7, new org.netbeans.lib.awtextra.AbsoluteConstraints(592, 160, 16, 385));
 
-        txtMateria.setBackground(new java.awt.Color(147, 10, 13));
+        txtMateria.setBackground(new java.awt.Color(237, 233, 233));
         txtMateria.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
-        txtMateria.setForeground(new java.awt.Color(255, 255, 255));
+        txtMateria.setForeground(new java.awt.Color(0, 0, 0));
         txtMateria.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtMateria.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         txtMateria.addActionListener(new java.awt.event.ActionListener() {
@@ -342,16 +338,16 @@ public class Reservas extends javax.swing.JFrame  {
         });
         panelReservas.add(txtMateria, new org.netbeans.lib.awtextra.AbsoluteConstraints(624, 288, 192, 25));
 
-        cbCarreras.setBackground(new java.awt.Color(147, 10, 13));
+        cbCarreras.setBackground(new java.awt.Color(237, 233, 233));
         cbCarreras.setFont(new java.awt.Font("Constantia", 0, 17)); // NOI18N
-        cbCarreras.setForeground(new java.awt.Color(255, 255, 255));
+        cbCarreras.setForeground(new java.awt.Color(0, 0, 0));
         cbCarreras.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
         cbCarreras.setPreferredSize(new java.awt.Dimension(72, 29));
         panelReservas.add(cbCarreras, new org.netbeans.lib.awtextra.AbsoluteConstraints(368, 384, 192, 25));
 
-        cbCargo.setBackground(new java.awt.Color(147, 10, 13));
+        cbCargo.setBackground(new java.awt.Color(237, 233, 233));
         cbCargo.setFont(new java.awt.Font("Constantia", 0, 17)); // NOI18N
-        cbCargo.setForeground(new java.awt.Color(255, 255, 255));
+        cbCargo.setForeground(new java.awt.Color(0, 0, 0));
         cbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Docente", "Estudiante", "Otros" }));
         cbCargo.setSelectedIndex(-1);
         cbCargo.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
@@ -362,9 +358,9 @@ public class Reservas extends javax.swing.JFrame  {
         });
         panelReservas.add(cbCargo, new org.netbeans.lib.awtextra.AbsoluteConstraints(368, 432, 192, 25));
 
-        txtApellidoResponsable.setBackground(new java.awt.Color(147, 10, 13));
+        txtApellidoResponsable.setBackground(new java.awt.Color(237, 233, 233));
         txtApellidoResponsable.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
-        txtApellidoResponsable.setForeground(new java.awt.Color(255, 255, 255));
+        txtApellidoResponsable.setForeground(new java.awt.Color(0, 0, 0));
         txtApellidoResponsable.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtApellidoResponsable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         txtApellidoResponsable.addActionListener(new java.awt.event.ActionListener() {
@@ -374,9 +370,9 @@ public class Reservas extends javax.swing.JFrame  {
         });
         panelReservas.add(txtApellidoResponsable, new org.netbeans.lib.awtextra.AbsoluteConstraints(368, 336, 192, 25));
 
-        txtNombreRespon.setBackground(new java.awt.Color(147, 10, 13));
+        txtNombreRespon.setBackground(new java.awt.Color(237, 233, 233));
         txtNombreRespon.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
-        txtNombreRespon.setForeground(new java.awt.Color(255, 255, 255));
+        txtNombreRespon.setForeground(new java.awt.Color(0, 0, 0));
         txtNombreRespon.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtNombreRespon.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         txtNombreRespon.addActionListener(new java.awt.event.ActionListener() {
@@ -386,9 +382,9 @@ public class Reservas extends javax.swing.JFrame  {
         });
         panelReservas.add(txtNombreRespon, new org.netbeans.lib.awtextra.AbsoluteConstraints(368, 288, 192, 25));
 
-        txtEdificio.setBackground(new java.awt.Color(43, 43, 43));
+        txtEdificio.setBackground(new java.awt.Color(237, 233, 233));
         txtEdificio.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
-        txtEdificio.setForeground(new java.awt.Color(255, 255, 255));
+        txtEdificio.setForeground(new java.awt.Color(0, 0, 0));
         txtEdificio.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtEdificio.setBorder(null);
         txtEdificio.addActionListener(new java.awt.event.ActionListener() {
@@ -399,22 +395,23 @@ public class Reservas extends javax.swing.JFrame  {
         panelReservas.add(txtEdificio, new org.netbeans.lib.awtextra.AbsoluteConstraints(96, 240, 192, 25));
 
         jLabel19.setFont(new java.awt.Font("Constantia", 1, 18)); // NOI18N
-        jLabel19.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel19.setForeground(new java.awt.Color(0, 0, 0));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("RESPONSABLE");
         panelReservas.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 176, 208, -1));
 
-        jlMensaje.setFont(new java.awt.Font("Cambria", 0, 18)); // NOI18N
-        jlMensaje.setForeground(new java.awt.Color(255, 255, 255));
-        panelReservas.add(jlMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(336, 496, 224, -1));
+        jlMensaje.setFont(new java.awt.Font("Cambria", 0, 16)); // NOI18N
+        jlMensaje.setForeground(new java.awt.Color(0, 0, 0));
+        jlMensaje.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        panelReservas.add(jlMensaje, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, 416, 16));
 
         jLabel20.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
-        jLabel20.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel20.setForeground(new java.awt.Color(0, 0, 0));
         jLabel20.setText("Cargo:");
         panelReservas.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(368, 416, -1, -1));
 
         jLabel21.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
-        jLabel21.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel21.setForeground(new java.awt.Color(0, 0, 0));
         jLabel21.setText("Nombre:");
         panelReservas.add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(368, 272, -1, -1));
 
