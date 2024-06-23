@@ -1,6 +1,6 @@
 package Controladores;
 
-
+import Modelos.Recursos;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 public class Seguridad {
 
     private static final String LLAVE = "LLAVESITA";
+    private Recursos rec = new Recursos();
 
     private static String emailFrom = "lithubprogramadores@gmail.com";
     private static String contraseñaFrom = "xldw ibkk gotk qcqy";
@@ -27,16 +28,15 @@ public class Seguridad {
     private Session mSession;
     private MimeMessage mCorreo;
 
-    
-    public void crearEmail( String correo,String contrasenia) {
+    public void crearEmail(String correo, String contrasenia) {
         emailTo = correo;
         System.out.println(emailTo);
         System.out.println(contrasenia);
         asunto = "Recuperación de contraseña \"Universidad Tecnica de Ambato\" - Reservas Labs";
-        contenido = "Estimado/a Usuario su clave de inicio de sesion es: "+contrasenia+". Gracias por utilizar FISEI-Reservas Labs";
+        contenido = "Estimado/a Usuario su clave de inicio de sesion es: " + contrasenia + ". Gracias por utilizar FISEI-Reservas Labs";
         // Simple mail transier protocolo
         mProperties = new Properties();
-        
+
         mProperties.put("mail.smtp.host", "smtp.gmail.com");
         mProperties.put("mail.smtp.ssl.trust", "smtp.gmail.com");
         mProperties.setProperty("mail.smtp.starttls.enable", "true");
@@ -52,7 +52,7 @@ public class Seguridad {
             mCorreo.setFrom(new InternetAddress(emailFrom));
             mCorreo.setRecipient(Message.RecipientType.TO, new InternetAddress(emailTo));//Remitente
             mCorreo.setSubject(asunto);
-            mCorreo.setText(contenido,"ISO-8859-1", "html");
+            mCorreo.setText(contenido, "ISO-8859-1", "html");
 
         } catch (AddressException ex) {
             Logger.getLogger(Seguridad.class.getName()).log(Level.SEVERE, null, ex);
@@ -67,8 +67,7 @@ public class Seguridad {
             mTransport.connect(emailFrom, contraseñaFrom);
             mTransport.sendMessage(mCorreo, mCorreo.getRecipients(Message.RecipientType.TO));
             mTransport.close();
-            JOptionPane.showMessageDialog(null,
-                    "Se ha enviado la contrasenia nueva a tu correo. Revisalo por favor.");
+            rec.exito("Se ha enviado la contraseña al correo. Revisalo por favor.");
 
         } catch (NoSuchProviderException ex) {
             Logger.getLogger(Seguridad.class.getName()).log(Level.SEVERE, null, ex);
@@ -76,7 +75,5 @@ public class Seguridad {
             Logger.getLogger(Seguridad.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    
 
 }
