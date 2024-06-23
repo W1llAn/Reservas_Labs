@@ -6,6 +6,7 @@ import Modelos.UsuarioSesion;
 import Vista.Horarios;
 import Vista.Laboratorios;
 import Vista.Menu;
+import Vista.Usuarios;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -22,11 +23,10 @@ import javax.swing.border.LineBorder;
 public class MenuControlador implements MouseListener {
 
     private Menu menu;
-    private final Color rojoOscuro = new Color(147, 10, 13);
-    private final Color rojoClaro = new Color(216, 17, 45);
+    private final Color rojoOscuro = new Color(212,215,224);//[188,192,203][147,10,13
+    private final Color rojoClaro = new Color(188,192,203);//[212,215,224]
     private final Font BOLD_FONT = new Font("Times New Roman", Font.BOLD, 16);
     private final Font PLAIN_FONT = new Font("Times New Roman", Font.PLAIN, 16);
-
 
     public MenuControlador() {
         String rol = UsuarioSesion.getRol();
@@ -67,9 +67,16 @@ public class MenuControlador implements MouseListener {
             this.menu.dispose();
             vista_horarios.setVisible(true);
         }
-        
+
         if (e.getSource() == this.menu.lblSalir) {
             System.exit(0);
+        }
+
+        if (e.getSource() == this.menu.lblLAgregarUsuario) {
+            Usuarios user = new Usuarios();
+            user.setVisible(true);
+             this.menu.dispose();
+            
         }
     }
 
