@@ -10,8 +10,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -32,14 +30,19 @@ public class MenuControlador implements MouseListener {
     private JLabel lblLaboratorios;
 
     public MenuControlador() {
-        menu = new Menu();
-        this.menu.lblLaboratorios.addMouseListener(this);
-        this.menu.lblHorarios.addMouseListener(this);
-        this.menu.lblSalir.addMouseListener(this);
         String rol = UsuarioSesion.getRol();
+        menu = new Menu();
         if (rol.equals("ADMIN")) {
-            initComponents();
-            menu.add(panItemLaboratorios);
+            this.menu.lblLAgregarUsuario.addMouseListener(this);
+            this.menu.lblLaboratorios.addMouseListener(this);
+            this.menu.lblHorarios.addMouseListener(this);
+            this.menu.lblSalir.addMouseListener(this);
+        } else {
+            this.menu.lblLAgregarUsuario.setVisible(false);
+            this.menu.panItemAgregarUsuarios.setVisible(false);
+            this.menu.lblLaboratorios.addMouseListener(this);
+            this.menu.lblHorarios.addMouseListener(this);
+            this.menu.lblSalir.addMouseListener(this);
         }
 
     }
@@ -65,6 +68,7 @@ public class MenuControlador implements MouseListener {
             this.menu.dispose();
             vista_horarios.setVisible(true);
         }
+        
         if (e.getSource() == this.menu.lblSalir) {
             System.exit(0);
         }
@@ -85,6 +89,7 @@ public class MenuControlador implements MouseListener {
         cambiarColorMenuItems(menu.lblHorarios, menu.panItemHorarios, me);
         cambiarColorMenuItems(menu.lblLaboratorios, menu.panItemLaboratorios, me);
         cambiarColorMenuItems(menu.lblSalir, menu.panItemSalir, me);
+        cambiarColorMenuItems(menu.lblLAgregarUsuario, menu.panItemAgregarUsuarios, me);
 
     }
 
@@ -109,45 +114,7 @@ public class MenuControlador implements MouseListener {
         cambiarColorMenuItems(menu.lblHorarios, menu.panItemHorarios, me);
         cambiarColorMenuItems(menu.lblLaboratorios, menu.panItemLaboratorios, me);
         cambiarColorMenuItems(menu.lblSalir, menu.panItemSalir, me);
-    }
-
-     private void initComponents() {
-        panItemLaboratorios = new JPanel();
-        lblLaboratorios = new JLabel("Agregar usuarios");
-
-        
-       panItemLaboratorios.setBounds(560, 350, 252, 40);
-
-        
-        menu.add(panItemLaboratorios);
-        // Establecer el color de fondo del panel
-        panItemLaboratorios.setBackground(new Color(147, 10, 13));
-        panItemLaboratorios.setPreferredSize(new Dimension(200, 50));
-        panItemLaboratorios.setBorder(new LineBorder(Color.WHITE, 2));
-
-        // Establecer el color del texto y otras propiedades
-        lblLaboratorios.setForeground(Color.WHITE);
-        lblLaboratorios.setHorizontalAlignment(SwingConstants.CENTER);
-        lblLaboratorios.setFont(new Font("Times New Roman", Font.PLAIN, 16));
-
-        panItemLaboratorios.setLayout(new BorderLayout());
-        panItemLaboratorios.add(lblLaboratorios, BorderLayout.CENTER);
-
-        // Añadir un MouseListener para que el panel funcione como un botón
-        panItemLaboratorios.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                panItemLaboratorios.setBackground(new Color(170, 30, 30)); // Cambiar color al pasar el mouse
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                panItemLaboratorios.setBackground(new Color(147, 10, 13)); // Restaurar color al salir del mouse
-            }
-        });
-
-        // Establecer la posición y el tamaño del panel manualmente
-        // Agregar el panel al contenedor del menú
+        cambiarColorMenuItems(menu.lblLAgregarUsuario, menu.panItemAgregarUsuarios, me);
     }
 
 }

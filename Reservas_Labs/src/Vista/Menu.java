@@ -29,8 +29,6 @@ public class Menu extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        panItemLaboratorios = new javax.swing.JPanel();
-        lblLaboratorios = new javax.swing.JLabel();
         panItemHorarios = new javax.swing.JPanel();
         lblHorarios = new javax.swing.JLabel();
         panItemSalir = new javax.swing.JPanel();
@@ -38,6 +36,10 @@ public class Menu extends javax.swing.JFrame {
         lblSalir1 = new javax.swing.JLabel();
         lblSalir2 = new javax.swing.JLabel();
         lblSalir3 = new javax.swing.JLabel();
+        panItemAgregarUsuarios = new javax.swing.JPanel();
+        lblLAgregarUsuario = new javax.swing.JLabel();
+        panItemLaboratorios = new javax.swing.JPanel();
+        lblLaboratorios = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -57,32 +59,6 @@ public class Menu extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("MENÚ");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(113, 41, -1, -1));
-
-        panItemLaboratorios.setBackground(new java.awt.Color(147, 10, 13));
-        panItemLaboratorios.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-
-        lblLaboratorios.setBackground(new java.awt.Color(43, 43, 43));
-        lblLaboratorios.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
-        lblLaboratorios.setForeground(new java.awt.Color(255, 255, 255));
-        lblLaboratorios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblLaboratorios.setText("Laboratorios");
-
-        javax.swing.GroupLayout panItemLaboratoriosLayout = new javax.swing.GroupLayout(panItemLaboratorios);
-        panItemLaboratorios.setLayout(panItemLaboratoriosLayout);
-        panItemLaboratoriosLayout.setHorizontalGroup(
-            panItemLaboratoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panItemLaboratoriosLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblLaboratorios, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        panItemLaboratoriosLayout.setVerticalGroup(
-            panItemLaboratoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panItemLaboratoriosLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblLaboratorios, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        jPanel2.add(panItemLaboratorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 254, -1));
 
         panItemHorarios.setBackground(new java.awt.Color(147, 10, 13));
         panItemHorarios.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
@@ -105,7 +81,8 @@ public class Menu extends javax.swing.JFrame {
             panItemHorariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panItemHorariosLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(lblHorarios, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(lblHorarios, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8))
         );
 
         jPanel2.add(panItemHorarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 254, -1));
@@ -143,6 +120,59 @@ public class Menu extends javax.swing.JFrame {
         panItemSalir.add(lblSalir3, new org.netbeans.lib.awtextra.AbsoluteConstraints(259, 1, 246, 40));
 
         jPanel2.add(panItemSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 336, 260, -1));
+
+        panItemAgregarUsuarios.setBackground(new java.awt.Color(147, 10, 13));
+        panItemAgregarUsuarios.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        lblLAgregarUsuario.setBackground(new java.awt.Color(43, 43, 43));
+        lblLAgregarUsuario.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        lblLAgregarUsuario.setForeground(new java.awt.Color(255, 255, 255));
+        lblLAgregarUsuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLAgregarUsuario.setText("Agregar Usuarios");
+
+        javax.swing.GroupLayout panItemAgregarUsuariosLayout = new javax.swing.GroupLayout(panItemAgregarUsuarios);
+        panItemAgregarUsuarios.setLayout(panItemAgregarUsuariosLayout);
+        panItemAgregarUsuariosLayout.setHorizontalGroup(
+            panItemAgregarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panItemAgregarUsuariosLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblLAgregarUsuario, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panItemAgregarUsuariosLayout.setVerticalGroup(
+            panItemAgregarUsuariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panItemAgregarUsuariosLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblLAgregarUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel2.add(panItemAgregarUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 208, 256, 48));
+
+        panItemLaboratorios.setBackground(new java.awt.Color(147, 10, 13));
+        panItemLaboratorios.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        lblLaboratorios.setBackground(new java.awt.Color(43, 43, 43));
+        lblLaboratorios.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
+        lblLaboratorios.setForeground(new java.awt.Color(255, 255, 255));
+        lblLaboratorios.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblLaboratorios.setText("Laboratorios");
+
+        javax.swing.GroupLayout panItemLaboratoriosLayout = new javax.swing.GroupLayout(panItemLaboratorios);
+        panItemLaboratorios.setLayout(panItemLaboratoriosLayout);
+        panItemLaboratoriosLayout.setHorizontalGroup(
+            panItemLaboratoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panItemLaboratoriosLayout.createSequentialGroup()
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(lblLaboratorios, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        panItemLaboratoriosLayout.setVerticalGroup(
+            panItemLaboratoriosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panItemLaboratoriosLayout.createSequentialGroup()
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(lblLaboratorios, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        jPanel2.add(panItemLaboratorios, new org.netbeans.lib.awtextra.AbsoluteConstraints(16, 144, -1, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(544, 112, 288, 400));
 
@@ -252,11 +282,13 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     public javax.swing.JLabel lblHorarios;
+    public javax.swing.JLabel lblLAgregarUsuario;
     public javax.swing.JLabel lblLaboratorios;
     public javax.swing.JLabel lblSalir;
     public javax.swing.JLabel lblSalir1;
     public javax.swing.JLabel lblSalir2;
     public javax.swing.JLabel lblSalir3;
+    public javax.swing.JPanel panItemAgregarUsuarios;
     public javax.swing.JPanel panItemHorarios;
     public javax.swing.JPanel panItemLaboratorios;
     public javax.swing.JPanel panItemSalir;
