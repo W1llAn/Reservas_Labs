@@ -23,8 +23,8 @@ import javax.swing.border.LineBorder;
 public class MenuControlador implements MouseListener {
 
     private Menu menu;
-    private final Color rojoOscuro = new Color(147, 10, 13);
-    private final Color rojoClaro = new Color(216, 17, 45);
+    private final Color rojoOscuro = new Color(212,215,224);//[188,192,203][147,10,13
+    private final Color rojoClaro = new Color(188,192,203);//[212,215,224]
     private final Font BOLD_FONT = new Font("Times New Roman", Font.BOLD, 16);
     private final Font PLAIN_FONT = new Font("Times New Roman", Font.PLAIN, 16);
 
