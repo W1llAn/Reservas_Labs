@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import Modelos.hash;
 
 /**
  *
@@ -54,12 +55,13 @@ public class Cont_login implements ActionListener{
     }
     
     private boolean VerificacionCredenciales(String username, String contraseña) throws SQLException{
+
         for(Usuario user : this.usuario){
-            System.out.println(username +"  "+contraseña+"---"+user.getNombre_usuario()+"  "+user.getContraseña());
-            if (user.getNombre_usuario().equals(username) && user.getContraseña().equals(contraseña) ) {
+            //System.out.println(username +"  "+contraseña+"---"+user.getNombre_usuario()+"  "+user.getContraseña());
+            if (user.getNombre_usuario().equals(username) && user.getContraseña().equals(hash.sha1(contraseña)) ) {
                 UsuarioSesion.setIdUsuario(user.getId_usuario());
                 UsuarioSesion.setNombreUsuario(user.getNombre_usuario());
-                System.out.println(user.getRol());
+                //System.out.println(user.getRol());
                 UsuarioSesion.setRol(user.getRol());
                 return true;
             }
