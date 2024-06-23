@@ -59,6 +59,8 @@ public class Cont_login implements ActionListener{
             if (user.getNombre_usuario().equals(username) && user.getContraseña().equals(contraseña) ) {
                 UsuarioSesion.setIdUsuario(user.getId_usuario());
                 UsuarioSesion.setNombreUsuario(user.getNombre_usuario());
+                System.out.println(user.getRol());
+                UsuarioSesion.setRol(user.getRol());
                 return true;
             }
         }

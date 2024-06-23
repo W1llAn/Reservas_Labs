@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class Usuario {
 
     private int id_usuario;
-    private String nombre_usuario,contraseña,correo;
+    private String nombre_usuario,contraseña,correo,rol;
     private Recursos rec = new Recursos();
 
     public Usuario() {
@@ -30,13 +30,22 @@ public class Usuario {
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
     }
+
+    public String getRol() {
+        return this.rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
     
 
 
-    public Usuario(int id_usuario, String nombre_usuario,String correo) {
+    public Usuario(int id_usuario, String nombre_usuario,String correo,String rol) {
         this.id_usuario = id_usuario;
         this.nombre_usuario = nombre_usuario;
         this.correo= correo;
+        this.rol=rol;
     }
 
     public int getId_usuario() {
@@ -87,6 +96,7 @@ public class Usuario {
                 user.setNombre_usuario(rs.getString("nombre_usuario"));
                 user.setContraseña(rs.getString("contraseña"));
                 user.setCorreo(rs.getString("correo_electronico"));
+                user.setRol(rs.getString("rol"));
                 usuarios.add(user);
             }
             st.close();
