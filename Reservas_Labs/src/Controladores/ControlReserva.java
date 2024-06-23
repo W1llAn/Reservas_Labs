@@ -305,7 +305,7 @@ public class ControlReserva implements ActionListener {
         String cedula = vistaRes.txtCedulaResponsable.getText();
         boolean cedulaEncontrada = busquedaCedula(cedula);
         if (cedulaEncontrada) {
-            vistaRes.jlMensaje.setText("Ya está registrada");
+            vistaRes.jlMensaje.setText("Ya está registrado");
             Responsable responsable = obtenerResponsablePorCedula(cedula);
             if (responsable != null) {
                 vistaRes.txtNombreRespon.setText(responsable.getNombre());
