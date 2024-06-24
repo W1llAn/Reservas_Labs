@@ -112,15 +112,41 @@ public class Cont_Horarios implements ActionListener, MouseListener{
         }
     }
     
-    private void asignarDiaFestivo(ArrayList<Festivo> dias){
+    public static boolean comprarIntervalo(LocalDate fechaAComparar, LocalDate fechaInicio, LocalDate fechaFin) {
+        return (fechaAComparar.isEqual(fechaInicio) || fechaAComparar.isAfter(fechaInicio)) &&
+               (fechaAComparar.isEqual(fechaFin) || fechaAComparar.isBefore(fechaFin));
+    }
+    
+    private void asignarDiaFestivo(ArrayList<Festivo> dias, LocalDate[] fechas){
         for (Festivo dia: dias) {
             LocalDate fechaInicio = LocalDate.parse(dia.getFechaInicio());
             LocalDate fechaFin = LocalDate.parse(dia.getFechaFin());
-            for (int i = fechaInicio.getDayOfWeek().getValue(); i <=fechaFin.getDayOfWeek().getValue(); i++) {
-                for (int j = 0; j <= 11; j++) {
-                     this.vista_horarios.tablaHorarios.setValueAt(dia, j, i);
+             boolean fechaInicioIntervalo = comprarIntervalo(fechaInicio, fechas[0],  fechas[1]);
+             boolean fechaFinIntervalo = comprarIntervalo(fechaFin, fechas[0],  fechas[1]);
+            if (fechaInicioIntervalo && !fechaFinIntervalo) {
+                for (int i = fechaInicio.getDayOfWeek().getValue(); i <=6; i++) {
+                    for (int j = 0; j <= 11; j++) {
+                        this.vista_horarios.tablaHorarios.setValueAt(dia, j, i);
+                    }
+                }
+                break;
+            }
+            if (fechaInicioIntervalo && fechaFinIntervalo) {
+                for (int i = fechaInicio.getDayOfWeek().getValue(); i <=fechaFin.getDayOfWeek().getValue(); i++) {
+                    for (int j = 0; j <= 11; j++) {
+                        this.vista_horarios.tablaHorarios.setValueAt(dia, j, i);
+                    }
+                }
+                break;
+            }
+            if (!fechaInicioIntervalo && fechaFinIntervalo) {
+                for (int i = 1; i <=fechaFin.getDayOfWeek().getValue(); i++) {
+                    for (int j = 0; j <= 11; j++) {
+                        this.vista_horarios.tablaHorarios.setValueAt(dia, j, i);
+                    }
                 }
             }
+            break;
         }
     }
     private void llenarComboBloques(){
@@ -263,7 +289,7 @@ public class Cont_Horarios implements ActionListener, MouseListener{
                         hora = horarios.contultaHorarios(vista_horarios.comboLaboratorio.getItemAt(itemSeleccionado).getId(),fechas[0].toString(),fechas[1].toString());
                         System.out.println("Horarios en el controlador "+hora.size());    
                         asignarDias(hora);
-                        asignarDiaFestivo(diasFestivos);
+                        asignarDiaFestivo(diasFestivos, fechas);
                     } catch (SQLException ex) {
                         Logger.getLogger(Cont_Horarios.class.getName()).log(Level.SEVERE, null, ex);
                     }  

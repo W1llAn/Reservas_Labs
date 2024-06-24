@@ -18,8 +18,10 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -152,6 +154,13 @@ public class FestivosControlador implements ActionListener {
         Festivos l = new Festivos();
         FestivosControlador v = new FestivosControlador(l);
     }
+    
+    public LocalDate convertirFecha(String fecha) {
+       String formatoFecha = "yyyy-MM-dd";
+        DateTimeFormatter formateador = DateTimeFormatter.ofPattern(formatoFecha);
+        LocalDate fechaLocalDate = LocalDate.parse(fecha, formateador);
+        return fechaLocalDate;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -168,7 +177,7 @@ public class FestivosControlador implements ActionListener {
           if (e.getSource() == vista.btnRegresar) {
           Horario horario = new Horario();
             Horarios vista_horarios = new Horarios();
-            LocalDate fecha = this.vista.txtFechaInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+            LocalDate fecha = this.convertirFecha(this.modelo.getFechaInicio());
             try {
                 Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList(),fecha,0,0,false);
             } catch (SQLException ex) {
