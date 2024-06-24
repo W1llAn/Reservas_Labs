@@ -17,6 +17,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,15 +32,17 @@ public class ControlReserva implements ActionListener {
     private Recursos rec = new Recursos();
     private Responsable responsable;
     private int id_responsable = 0;
-    private int id_laboratorio = 0;
+    private int id_laboratorio = 0, idBlock, posicionLab;
     private String tipo_reserva = null;
 //CONSTRUCTOR PARA GUARDAR LAS RESERVAS DE LABORATORIOS
 
     public ControlReserva(Reservas vistRes, Horario modelohorario, String Edificio,
             String Laboratorio, String Fecha, String hInicio, String hFin,
-            int id_laboratorio) throws SQLException, ClassNotFoundException {
+            int IdBlock, int id_laboratorio, int posicionLab) throws SQLException, ClassNotFoundException {
         this.modelohorario = modelohorario;
+        this.posicionLab=posicionLab;
         this.vistaRes = vistRes;
+        this.idBlock=IdBlock;
         this.responsable = new Responsable();
         // Inicializa y configura componentes que dependen de vistaRes
         this.vistaRes.btReservas.addActionListener(this);
@@ -113,6 +117,16 @@ public class ControlReserva implements ActionListener {
         });
 
     }
+    public static LocalDate convertStringToLocalDate(String dateString) {
+        String pattern = "yyyy-MM-dd";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        try {
+            return LocalDate.parse(dateString, formatter);
+        } catch (DateTimeParseException e) {
+            System.err.println("Formato de fecha inválido: " + e.getMessage());
+            return null;
+        }
+    }
 
     //GUARDAR INFORMACION DE LA RESERVA
     @Override
@@ -149,7 +163,7 @@ public class ControlReserva implements ActionListener {
             Horario horario = new Horario();
             Horarios vista_horarios = new Horarios();
             try {
-                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList());
+                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList(),convertStringToLocalDate(this.vistaRes.txtFechaReserva.getText()),0,0,false);
             } catch (SQLException ex) {
                 Logger.getLogger(MenuControlador.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -289,7 +303,7 @@ public class ControlReserva implements ActionListener {
             //Volver al menu
             Horarios vista_horarios = new Horarios();
             try {
-                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList());
+                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList(),convertStringToLocalDate(this.vistaRes.txtFechaReserva.getText()),this.idBlock,this.posicionLab, true);
             } catch (SQLException ex) {
                 Logger.getLogger(MenuControlador.class.getName()).log(Level.SEVERE, null, ex);
             }

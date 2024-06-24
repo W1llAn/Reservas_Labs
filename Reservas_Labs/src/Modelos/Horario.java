@@ -160,7 +160,8 @@ public class Horario {
             ResultSet rs = null;
             String consulta = "SELECT id_horario_PK, ID_laboratorio, fecha_dia,hora_inicio, hora_final, materia, nombre_dia, nombre, apellido FROM Horarios " +
                                         "JOIN responsables ON Horarios.id_responsable = responsables.id_responsable "
-                                        + "WHERE id_laboratorio ="+id_laboratorio+" AND fecha_dia BETWEEN '"+fechaInicio+"' AND '"+fechaFin+"' ;";
+                                        + "WHERE id_laboratorio ="+id_laboratorio+" AND (fecha_dia BETWEEN '"+fechaInicio+"' AND '"+fechaFin+"'  OR tipo=0 );";
+            System.out.println(consulta);
             rs = st.executeQuery(consulta);
             while (rs.next()) {
                 Horario hor = new Horario();
@@ -176,6 +177,7 @@ public class Horario {
             }
             st.close();
             rs.close();
+            System.out.println("Los horarios obtenidos: " + horarios.size());
         }
         return horarios;
     }

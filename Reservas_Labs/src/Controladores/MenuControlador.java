@@ -13,6 +13,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
@@ -59,8 +60,9 @@ public class MenuControlador implements MouseListener {
         if (e.getSource() == menu.lblHorarios) {
             Horarios vista_horarios = new Horarios();
             Horario horario = new Horario();
+             LocalDate fechaActual = LocalDate.now();
             try {
-                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList());
+                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList(),fechaActual,0,0,false);
             } catch (SQLException ex) {
                 Logger.getLogger(MenuControlador.class.getName()).log(Level.SEVERE, null, ex);
             }

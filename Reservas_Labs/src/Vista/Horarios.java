@@ -5,19 +5,27 @@
 package Vista;
 import Modelos.Block;
 import Modelos.Lab;
+import java.awt.Font;
+import javax.swing.JMenuItem;
 /**
  *
  * @author PC
  */
 public class Horarios extends javax.swing.JFrame {
-
+public JMenuItem jitmReserva = new JMenuItem("Reservar");
+ public JMenuItem jitmEliminarReserva = new JMenuItem(" Eliminar reserva");
     /**
      * Creates new form Laboratorios_
      */
     public Horarios() {
         initComponents();
         this.setLocationRelativeTo(null);
-        
+        Font font = new Font("Lucida fax", Font.PLAIN, 16); // Por ejemplo, Arial, negrita, tamaño 16
+        this.jitmReserva.setFont(font);
+        this.jitmEliminarReserva.setFont(font);
+        this.menuClick.add(jitmReserva);
+        this.menuClick.add(jitmEliminarReserva);
+        this.tablaHorarios.setComponentPopupMenu(menuClick);
     }
 
     /**
@@ -29,6 +37,7 @@ public class Horarios extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        menuClick = new javax.swing.JPopupMenu();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -36,13 +45,16 @@ public class Horarios extends javax.swing.JFrame {
         comboBloque = new javax.swing.JComboBox<>();
         comboLaboratorio = new javax.swing.JComboBox<>();
         btnRegresar = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
+        txt_semana = new javax.swing.JLabel();
         btnReserva = new javax.swing.JButton();
         btnDiaFestivo = new javax.swing.JButton();
         Scroll = new javax.swing.JScrollPane();
         tablaHorarios = new Utilidades.horario();
         fechaDia = new com.toedter.calendar.JDateChooser();
         txt_fechas = new java.awt.Label();
+        btnSiguienteS = new javax.swing.JButton();
+        btnAnteriorS = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -67,41 +79,41 @@ public class Horarios extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Reborn", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Horarios");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 60, -1, -1));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Corbel", 1, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Seleccione un Laboratorio: ");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
         comboBloque.setFont(new java.awt.Font("Corbel", 0, 14)); // NOI18N
-        jPanel1.add(comboBloque, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 90, 240, -1));
+        jPanel1.add(comboBloque, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 240, -1));
 
         comboLaboratorio.setFont(new java.awt.Font("Corbel", 0, 14)); // NOI18N
-        jPanel1.add(comboLaboratorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 240, -1));
+        jPanel1.add(comboLaboratorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 240, -1));
 
         btnRegresar.setBackground(new java.awt.Color(147, 10, 13));
         btnRegresar.setFont(new java.awt.Font("Corbel", 1, 16)); // NOI18N
         btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
         btnRegresar.setText("Regresar");
-        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 90, 100, 30));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 100, 30));
 
-        jLabel5.setFont(new java.awt.Font("Corbel", 1, 16)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Seleccione un Bloque: ");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, -1, -1));
+        txt_semana.setFont(new java.awt.Font("Corbel", 1, 16)); // NOI18N
+        txt_semana.setForeground(new java.awt.Color(255, 255, 255));
+        txt_semana.setText("Semana");
+        jPanel1.add(txt_semana, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 50, -1, -1));
 
         btnReserva.setBackground(new java.awt.Color(147, 10, 13));
         btnReserva.setFont(new java.awt.Font("Corbel", 1, 16)); // NOI18N
         btnReserva.setForeground(new java.awt.Color(255, 255, 255));
         btnReserva.setText("Reservar");
-        jPanel1.add(btnReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 90, 100, 30));
+        jPanel1.add(btnReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 100, 30));
 
         btnDiaFestivo.setBackground(new java.awt.Color(147, 10, 13));
         btnDiaFestivo.setFont(new java.awt.Font("Corbel", 1, 16)); // NOI18N
         btnDiaFestivo.setForeground(new java.awt.Color(255, 255, 255));
         btnDiaFestivo.setText("Ingresar dia festivo");
-        jPanel1.add(btnDiaFestivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(760, 90, 170, 30));
+        jPanel1.add(btnDiaFestivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 170, 30));
 
         Scroll.setViewportView(tablaHorarios);
 
@@ -109,12 +121,31 @@ public class Horarios extends javax.swing.JFrame {
 
         fechaDia.setBackground(new java.awt.Color(43, 43, 43));
         fechaDia.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
+        fechaDia.setDoubleBuffered(false);
+        fechaDia.setFocusable(false);
         fechaDia.setFont(new java.awt.Font("Constantia", 0, 16)); // NOI18N
-        jPanel1.add(fechaDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(540, 140, 180, 30));
+        jPanel1.add(fechaDia, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 140, 180, 30));
 
         txt_fechas.setBackground(new java.awt.Color(255, 255, 255));
         txt_fechas.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
-        jPanel1.add(txt_fechas, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 140, 180, 30));
+        jPanel1.add(txt_fechas, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 70, 180, 30));
+
+        btnSiguienteS.setBackground(new java.awt.Color(147, 10, 13));
+        btnSiguienteS.setFont(new java.awt.Font("Corbel", 1, 16)); // NOI18N
+        btnSiguienteS.setForeground(new java.awt.Color(255, 255, 255));
+        btnSiguienteS.setText("Siguiente");
+        jPanel1.add(btnSiguienteS, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 70, 100, 30));
+
+        btnAnteriorS.setBackground(new java.awt.Color(147, 10, 13));
+        btnAnteriorS.setFont(new java.awt.Font("Corbel", 1, 16)); // NOI18N
+        btnAnteriorS.setForeground(new java.awt.Color(255, 255, 255));
+        btnAnteriorS.setText("Anterior");
+        jPanel1.add(btnAnteriorS, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 100, 30));
+
+        jLabel6.setFont(new java.awt.Font("Corbel", 1, 16)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setText("Seleccione un Bloque: ");
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -168,18 +199,22 @@ public class Horarios extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JScrollPane Scroll;
+    public javax.swing.JButton btnAnteriorS;
     public javax.swing.JButton btnDiaFestivo;
     public javax.swing.JButton btnRegresar;
     public javax.swing.JButton btnReserva;
+    public javax.swing.JButton btnSiguienteS;
     public javax.swing.JComboBox<Block> comboBloque;
     public javax.swing.JComboBox<Lab> comboLaboratorio;
     public com.toedter.calendar.JDateChooser fechaDia;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    public javax.swing.JPopupMenu menuClick;
     public Utilidades.horario tablaHorarios;
     public java.awt.Label txt_fechas;
+    public javax.swing.JLabel txt_semana;
     // End of variables declaration//GEN-END:variables
 }
