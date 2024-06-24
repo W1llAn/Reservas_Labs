@@ -170,7 +170,7 @@ public class FestivosControlador implements ActionListener {
             Horarios vista_horarios = new Horarios();
             LocalDate fecha = this.vista.txtFechaInicio.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
             try {
-                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList(),fecha);
+                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList(),fecha,0,0,false);
             } catch (SQLException ex) {
                 Logger.getLogger(MenuControlador.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -47,7 +47,7 @@ public class MenuControlador implements MouseListener {
             Horario horario = new Horario();
              LocalDate fechaActual = LocalDate.now();
             try {
-                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList(),fechaActual);
+                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList(),fechaActual,0,0,false);
             } catch (SQLException ex) {
                 Logger.getLogger(MenuControlador.class.getName()).log(Level.SEVERE, null, ex);
             }
