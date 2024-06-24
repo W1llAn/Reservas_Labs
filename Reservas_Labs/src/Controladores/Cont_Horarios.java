@@ -22,6 +22,8 @@ import java.sql.SQLException;
 import java.time.DayOfWeek;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -232,6 +234,17 @@ public class Cont_Horarios implements ActionListener, MouseListener{
         }
      }
     
+    public  boolean reservaFutura(int hour, int minute, LocalDate date) {
+        // Obtener la fecha y hora actuales
+        LocalDateTime now = LocalDateTime.now();
+
+        // Combinar la fecha proporcionada con la hora y minuto
+        LocalDateTime dateTimeToCompare = LocalDateTime.of(date, LocalTime.of(hour, minute));
+
+        // Comparar la fecha y hora combinadas con la fecha y hora actuales
+        return dateTimeToCompare.isAfter(now);
+    }
+    
      public int obtenerHoras(String hora) {
         // Obtener los primeros dos caracteres y convertirlos a entero
         String hoursString = hora.substring(0, 2);
@@ -358,12 +371,17 @@ public class Cont_Horarios implements ActionListener, MouseListener{
 
     @Override
     public void mouseClicked(MouseEvent e) {
-         if (e.getSource()==this.vista_horarios.btnReserva) {          
-             if (this.ControlesReserva()) {
+         if (e.getSource()==this.vista_horarios.btnReserva) {
+             if (this.ControlesReserva()) {               
               Instant instant = this.vista_horarios.fechaDia.getDate().toInstant();
              LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
             Horario horario = new Horario();
             Reservas vistReser = new Reservas();
+            int hora = this.vista_horarios.tablaHorarios.getSelectedRow()<=5 ?this.vista_horarios.tablaHorarios.getSelectedRow()+8:this.vista_horarios.tablaHorarios.getSelectedRow()+9;
+            if (!(this.reservaFutura(hora, 0,localDate))) {
+                    rec.mensajeError("No puede reservar en una fecha pasada");
+                     return;
+            }
             try {
                 ControlReserva contr= new ControlReserva(vistReser, 
                         horario,this.vista_horarios.comboLaboratorio.getItemAt(this.vista_horarios.comboLaboratorio.getSelectedIndex()).getBlockName(),
