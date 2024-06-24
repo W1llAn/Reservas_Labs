@@ -200,6 +200,12 @@ public class Cont_Horarios implements ActionListener, MouseListener{
         }
     }
     private boolean ControlesReserva(){
+        
+       if (this.vista_horarios.tablaHorarios.getSelectedRow()==-1) {
+            this.rec.aviso("Seleccione la hora que quiere reservar");
+            return false;
+        }
+        
         if (this.vista_horarios.tablaHorarios.getValueAt(this.vista_horarios.tablaHorarios.getSelectedRow(), this.vista_horarios.tablaHorarios.getSelectedColumn()) != null) {
             this.rec.aviso("El laboratorio a esa hora se encuntra ocupado");
             return false;
@@ -216,9 +222,7 @@ public class Cont_Horarios implements ActionListener, MouseListener{
             return false;
         }
         
-        if (this.vista_horarios.tablaHorarios.getSelectedRow()==-1) {
-            this.rec.aviso("Seleccione la hora que quiere reservar");
-        }
+        
     return true;
     }
     
