@@ -392,7 +392,7 @@ public class Cont_Horarios implements ActionListener, MouseListener{
             Horario horario = new Horario();
             Reservas vistReser = new Reservas();
             int hora = this.vista_horarios.tablaHorarios.getSelectedRow()<=5 ?this.vista_horarios.tablaHorarios.getSelectedRow()+8:this.vista_horarios.tablaHorarios.getSelectedRow()+9;
-            if (this.reservaFutura(hora, 0,localDate)) {
+            if (!(this.reservaFutura(hora, 0,localDate))) {
                     rec.mensajeError("No puede reservar en una fecha pasada");
                      return;
             }
@@ -428,7 +428,8 @@ public class Cont_Horarios implements ActionListener, MouseListener{
     @Override
     public void mousePressed(MouseEvent e) {
         if (e.getSource() == this.vista_horarios.tablaHorarios) {
-             
+             int col = this.vista_horarios.tablaHorarios.getSelectedColumn();
+            this.vista_horarios.fechaDia.setDate(this.fechaDiaT(this.vista_horarios.fechaDia.getDate(), col-1));
         }
     }
 
