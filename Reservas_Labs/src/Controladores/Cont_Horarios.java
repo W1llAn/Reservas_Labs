@@ -13,7 +13,9 @@ import Modelos.LabDB;
 import Utilidades.Recurso;
 import Vista.Festivos;
 import Vista.Horarios;
+import Vista.Login;
 import Vista.Reservas;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -32,6 +34,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -43,15 +46,13 @@ public class Cont_Horarios implements ActionListener, MouseListener{
     private Horario horarios = new Horario();
     private LabDB lab = new LabDB();
     private Recurso rec = new Recurso();
-    private int semana=7;
+    private int semana=8;
     
 
     public Cont_Horarios(Horarios vista_horarios, Horario horarios, ArrayList<Lab> laboratorios, LocalDate diaP, int idBlock, int idLab, boolean Reserv) throws SQLException {
         this.vista_horarios = vista_horarios;
         this.horarios = horarios;
         this.vista_horarios.btnRegresar.addActionListener(this);
-        this.vista_horarios.btnReserva.addMouseListener(this);
-        this.vista_horarios.btnDiaFestivo.addActionListener(this);
         this.vista_horarios.jitmReserva.addActionListener(this);
         this.vista_horarios.btnSiguienteS.addActionListener(this);
         this.vista_horarios.btnAnteriorS.addActionListener(this);
@@ -59,6 +60,7 @@ public class Cont_Horarios implements ActionListener, MouseListener{
         this.vista_horarios.fechaDia.addMouseListener(this);
         this.vista_horarios.txt_semana.setText("Semana ");
         this.vista_horarios.fechaDia.addMouseListener(this);
+        this.ingresoImagenes();
         Instant instant = diaP.atStartOfDay(ZoneId.systemDefault()).toInstant();
          LocalDate localDate1 = instant.atZone(ZoneId.systemDefault()).toLocalDate();
          vista_horarios.txt_fechas.setText(obtenerFechasSemana(localDate1)[0].toString() + " - " + obtenerFechasSemana(localDate1)[1].toString());
@@ -97,6 +99,27 @@ public class Cont_Horarios implements ActionListener, MouseListener{
              }    
           
         }
+    private void ingresoImagenes(){
+        ImageIcon fondo = new ImageIcon("src\\imagenes\\FondoN.png");
+        int ancho=this.vista_horarios.lblFondo.getWidth(), largo = this.vista_horarios.lblFondo.getHeight();
+         Image imagenEscalada = fondo.getImage().getScaledInstance(ancho, largo, Image.SCALE_SMOOTH);
+         ImageIcon imagenFinal = new ImageIcon(imagenEscalada);
+         this.vista_horarios.lblFondo.setIcon(imagenFinal);
+         ImageIcon btnS = new ImageIcon("src\\iconos\\flechaDerecha.png");
+         int anchoBtnS=this.vista_horarios.btnSiguienteS.getWidth(), largoBtnS = this.vista_horarios.btnSiguienteS.getHeight();
+         Image btnSEscalada = btnS.getImage().getScaledInstance(anchoBtnS, largoBtnS, Image.SCALE_SMOOTH);
+         ImageIcon btnSFinal = new ImageIcon(btnSEscalada);
+         this.vista_horarios.btnSiguienteS.setIcon(btnSFinal);
+         ImageIcon logo = new ImageIcon("src\\iconos\\flechaIzquierda.png");
+         int anchoLogo=this.vista_horarios.btnAnteriorS.getWidth(), largoLogo = this.vista_horarios.btnAnteriorS.getHeight();
+         Image btnA = logo.getImage().getScaledInstance(anchoLogo, largoLogo, Image.SCALE_SMOOTH);
+         ImageIcon btnAFinal = new ImageIcon(btnA);
+         this.vista_horarios.btnAnteriorS.setIcon(btnAFinal);
+         int anchoBtnR=this.vista_horarios.btnRegresar.getWidth(), largoBtnR = this.vista_horarios.btnRegresar.getHeight();
+         Image btnREscalada = logo.getImage().getScaledInstance(anchoBtnR, largoBtnR, Image.SCALE_SMOOTH);
+         ImageIcon btnRFinal = new ImageIcon(btnREscalada);
+         this.vista_horarios.btnRegresar.setIcon(btnRFinal);
+    }
     
     private void llenarLaboratorios(ArrayList<Lab> laboratorios,int codigo){
         for (int i = 0; i < laboratorios.size(); i++) {
@@ -344,12 +367,6 @@ public class Cont_Horarios implements ActionListener, MouseListener{
             menu.iniciar();
             this.vista_horarios.dispose();
         }            
-        if (e.getSource()==this.vista_horarios.btnDiaFestivo) {
-            Festivos vista_DiaFestivo = new Festivos();
-            FestivosControlador  ctrl_festivo = new FestivosControlador(vista_DiaFestivo);
-            this.vista_horarios.dispose();
-            vista_DiaFestivo.setVisible(true);
-        }
         if (e.getSource() == this.vista_horarios.btnAnteriorS) {
             if (semana>=1) {
                 this.vista_horarios.fechaDia.setDate(this.semanaAnterior(this.vista_horarios.fechaDia.getDate()));
@@ -369,20 +386,13 @@ public class Cont_Horarios implements ActionListener, MouseListener{
         }
         
         if (e.getSource() == this.vista_horarios.jitmReserva) {
-            System.out.println("dhsuhfskd");
-        }
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-         if (e.getSource()==this.vista_horarios.btnReserva) {
-             if (this.ControlesReserva()) {               
+            if (this.ControlesReserva()) {               
               Instant instant = this.vista_horarios.fechaDia.getDate().toInstant();
              LocalDate localDate = instant.atZone(ZoneId.systemDefault()).toLocalDate();
             Horario horario = new Horario();
             Reservas vistReser = new Reservas();
             int hora = this.vista_horarios.tablaHorarios.getSelectedRow()<=5 ?this.vista_horarios.tablaHorarios.getSelectedRow()+8:this.vista_horarios.tablaHorarios.getSelectedRow()+9;
-            if (!(this.reservaFutura(hora, 0,localDate))) {
+            if (this.reservaFutura(hora, 0,localDate)) {
                     rec.mensajeError("No puede reservar en una fecha pasada");
                      return;
             }
@@ -405,14 +415,20 @@ public class Cont_Horarios implements ActionListener, MouseListener{
             this.vista_horarios.dispose();
             
         }
-            }   
+        }
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        /* if (e.getSource()==this.vista_horarios.btnReserva) {
+            
+            }   */
         }           
 
     @Override
     public void mousePressed(MouseEvent e) {
         if (e.getSource() == this.vista_horarios.tablaHorarios) {
-            int col = this.vista_horarios.tablaHorarios.getSelectedColumn();
-            this.vista_horarios.fechaDia.setDate(this.fechaDiaT(this.vista_horarios.fechaDia.getDate(), col-1));
+             
         }
     }
 

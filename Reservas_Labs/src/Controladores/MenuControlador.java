@@ -3,6 +3,7 @@ package Controladores;
 import Modelos.Horario;
 import Modelos.LabDB;
 import Modelos.UsuarioSesion;
+import Vista.Festivos;
 import Vista.Horarios;
 import Vista.Laboratorios;
 import Vista.Menu;
@@ -11,6 +12,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
 import java.awt.event.MouseListener;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -32,14 +34,21 @@ public class MenuControlador implements MouseListener {
     public MenuControlador() {
         String rol = UsuarioSesion.getRol();
         menu = new Menu();
+        ImageIcon fondo = new ImageIcon("src\\imagenes\\FondoN.png");
+        int ancho=menu.lblFondo.getWidth(), largo = menu.lblFondo.getHeight();
+         Image imagenEscalada = fondo.getImage().getScaledInstance(ancho, largo, Image.SCALE_SMOOTH);
+         ImageIcon imagenFinal = new ImageIcon(imagenEscalada);
+         menu.lblFondo.setIcon(imagenFinal);
         if (rol.equals("ADMIN")) {
             this.menu.lblLAgregarUsuario.addMouseListener(this);
             this.menu.lblLaboratorios.addMouseListener(this);
+            this.menu.lblLDiaFeriado.addMouseListener(this);
             this.menu.lblHorarios.addMouseListener(this);
             this.menu.lblSalir.addMouseListener(this);
         } else {
+            this.menu.lblLDiaFeriado.addMouseListener(this);
             this.menu.lblLAgregarUsuario.setVisible(false);
-            this.menu.panItemAgregarUsuarios.setVisible(false);
+            this.menu.panItemDiasFestivos.setVisible(false);
             this.menu.lblLaboratorios.addMouseListener(this);
             this.menu.lblHorarios.addMouseListener(this);
             this.menu.lblSalir.addMouseListener(this);
@@ -69,6 +78,12 @@ public class MenuControlador implements MouseListener {
             this.menu.dispose();
             vista_horarios.setVisible(true);
         }
+        if (e.getSource()==menu.lblLDiaFeriado) {
+            Festivos vista_DiaFestivo = new Festivos();
+            FestivosControlador  ctrl_festivo = new FestivosControlador(vista_DiaFestivo);
+            this.menu.dispose();
+            vista_DiaFestivo.setVisible(true);
+        }
 
         if (e.getSource() == this.menu.lblSalir) {
             System.exit(0);
@@ -97,7 +112,9 @@ public class MenuControlador implements MouseListener {
         cambiarColorMenuItems(menu.lblHorarios, menu.panItemHorarios, me);
         cambiarColorMenuItems(menu.lblLaboratorios, menu.panItemLaboratorios, me);
         cambiarColorMenuItems(menu.lblSalir, menu.panItemSalir, me);
+        cambiarColorMenuItems(menu.lblLDiaFeriado, menu.panItemDiasFestivos, me);
         cambiarColorMenuItems(menu.lblLAgregarUsuario, menu.panItemAgregarUsuarios, me);
+
 
     }
 
@@ -123,6 +140,7 @@ public class MenuControlador implements MouseListener {
         cambiarColorMenuItems(menu.lblLaboratorios, menu.panItemLaboratorios, me);
         cambiarColorMenuItems(menu.lblSalir, menu.panItemSalir, me);
         cambiarColorMenuItems(menu.lblLAgregarUsuario, menu.panItemAgregarUsuarios, me);
+        cambiarColorMenuItems(menu.lblLDiaFeriado, menu.panItemDiasFestivos, me);
     }
 
 }

@@ -175,17 +175,9 @@ public class FestivosControlador implements ActionListener {
            cleanFields();
         }
           if (e.getSource() == vista.btnRegresar) {
-          Horario horario = new Horario();
-            Horarios vista_horarios = new Horarios();
-            String fechaS = (String) this.vista.tbLabs.getValueAt(this.vista.tbLabs.getRowCount()-1,3);
-            LocalDate fecha = this.convertirFecha(fechaS);
-            try {
-                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList(),fecha,0,0,false);
-            } catch (SQLException ex) {
-                Logger.getLogger(MenuControlador.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            MenuControlador menu = new MenuControlador();
+            menu.iniciar();
             this.vista.dispose();
-            vista_horarios.setVisible(true);
         }
      
             

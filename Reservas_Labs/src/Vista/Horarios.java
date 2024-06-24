@@ -46,8 +46,6 @@ public JMenuItem jitmReserva = new JMenuItem("Reservar");
         comboLaboratorio = new javax.swing.JComboBox<>();
         btnRegresar = new javax.swing.JButton();
         txt_semana = new javax.swing.JLabel();
-        btnReserva = new javax.swing.JButton();
-        btnDiaFestivo = new javax.swing.JButton();
         Scroll = new javax.swing.JScrollPane();
         tablaHorarios = new Utilidades.horario();
         fechaDia = new com.toedter.calendar.JDateChooser();
@@ -55,6 +53,7 @@ public JMenuItem jitmReserva = new JMenuItem("Reservar");
         btnSiguienteS = new javax.swing.JButton();
         btnAnteriorS = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -76,13 +75,14 @@ public JMenuItem jitmReserva = new JMenuItem("Reservar");
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, -1, -1));
 
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Reborn", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Horarios");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Corbel", 1, 16)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Seleccione un Laboratorio: ");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, -1));
 
@@ -92,28 +92,15 @@ public JMenuItem jitmReserva = new JMenuItem("Reservar");
         comboLaboratorio.setFont(new java.awt.Font("Corbel", 0, 14)); // NOI18N
         jPanel1.add(comboLaboratorio, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 110, 240, -1));
 
-        btnRegresar.setBackground(new java.awt.Color(147, 10, 13));
+        btnRegresar.setBackground(new java.awt.Color(204, 204, 204));
         btnRegresar.setFont(new java.awt.Font("Corbel", 1, 16)); // NOI18N
         btnRegresar.setForeground(new java.awt.Color(255, 255, 255));
-        btnRegresar.setText("Regresar");
-        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 100, 30));
+        jPanel1.add(btnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, 50, 40));
 
         txt_semana.setFont(new java.awt.Font("Corbel", 1, 16)); // NOI18N
-        txt_semana.setForeground(new java.awt.Color(255, 255, 255));
+        txt_semana.setForeground(new java.awt.Color(0, 0, 0));
         txt_semana.setText("Semana");
         jPanel1.add(txt_semana, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 50, -1, -1));
-
-        btnReserva.setBackground(new java.awt.Color(147, 10, 13));
-        btnReserva.setFont(new java.awt.Font("Corbel", 1, 16)); // NOI18N
-        btnReserva.setForeground(new java.awt.Color(255, 255, 255));
-        btnReserva.setText("Reservar");
-        jPanel1.add(btnReserva, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 100, 30));
-
-        btnDiaFestivo.setBackground(new java.awt.Color(147, 10, 13));
-        btnDiaFestivo.setFont(new java.awt.Font("Corbel", 1, 16)); // NOI18N
-        btnDiaFestivo.setForeground(new java.awt.Color(255, 255, 255));
-        btnDiaFestivo.setText("Ingresar dia festivo");
-        jPanel1.add(btnDiaFestivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 170, 30));
 
         Scroll.setViewportView(tablaHorarios);
 
@@ -130,28 +117,28 @@ public JMenuItem jitmReserva = new JMenuItem("Reservar");
         txt_fechas.setFont(new java.awt.Font("Courier New", 0, 12)); // NOI18N
         jPanel1.add(txt_fechas, new org.netbeans.lib.awtextra.AbsoluteConstraints(620, 70, 180, 30));
 
-        btnSiguienteS.setBackground(new java.awt.Color(147, 10, 13));
+        btnSiguienteS.setBackground(new java.awt.Color(204, 204, 204));
         btnSiguienteS.setFont(new java.awt.Font("Corbel", 1, 16)); // NOI18N
         btnSiguienteS.setForeground(new java.awt.Color(255, 255, 255));
-        btnSiguienteS.setText("Siguiente");
-        jPanel1.add(btnSiguienteS, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 70, 100, 30));
+        jPanel1.add(btnSiguienteS, new org.netbeans.lib.awtextra.AbsoluteConstraints(820, 70, 40, 30));
 
-        btnAnteriorS.setBackground(new java.awt.Color(147, 10, 13));
+        btnAnteriorS.setBackground(new java.awt.Color(204, 204, 204));
         btnAnteriorS.setFont(new java.awt.Font("Corbel", 1, 16)); // NOI18N
         btnAnteriorS.setForeground(new java.awt.Color(255, 255, 255));
-        btnAnteriorS.setText("Anterior");
-        jPanel1.add(btnAnteriorS, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 70, 100, 30));
+        jPanel1.add(btnAnteriorS, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 70, 40, 30));
 
+        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Corbel", 1, 16)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Seleccione un Bloque: ");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, -1, -1));
+        jPanel1.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 950, 640));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 946, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -200,9 +187,7 @@ public JMenuItem jitmReserva = new JMenuItem("Reservar");
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JScrollPane Scroll;
     public javax.swing.JButton btnAnteriorS;
-    public javax.swing.JButton btnDiaFestivo;
     public javax.swing.JButton btnRegresar;
-    public javax.swing.JButton btnReserva;
     public javax.swing.JButton btnSiguienteS;
     public javax.swing.JComboBox<Block> comboBloque;
     public javax.swing.JComboBox<Lab> comboLaboratorio;
@@ -212,6 +197,7 @@ public JMenuItem jitmReserva = new JMenuItem("Reservar");
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    public javax.swing.JLabel lblFondo;
     public javax.swing.JPopupMenu menuClick;
     public Utilidades.horario tablaHorarios;
     public java.awt.Label txt_fechas;
