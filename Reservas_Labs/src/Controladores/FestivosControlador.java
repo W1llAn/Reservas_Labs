@@ -11,6 +11,7 @@ import Modelos.Horario;
 import Modelos.LabDB;
 import Vista.Festivos;
 import Vista.Horarios;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -25,6 +26,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SpinnerNumberModel;
@@ -48,6 +50,7 @@ public class FestivosControlador implements ActionListener {
         this.modelo = new Festivo();
         this.dto = new FestivosDB();
         this.table = new DefaultTableModel(new String[]{"ID", "DESCRIPCION", "FECHA INICIO", "FECHA FIN"}, 0);
+        this.ingresoImagenes();
         this.vista.spinDias.setModel(new SpinnerNumberModel(1, 0, 5, 1));
         this.vista.setVisible(true);
         fillTable();
@@ -72,6 +75,13 @@ public class FestivosControlador implements ActionListener {
                 }
             }
         });
+    }
+    private void ingresoImagenes(){
+        ImageIcon fondo = new ImageIcon("src\\imagenes\\FondoN.png");
+        int ancho=this.vista.lblFondo.getWidth(), largo = this.vista.lblFondo.getHeight();
+         Image imagenEscalada = fondo.getImage().getScaledInstance(ancho, largo, Image.SCALE_SMOOTH);
+         ImageIcon imagenFinal = new ImageIcon(imagenEscalada);
+         this.vista.lblFondo.setIcon(imagenFinal);
     }
 
     private void fillFields(MouseEvent e) throws ParseException {
