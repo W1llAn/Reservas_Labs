@@ -49,17 +49,17 @@ public class Laboratorios extends javax.swing.JFrame  {
         btnAdd = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         cbxBlock = new javax.swing.JComboBox<>();
-        btnCancelar = new javax.swing.JButton();
         txtSearch = new javax.swing.JTextField();
+        btnCancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        panelReservas.setBackground(new java.awt.Color(43, 43, 43));
+        panelReservas.setBackground(new java.awt.Color(212, 215, 224));
         panelReservas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Reborn", 1, 48)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Aulas");
         panelReservas.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 40, -1, 78));
 
@@ -72,14 +72,14 @@ public class Laboratorios extends javax.swing.JFrame  {
         jSeparator1.setAlignmentX(0.3F);
         panelReservas.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(888, 161, 16, 385));
 
-        btnClean.setBackground(new java.awt.Color(147, 10, 13));
+        btnClean.setBackground(new java.awt.Color(153, 153, 153));
         btnClean.setFont(new java.awt.Font("Constantia", 1, 15)); // NOI18N
         btnClean.setForeground(new java.awt.Color(255, 255, 255));
         btnClean.setText("Limpiar");
         btnClean.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 255), new java.awt.Color(255, 255, 255), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255)));
-        panelReservas.add(btnClean, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 560, 111, -1));
+        panelReservas.add(btnClean, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 560, 111, -1));
 
-        btnEdit.setBackground(new java.awt.Color(43, 43, 43));
+        btnEdit.setBackground(new java.awt.Color(102, 102, 102));
         btnEdit.setFont(new java.awt.Font("Constantia", 1, 15)); // NOI18N
         btnEdit.setForeground(new java.awt.Color(255, 255, 255));
         btnEdit.setText("Editar");
@@ -87,13 +87,13 @@ public class Laboratorios extends javax.swing.JFrame  {
         panelReservas.add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, 111, -1));
 
         jLabel11.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
-        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Tipo");
         panelReservas.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 310, -1, -1));
 
-        txtName.setBackground(new java.awt.Color(147, 10, 13));
+        txtName.setBackground(new java.awt.Color(255, 255, 255));
         txtName.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
-        txtName.setForeground(new java.awt.Color(255, 255, 255));
+        txtName.setForeground(new java.awt.Color(0, 0, 0));
         txtName.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtName.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         txtName.addActionListener(new java.awt.event.ActionListener() {
@@ -104,17 +104,17 @@ public class Laboratorios extends javax.swing.JFrame  {
         panelReservas.add(txtName, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 220, 25));
 
         jLabel15.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel15.setForeground(new java.awt.Color(0, 0, 0));
         jLabel15.setText("Bloque");
         panelReservas.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, -1, -1));
 
         jLabel16.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setForeground(new java.awt.Color(0, 0, 0));
         jLabel16.setText("Nombre:");
         panelReservas.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, -1, -1));
 
         jLabel17.setFont(new java.awt.Font("Constantia", 1, 18)); // NOI18N
-        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setForeground(new java.awt.Color(0, 0, 0));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("Datos Aulas");
         panelReservas.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 208, -1));
@@ -141,9 +141,9 @@ public class Laboratorios extends javax.swing.JFrame  {
         jSeparator6.setAlignmentX(0.3F);
         panelReservas.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(48, 160, 16, 384));
 
-        cbxTipo.setBackground(new java.awt.Color(147, 10, 13));
+        cbxTipo.setBackground(new java.awt.Color(255, 255, 255));
         cbxTipo.setFont(new java.awt.Font("Constantia", 0, 17)); // NOI18N
-        cbxTipo.setForeground(new java.awt.Color(255, 255, 255));
+        cbxTipo.setForeground(new java.awt.Color(0, 0, 0));
         cbxTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Laboratorio", "Aula", "Aula Especial" }));
         cbxTipo.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
         cbxTipo.setPreferredSize(new java.awt.Dimension(72, 29));
@@ -152,7 +152,7 @@ public class Laboratorios extends javax.swing.JFrame  {
                 cbxTipoActionPerformed(evt);
             }
         });
-        panelReservas.add(cbxTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 340, 220, 25));
+        panelReservas.add(cbxTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 335, 220, 30));
 
         tbLabs.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -169,23 +169,23 @@ public class Laboratorios extends javax.swing.JFrame  {
 
         panelReservas.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, 560, 360));
 
-        btnAdd.setBackground(new java.awt.Color(147, 10, 13));
+        btnAdd.setBackground(new java.awt.Color(153, 153, 153));
         btnAdd.setFont(new java.awt.Font("Constantia", 1, 15)); // NOI18N
         btnAdd.setForeground(new java.awt.Color(255, 255, 255));
         btnAdd.setText("Guardar");
         btnAdd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 255), new java.awt.Color(255, 255, 255), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255)));
         panelReservas.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 111, -1));
 
-        btnDelete.setBackground(new java.awt.Color(43, 43, 43));
+        btnDelete.setBackground(new java.awt.Color(153, 0, 0));
         btnDelete.setFont(new java.awt.Font("Constantia", 1, 15)); // NOI18N
         btnDelete.setForeground(new java.awt.Color(255, 255, 255));
         btnDelete.setText("Eliminar");
         btnDelete.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 255), new java.awt.Color(255, 255, 255), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255)));
         panelReservas.add(btnDelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 480, 111, -1));
 
-        cbxBlock.setBackground(new java.awt.Color(147, 10, 13));
+        cbxBlock.setBackground(new java.awt.Color(255, 255, 255));
         cbxBlock.setFont(new java.awt.Font("Constantia", 0, 17)); // NOI18N
-        cbxBlock.setForeground(new java.awt.Color(255, 255, 255));
+        cbxBlock.setForeground(new java.awt.Color(0, 0, 0));
         cbxBlock.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 255, 255)));
         cbxBlock.setPreferredSize(new java.awt.Dimension(72, 29));
         cbxBlock.addActionListener(new java.awt.event.ActionListener() {
@@ -193,18 +193,11 @@ public class Laboratorios extends javax.swing.JFrame  {
                 cbxBlockActionPerformed(evt);
             }
         });
-        panelReservas.add(cbxBlock, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 270, 220, 25));
+        panelReservas.add(cbxBlock, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 265, 220, 30));
 
-        btnCancelar.setBackground(new java.awt.Color(43, 43, 43));
-        btnCancelar.setFont(new java.awt.Font("Constantia", 1, 15)); // NOI18N
-        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
-        btnCancelar.setText("Regresar");
-        btnCancelar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 255), new java.awt.Color(255, 255, 255), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255)));
-        panelReservas.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 560, 111, -1));
-
-        txtSearch.setBackground(new java.awt.Color(147, 10, 13));
+        txtSearch.setBackground(new java.awt.Color(255, 255, 255));
         txtSearch.setFont(new java.awt.Font("Constantia", 0, 14)); // NOI18N
-        txtSearch.setForeground(new java.awt.Color(255, 255, 255));
+        txtSearch.setForeground(new java.awt.Color(0, 0, 0));
         txtSearch.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txtSearch.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         txtSearch.addActionListener(new java.awt.event.ActionListener() {
@@ -214,7 +207,19 @@ public class Laboratorios extends javax.swing.JFrame  {
         });
         panelReservas.add(txtSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 120, 310, 25));
 
-        getContentPane().add(panelReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 6, 928, 590));
+        btnCancelar.setBackground(new java.awt.Color(212, 215, 224));
+        btnCancelar.setFont(new java.awt.Font("Constantia", 1, 15)); // NOI18N
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/regresar-icon.png"))); // NOI18N
+        btnCancelar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 255), new java.awt.Color(255, 255, 255), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255)));
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        panelReservas.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(832, 112, 32, 32));
+
+        getContentPane().add(panelReservas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 600));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -234,6 +239,10 @@ public class Laboratorios extends javax.swing.JFrame  {
     private void txtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSearchActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSearchActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnCancelarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

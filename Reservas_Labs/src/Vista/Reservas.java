@@ -103,6 +103,11 @@ public class Reservas extends javax.swing.JFrame  {
         bnRegresar.setForeground(new java.awt.Color(255, 255, 255));
         bnRegresar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/regresar-icon.png"))); // NOI18N
         bnRegresar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(255, 255, 255), new java.awt.Color(255, 255, 255), new java.awt.Color(0, 0, 0), new java.awt.Color(255, 255, 255)));
+        bnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bnRegresarActionPerformed(evt);
+            }
+        });
         panelReservas.add(bnRegresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(832, 112, 32, 32));
 
         jLabel5.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
@@ -463,6 +468,10 @@ public class Reservas extends javax.swing.JFrame  {
     private void txtMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMateriaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMateriaActionPerformed
+
+    private void bnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bnRegresarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_bnRegresarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
