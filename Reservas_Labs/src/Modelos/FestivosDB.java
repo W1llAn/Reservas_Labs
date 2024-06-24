@@ -66,7 +66,7 @@ public class FestivosDB {
         } else {
             Statement st = con.createStatement();
             ResultSet rs = null;
-            String consulta = "SELECT  id_festivos, descripcion, fecha_inicio, fecha_fin FROM Festivos WHERE fecha_inicio BETWEEN '"+fechaInicio+"' AND '"+fechaFin+"' ;";
+            String consulta = "SELECT  id_festivos, descripcion, fecha_inicio, fecha_fin FROM Festivos WHERE (fecha_inicio BETWEEN '"+fechaInicio+"' AND '"+fechaFin+"' ) OR  (fecha_fin BETWEEN '"+fechaInicio+"' AND '"+fechaFin+"' ) ;";
             rs = st.executeQuery(consulta);
             while (rs.next()) {
                 Festivo fest = new Festivo();

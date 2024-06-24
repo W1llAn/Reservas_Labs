@@ -11,16 +11,29 @@ import javax.swing.JOptionPane;
  * @author William
  */
 public class Recurso {
-        public void aviso(String mensaje){
-          JOptionPane.showMessageDialog(null, mensaje);
-        }    
-        public boolean ConfirmarAccion(String mensaje) {
-        int opcionSeleccionada = JOptionPane.showConfirmDialog(null, 
-                                                              mensaje, 
-                                                              "Confirmar acción", 
-                                                              JOptionPane.YES_NO_OPTION, 
-                                                              JOptionPane.QUESTION_MESSAGE);
+
+    public void aviso(String mensaje) {
+        JOptionPane.showMessageDialog(null, mensaje);
+    }
+
+    public boolean ConfirmarAccion(String mensaje) {
+        int opcionSeleccionada = JOptionPane.showConfirmDialog(null,
+                mensaje,
+                "Confirmar acción",
+                JOptionPane.YES_NO_OPTION,
+                JOptionPane.QUESTION_MESSAGE);
 
         return opcionSeleccionada == JOptionPane.YES_OPTION;
     }
+
+    public void exito(String mensaje) {
+        JOptionPane.showMessageDialog(null,
+                mensaje,
+                "Éxito",
+                JOptionPane.INFORMATION_MESSAGE);
+    }
+
+        public void mensajeError(String mensaje) {
+        JOptionPane.showMessageDialog(null, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+        }
 }

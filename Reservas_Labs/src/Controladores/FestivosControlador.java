@@ -11,6 +11,7 @@ import Modelos.Horario;
 import Modelos.LabDB;
 import Vista.Festivos;
 import Vista.Horarios;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -18,11 +19,14 @@ import java.awt.event.MouseEvent;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SpinnerNumberModel;
@@ -46,6 +50,7 @@ public class FestivosControlador implements ActionListener {
         this.modelo = new Festivo();
         this.dto = new FestivosDB();
         this.table = new DefaultTableModel(new String[]{"ID", "DESCRIPCION", "FECHA INICIO", "FECHA FIN"}, 0);
+        this.ingresoImagenes();
         this.vista.spinDias.setModel(new SpinnerNumberModel(1, 0, 5, 1));
         this.vista.setVisible(true);
         fillTable();
@@ -70,6 +75,13 @@ public class FestivosControlador implements ActionListener {
                 }
             }
         });
+    }
+    private void ingresoImagenes(){
+        ImageIcon fondo = new ImageIcon("src\\imagenes\\FondoN.png");
+        int ancho=this.vista.lblFondo.getWidth(), largo = this.vista.lblFondo.getHeight();
+         Image imagenEscalada = fondo.getImage().getScaledInstance(ancho, largo, Image.SCALE_SMOOTH);
+         ImageIcon imagenFinal = new ImageIcon(imagenEscalada);
+         this.vista.lblFondo.setIcon(imagenFinal);
     }
 
     private void fillFields(MouseEvent e) throws ParseException {
@@ -152,6 +164,13 @@ public class FestivosControlador implements ActionListener {
         Festivos l = new Festivos();
         FestivosControlador v = new FestivosControlador(l);
     }
+    
+    public LocalDate convertirFecha(String fecha) {
+       String formatoFecha = "yyyy-MM-dd";
+        DateTimeFormatter formateador = DateTimeFormatter.ofPattern(formatoFecha);
+        LocalDate fechaLocalDate = LocalDate.parse(fecha, formateador);
+        return fechaLocalDate;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -166,15 +185,9 @@ public class FestivosControlador implements ActionListener {
            cleanFields();
         }
           if (e.getSource() == vista.btnRegresar) {
-          Horario horario = new Horario();
-            Horarios vista_horarios = new Horarios();
-            try {
-                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList());
-            } catch (SQLException ex) {
-                Logger.getLogger(MenuControlador.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            MenuControlador menu = new MenuControlador();
+            menu.iniciar();
             this.vista.dispose();
-            vista_horarios.setVisible(true);
         }
      
             

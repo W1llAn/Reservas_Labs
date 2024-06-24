@@ -17,6 +17,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,15 +32,18 @@ public class ControlReserva implements ActionListener {
     private Recursos rec = new Recursos();
     private Responsable responsable;
     private int id_responsable = 0;
-    private int id_laboratorio = 0;
+    private int id_laboratorio = 0, idBlock, posicionLab;
     private String tipo_reserva = null;
+    private int tipo = 0;
 //CONSTRUCTOR PARA GUARDAR LAS RESERVAS DE LABORATORIOS
 
     public ControlReserva(Reservas vistRes, Horario modelohorario, String Edificio,
             String Laboratorio, String Fecha, String hInicio, String hFin,
-            int id_laboratorio) throws SQLException, ClassNotFoundException {
+            int IdBlock, int id_laboratorio, int posicionLab) throws SQLException, ClassNotFoundException {
         this.modelohorario = modelohorario;
+        this.posicionLab = posicionLab;
         this.vistaRes = vistRes;
+        this.idBlock = IdBlock;
         this.responsable = new Responsable();
         // Inicializa y configura componentes que dependen de vistaRes
         this.vistaRes.btReservas.addActionListener(this);
@@ -114,6 +119,17 @@ public class ControlReserva implements ActionListener {
 
     }
 
+    public static LocalDate convertStringToLocalDate(String dateString) {
+        String pattern = "yyyy-MM-dd";
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(pattern);
+        try {
+            return LocalDate.parse(dateString, formatter);
+        } catch (DateTimeParseException e) {
+            System.err.println("Formato de fecha inválido: " + e.getMessage());
+            return null;
+        }
+    }
+
     //GUARDAR INFORMACION DE LA RESERVA
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -122,6 +138,7 @@ public class ControlReserva implements ActionListener {
                 System.out.println("El id de responsable fue:" + id_responsable);
                 String tipo_ReservaFinal = (tipo_reserva == null) ? vistaRes.txtMateria.getText() : tipo_reserva;
                 //significa que en la busqueda dinamica no se encontro a la persona de la cedula
+                int tipo = (tipo_reserva == null) ? 0 : 1;
                 if (id_responsable == 0) {
                     try {
                         System.out.println("No existe responsable se envian los datos del nuevo responsable a la base");
@@ -135,21 +152,21 @@ public class ControlReserva implements ActionListener {
                     }
                     //guardamos el horario  en la base
                     int id_responsable_guardado = consultarIdResponsableAlmacen(this.vistaRes.txtCedulaResponsable.getText());
-                    guardarHorario(id_responsable_guardado, id_laboratorio, tipo_ReservaFinal);
+                    guardarHorario(id_responsable_guardado, id_laboratorio, tipo_ReservaFinal, tipo);
                 } else {
-                    guardarHorario(id_responsable, id_laboratorio, tipo_ReservaFinal);
+                    guardarHorario(id_responsable, id_laboratorio, tipo_ReservaFinal, tipo);
                 }
             }
         }
         if (e.getSource() == this.vistaRes.btCancelar) {
             borrarDatos();
         }
-        if (e.getSource() == this.vistaRes.bnRegresar){
-            
+        if (e.getSource() == this.vistaRes.bnRegresar) {
+
             Horario horario = new Horario();
             Horarios vista_horarios = new Horarios();
             try {
-                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList());
+                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList(), convertStringToLocalDate(this.vistaRes.txtFechaReserva.getText()), 0, 0, false);
             } catch (SQLException ex) {
                 Logger.getLogger(MenuControlador.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -168,15 +185,16 @@ public class ControlReserva implements ActionListener {
             Statement stmt = con.createStatement();
             ResultSet rs = null;
             // Insercción en la tabla horario
-            String consultaHorario = "INSERT INTO Horarios (ID_laboratorio, fecha_dia, hora_inicio, hora_final, materia, nombre_dia, id_responsable,descripcion) VALUES("
+            String consultaHorario = "INSERT INTO Horarios (ID_laboratorio, fecha_dia, hora_inicio, hora_final, materia, nombre_dia, id_responsable,descripcion,tipo) VALUES("
                     + h.getId_laboratorio() + ", '"
                     + h.getFecha_dia() + "', '"
                     + h.getHora_inicio() + "', '"
                     + h.getHora_final() + "', '"
                     + h.getMateria() + "', '"
-                    + h.getNombre_dia() + "', "
-                    + h.getId_responsable() + ",'"
-                    + h.getDescripcion() + "');";
+                    + h.getNombre_dia() + "',' "
+                    + h.getId_responsable() + "','"
+                    + h.getDescripcion() + "','"
+                    + h.getTipo() + "');";
 
             stmt.executeUpdate(consultaHorario);
 
@@ -247,7 +265,7 @@ public class ControlReserva implements ActionListener {
         String nombre = vistaRes.txtNombreRespon.getText();
         String apellido = vistaRes.txtApellidoResponsable.getText();
         String cargo = vistaRes.cbCargo.getSelectedItem().toString();
-        System.out.println("El cargos es: " + cargo);
+        //System.out.println("El cargos es: " + cargo);
         int id_carrera = vistaRes.cbCarreras.getItemAt(vistaRes.cbCarreras.getSelectedIndex()).getId_carrera();
         if (con == null) {
             rec.aviso("No tiene conexion RECUERDE cada accion que realize en el programa no se va a guardar");
@@ -271,7 +289,7 @@ public class ControlReserva implements ActionListener {
         return 0;
     }
 
-    private void guardarHorario(int id_responsable, int id_laboratorio, String tipo_ReservaFinal) {
+    private void guardarHorario(int id_responsable, int id_laboratorio, String tipo_ReservaFinal, int tipo) {
         Horario horario = new Horario();
         horario.setId_responsable(id_responsable);
         System.out.println("El id del responsable es: " + id_responsable);
@@ -281,15 +299,17 @@ public class ControlReserva implements ActionListener {
         horario.setNombre_dia(horario.decifrarDia(this.vistaRes.txtFechaReserva.getText()));
         horario.setMateria(tipo_ReservaFinal);
         horario.setId_laboratorio(id_laboratorio);
+        horario.setTipo(tipo);
         horario.setDescripcion(this.vistaRes.textDescripcion.getText());
         try {
             guardarHorario(horario);
             borrarDatos();
-            rec.aviso("Su reserva se ha realizado con éxito");
+            rec.exito("Su reserva se ha realizado con éxito");
             //Volver al menu
             Horarios vista_horarios = new Horarios();
+
             try {
-                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList());
+                Cont_Horarios ctrl_horario = new Cont_Horarios(vista_horarios, horario, new LabDB().labList(), convertStringToLocalDate(this.vistaRes.txtFechaReserva.getText()), this.idBlock, this.posicionLab, true);
             } catch (SQLException ex) {
                 Logger.getLogger(MenuControlador.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -305,7 +325,7 @@ public class ControlReserva implements ActionListener {
         String cedula = vistaRes.txtCedulaResponsable.getText();
         boolean cedulaEncontrada = busquedaCedula(cedula);
         if (cedulaEncontrada) {
-            vistaRes.jlMensaje.setText("Cédula encontrada.");
+            vistaRes.jlMensaje.setText("Ya está registrado");
             Responsable responsable = obtenerResponsablePorCedula(cedula);
             if (responsable != null) {
                 vistaRes.txtNombreRespon.setText(responsable.getNombre());
@@ -323,7 +343,7 @@ public class ControlReserva implements ActionListener {
                 id_responsable = responsable.getId_responsable();
             }
         } else {
-            vistaRes.jlMensaje.setText("Cédula no encontrada, debe registrarse.");
+            vistaRes.jlMensaje.setText("Persona no encontrada: Regístrese por favor");
             vistaRes.txtNombreRespon.setText("");
             vistaRes.txtApellidoResponsable.setText("");
             vistaRes.cbCargo.setSelectedIndex(-1);

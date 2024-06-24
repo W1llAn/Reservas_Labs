@@ -53,47 +53,47 @@ public class Login extends javax.swing.JFrame {
         panel_fondo.add(Lb_logoUta, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 130, 180));
 
         jLabel2.setFont(new java.awt.Font("Reborn", 1, 28)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Labs");
         panel_fondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 210, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Reborn", 1, 28)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Reservas");
         panel_fondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 170, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("MontereyFLF", 1, 22)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("FISEI");
         panel_fondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 360, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("MontereyFLF", 1, 22)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Universidad Técnica de Ambato");
         panel_fondo.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 330, -1, -1));
 
-        jPanel1.setBackground(new java.awt.Color(147, 10, 13));
+        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel5.setFont(new java.awt.Font("MontereyMediumFLF", 0, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Usuario");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 90, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 80, 90, -1));
 
         jLabel6.setFont(new java.awt.Font("MontereyMediumFLF", 0, 24)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Contraseña");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 140, 150, -1));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 150, -1));
 
         jLabel7.setFont(new java.awt.Font("MontereyMediumFLF", 0, 24)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Login");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, 60, -1));
 
         txt_contraseña.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel1.add(txt_contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 340, 30));
+        jPanel1.add(txt_contraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, 340, 30));
 
-        btn_salir.setBackground(new java.awt.Color(147, 10, 13));
+        btn_salir.setBackground(new java.awt.Color(102, 102, 102));
         btn_salir.setFont(new java.awt.Font("MontereyMediumFLF", 1, 18)); // NOI18N
         btn_salir.setForeground(new java.awt.Color(255, 255, 255));
         btn_salir.setText("Salir");
@@ -105,7 +105,7 @@ public class Login extends javax.swing.JFrame {
         });
         jPanel1.add(btn_salir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 340, 40));
 
-        btn_ingresar.setBackground(new java.awt.Color(147, 10, 13));
+        btn_ingresar.setBackground(new java.awt.Color(102, 102, 102));
         btn_ingresar.setFont(new java.awt.Font("MontereyMediumFLF", 1, 18)); // NOI18N
         btn_ingresar.setForeground(new java.awt.Color(255, 255, 255));
         btn_ingresar.setText("Ingresar");
@@ -116,10 +116,10 @@ public class Login extends javax.swing.JFrame {
             }
         });
         jPanel1.add(btn_ingresar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 300, 340, 40));
-        jPanel1.add(txt_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 340, 30));
+        jPanel1.add(txt_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 340, 30));
 
-        btn_recuperar_contrasenia.setBackground(new java.awt.Color(147, 10, 13));
-        btn_recuperar_contrasenia.setForeground(new java.awt.Color(255, 255, 255));
+        btn_recuperar_contrasenia.setBackground(new java.awt.Color(204, 204, 204));
+        btn_recuperar_contrasenia.setForeground(new java.awt.Color(0, 0, 0));
         btn_recuperar_contrasenia.setText("Olvidé mi contraseña");
         btn_recuperar_contrasenia.setBorder(null);
         btn_recuperar_contrasenia.addActionListener(new java.awt.event.ActionListener() {
