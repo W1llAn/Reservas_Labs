@@ -261,7 +261,7 @@ public class ControlReserva implements ActionListener {
         String nombre = vistaRes.txtNombreRespon.getText();
         String apellido = vistaRes.txtApellidoResponsable.getText();
         String cargo = vistaRes.cbCargo.getSelectedItem().toString();
-        System.out.println("El cargos es: " + cargo);
+        //System.out.println("El cargos es: " + cargo);
         int id_carrera = vistaRes.cbCarreras.getItemAt(vistaRes.cbCarreras.getSelectedIndex()).getId_carrera();
         if (con == null) {
             rec.aviso("No tiene conexion RECUERDE cada accion que realize en el programa no se va a guardar");
@@ -288,7 +288,7 @@ public class ControlReserva implements ActionListener {
     private void guardarHorario(int id_responsable, int id_laboratorio, String tipo_ReservaFinal) {
         Horario horario = new Horario();
         horario.setId_responsable(id_responsable);
-        System.out.println("El id del responsable es: " + id_responsable);
+       // System.out.println("El id del responsable es: " + id_responsable);
         horario.setHora_inicio(this.vistaRes.txtHoraInicio.getText());
         horario.setHora_final(this.vistaRes.txtHoraFin.getText());
         horario.setFecha_dia(LocalDate.parse(this.vistaRes.txtFechaReserva.getText()));
@@ -299,7 +299,7 @@ public class ControlReserva implements ActionListener {
         try {
             guardarHorario(horario);
             borrarDatos();
-            rec.aviso("Su reserva se ha realizado con éxito");
+            rec.exito("Su reserva se ha realizado con éxito");
             //Volver al menu
             Horarios vista_horarios = new Horarios();
             try {
@@ -319,7 +319,7 @@ public class ControlReserva implements ActionListener {
         String cedula = vistaRes.txtCedulaResponsable.getText();
         boolean cedulaEncontrada = busquedaCedula(cedula);
         if (cedulaEncontrada) {
-            vistaRes.jlMensaje.setText("Cédula encontrada.");
+            vistaRes.jlMensaje.setText("Ya está registrado");
             Responsable responsable = obtenerResponsablePorCedula(cedula);
             if (responsable != null) {
                 vistaRes.txtNombreRespon.setText(responsable.getNombre());
@@ -337,7 +337,7 @@ public class ControlReserva implements ActionListener {
                 id_responsable = responsable.getId_responsable();
             }
         } else {
-            vistaRes.jlMensaje.setText("Cédula no encontrada, debe registrarse.");
+           vistaRes.jlMensaje.setText("Persona no encontrada: Regístrese por favor");
             vistaRes.txtNombreRespon.setText("");
             vistaRes.txtApellidoResponsable.setText("");
             vistaRes.cbCargo.setSelectedIndex(-1);

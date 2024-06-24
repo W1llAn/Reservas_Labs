@@ -5,6 +5,8 @@
 package Modelos;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -45,7 +47,26 @@ public class Lab {
         this.horarios.add(horario);
     }
     
-    
+        // Método para generar un código único
+    public void generateCode(ArrayList<String> existingCodes) {
+        String prefix = this.name.substring(0, 3).toUpperCase();
+        int maxNumber = 0;
+        
+        Pattern pattern = Pattern.compile(prefix + "(\\d+)");
+        
+        for (String existingCode : existingCodes) {
+            Matcher matcher = pattern.matcher(existingCode);
+            if (matcher.find()) {
+                int number = Integer.parseInt(matcher.group(1));
+                if (number > maxNumber) {
+                    maxNumber = number;
+                }
+            }
+        }
+        
+        String newCode = prefix + String.format("%03d", maxNumber + 1);
+        this.setCode(newCode);
+    }
 
     public void setBlockName(String blockName) {
         this.blockName = blockName;
@@ -76,6 +97,7 @@ public class Lab {
     }
 
     public String getCode() {
+        
         return code;
     }
 
@@ -98,8 +120,8 @@ public class Lab {
     public void setIdBlock(int idBlock) {
         this.idBlock = idBlock;
     }
-
-    @Override
+    
+        @Override
     public String toString() {
         return this.name;
     }
