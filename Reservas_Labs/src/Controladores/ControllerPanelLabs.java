@@ -9,6 +9,7 @@ import Modelos.BlockDB;
 import Modelos.Lab;
 import Modelos.LabDB;
 import Vista.Laboratorios;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -62,6 +64,7 @@ public final class ControllerPanelLabs implements ActionListener {
         view.btnEdit.addActionListener(this);
         view.btnDelete.addActionListener(this);
         view.btnCancelar.addActionListener(this);
+        this.ingresoImagenes();
         view.tbLabs.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -93,6 +96,14 @@ public final class ControllerPanelLabs implements ActionListener {
         view.txtName.setText(getRowTable(target.getSelectedRow(), 1));
         seleccionarPorCoincidencia(view.cbxBlock, getRowTable(target.getSelectedRow(), 2));
         seleccionarPorCoincidenciaLaboratorios(view.cbxTipo, getRowTable(target.getSelectedRow(), 3));
+    }
+    
+    private void ingresoImagenes(){
+        ImageIcon fondo = new ImageIcon("src\\imagenes\\FondoN.png");
+        int ancho=this.view.lblFondo.getWidth(), largo = this.view.lblFondo.getHeight();
+         Image imagenEscalada = fondo.getImage().getScaledInstance(ancho, largo, Image.SCALE_SMOOTH);
+         ImageIcon imagenFinal = new ImageIcon(imagenEscalada);
+        this.view.lblFondo.setIcon(imagenFinal);
     }
 
     private void seleccionarPorCoincidencia(JComboBox<Block> comboBox, String seleccion) {

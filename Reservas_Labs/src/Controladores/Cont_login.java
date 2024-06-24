@@ -38,7 +38,7 @@ public class Cont_login implements ActionListener{
     }
     
     private void ingresoImagenes(Login vista_login){
-        ImageIcon fondo = new ImageIcon("src\\imagenes\\Fondo.png");
+        ImageIcon fondo = new ImageIcon("src\\imagenes\\FondoN.png");
         int ancho=vista_login.panel_fondo.getWidth(), largo = vista_login.panel_fondo.getHeight();
          Image imagenEscalada = fondo.getImage().getScaledInstance(ancho, largo, Image.SCALE_SMOOTH);
          ImageIcon imagenFinal = new ImageIcon(imagenEscalada);

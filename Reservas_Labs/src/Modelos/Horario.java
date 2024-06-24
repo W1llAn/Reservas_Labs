@@ -24,7 +24,7 @@ public class Horario {
     private String  hora_inicio,hora_final, nombre_dia,materia,nombre_responsable,descripcion ;
     private LocalDate fecha_dia; 
     private Recursos rec = new Recursos();
-    private int id_laboratorio,id_responsable;  
+    private int id_laboratorio,id_responsable,tipo;  
 
     public Horario(String hora_inicio, String hora_final, String nombre_dia, String materia,String nombre_responsable, LocalDate fecha_dia, int id_laboratorio) {
         this.hora_inicio = hora_inicio;
@@ -36,7 +36,7 @@ public class Horario {
         this.id_laboratorio = id_laboratorio;
     }
 
-    public Horario(LocalDate fecha_dia, String hora_inicio, String hora_final, String nombre_dia, String materia, int id_laboratorio, int id_responsable,String descripcion) {
+    public Horario(int tipo,LocalDate fecha_dia, String hora_inicio, String hora_final, String nombre_dia, String materia, int id_laboratorio, int id_responsable,String descripcion) {
         this.fecha_dia = fecha_dia;
         this.hora_inicio = hora_inicio;
         this.hora_final = hora_final;
@@ -45,6 +45,15 @@ public class Horario {
         this.id_laboratorio = id_laboratorio;
         this.id_responsable = id_responsable;
         this.descripcion= descripcion;
+        this.tipo=tipo;
+    }
+
+    public int getTipo() {
+        return this.tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
     }
     
 
@@ -160,7 +169,8 @@ public class Horario {
             ResultSet rs = null;
             String consulta = "SELECT id_horario_PK, ID_laboratorio, fecha_dia,hora_inicio, hora_final, materia, nombre_dia, nombre, apellido FROM Horarios " +
                                         "JOIN responsables ON Horarios.id_responsable = responsables.id_responsable "
-                                        + "WHERE id_laboratorio ="+id_laboratorio+" AND fecha_dia BETWEEN '"+fechaInicio+"' AND '"+fechaFin+"' ;";
+                                        + "WHERE id_laboratorio ="+id_laboratorio+" AND (fecha_dia BETWEEN '"+fechaInicio+"' AND '"+fechaFin+"'  OR tipo=0 );";
+            System.out.println(consulta);
             rs = st.executeQuery(consulta);
             while (rs.next()) {
                 Horario hor = new Horario();
@@ -176,6 +186,41 @@ public class Horario {
             }
             st.close();
             rs.close();
+            System.out.println("Los horarios obtenidos: " + horarios.size());
+        }
+        return horarios;
+    }
+    
+    public ArrayList<Horario> contultaHorariosV(int id_laboratorio, String fechaInicio, String fechaFin) throws SQLException{
+
+        ArrayList<Horario> horarios = new ArrayList<>();
+        Conexion conexion = new Conexion();
+        Connection con = conexion.Conectar();
+        if (con == null) {
+            rec.aviso("No tiene conexion RECUERDE cada accion que realize en el programa no se va a guardar");
+        } else {
+            Statement st = con.createStatement();
+            ResultSet rs = null;
+            String consulta = "SELECT id_horario_PK, ID_laboratorio, fecha_dia,hora_inicio, hora_final, materia, nombre_dia, nombre, apellido FROM Horarios " +
+                                        "JOIN responsables ON Horarios.id_responsable = responsables.id_responsable "
+                                        + "WHERE id_laboratorio ="+id_laboratorio+" AND (fecha_dia BETWEEN '"+fechaInicio+"' AND '"+fechaFin+"');";
+            System.out.println(consulta);
+            rs = st.executeQuery(consulta);
+            while (rs.next()) {
+                Horario hor = new Horario();
+                java.sql.Date fecha = rs.getDate("fecha_dia");
+                hor.setFecha_dia(fecha.toLocalDate());
+                hor.setHora_inicio(rs.getString("hora_inicio"));
+                hor.setHora_final(rs.getString("hora_final"));
+                hor.setId_laboratorio(rs.getInt("ID_laboratorio"));
+                hor.setMateria(rs.getString("materia"));
+                hor.setNombre_dia(rs.getString("nombre_dia"));
+                hor.setNombre_responsable(rs.getString("nombre")+" "+rs.getString("apellido"));
+                horarios.add(hor);
+            }
+            st.close();
+            rs.close();
+            System.out.println("Los horarios obtenidos: " + horarios.size());
         }
         return horarios;
     }
