@@ -190,6 +190,40 @@ public class Horario {
         }
         return horarios;
     }
+    
+    public ArrayList<Horario> contultaHorariosV(int id_laboratorio, String fechaInicio, String fechaFin) throws SQLException{
+
+        ArrayList<Horario> horarios = new ArrayList<>();
+        Conexion conexion = new Conexion();
+        Connection con = conexion.Conectar();
+        if (con == null) {
+            rec.aviso("No tiene conexion RECUERDE cada accion que realize en el programa no se va a guardar");
+        } else {
+            Statement st = con.createStatement();
+            ResultSet rs = null;
+            String consulta = "SELECT id_horario_PK, ID_laboratorio, fecha_dia,hora_inicio, hora_final, materia, nombre_dia, nombre, apellido FROM Horarios " +
+                                        "JOIN responsables ON Horarios.id_responsable = responsables.id_responsable "
+                                        + "WHERE id_laboratorio ="+id_laboratorio+" AND (fecha_dia BETWEEN '"+fechaInicio+"' AND '"+fechaFin+"');";
+            System.out.println(consulta);
+            rs = st.executeQuery(consulta);
+            while (rs.next()) {
+                Horario hor = new Horario();
+                java.sql.Date fecha = rs.getDate("fecha_dia");
+                hor.setFecha_dia(fecha.toLocalDate());
+                hor.setHora_inicio(rs.getString("hora_inicio"));
+                hor.setHora_final(rs.getString("hora_final"));
+                hor.setId_laboratorio(rs.getInt("ID_laboratorio"));
+                hor.setMateria(rs.getString("materia"));
+                hor.setNombre_dia(rs.getString("nombre_dia"));
+                hor.setNombre_responsable(rs.getString("nombre")+" "+rs.getString("apellido"));
+                horarios.add(hor);
+            }
+            st.close();
+            rs.close();
+            System.out.println("Los horarios obtenidos: " + horarios.size());
+        }
+        return horarios;
+    }
         
     public void asignarHorarios(ArrayList<Horario> horarios) throws SQLException{
             for(Horario h: horarios){

@@ -322,12 +322,14 @@ public class Cont_Horarios implements ActionListener, MouseListener{
                          Instant instant = vista_horarios.fechaDia.getDate().toInstant();
                          LocalDate localDate1 = instant.atZone(ZoneId.systemDefault()).toLocalDate();
                          LocalDate [] fechas = obtenerFechasSemana(localDate1);
-                         System.out.println("intervalo de fechas" + fechas[0]+ " "+fechas[1]);
                          ArrayList<Festivo> diasFestivos = null;
                          diasFestivos = new FestivosDB().listaFestivosSemana(fechas[0].toString(), fechas[1].toString());
                         ArrayList<Horario> hora = null;
-                        hora = horarios.contultaHorarios(vista_horarios.comboLaboratorio.getItemAt(itemSeleccionado).getId(),fechas[0].toString(),fechas[1].toString());
-                        System.out.println("Horarios en el controlador "+hora.size());    
+                        if (this.semana<=8) {
+                           hora = horarios.contultaHorarios(vista_horarios.comboLaboratorio.getItemAt(itemSeleccionado).getId(),fechas[0].toString(),fechas[1].toString());
+                        }else{
+                           hora = horarios.contultaHorariosV(vista_horarios.comboLaboratorio.getItemAt(itemSeleccionado).getId(),fechas[0].toString(),fechas[1].toString());
+                        }
                         asignarDias(hora);
                         asignarDiaFestivo(diasFestivos, fechas);
                     } catch (SQLException ex) {
@@ -382,6 +384,11 @@ public class Cont_Horarios implements ActionListener, MouseListener{
                   this.borrarTabla();
                  this.consultaHorarios();
                  this.vista_horarios.txt_semana.setText("Semana " + semana);
+            }else{
+                 this.vista_horarios.fechaDia.setDate(this.semanaSiguiente(this.vista_horarios.fechaDia.getDate()));
+                  this.borrarTabla();
+                 this.consultaHorarios();
+                 this.vista_horarios.txt_semana.setText("Vacaciones");
             }
         }
         
