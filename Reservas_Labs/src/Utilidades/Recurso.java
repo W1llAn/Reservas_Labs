@@ -32,4 +32,8 @@ public class Recurso {
                 "Éxito",
                 JOptionPane.INFORMATION_MESSAGE);
     }
+
+        public void mensajeError(String mensaje) {
+        JOptionPane.showMessageDialog(null, mensaje, "Error", JOptionPane.ERROR_MESSAGE);
+        }
 }
