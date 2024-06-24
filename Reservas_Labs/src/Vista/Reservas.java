@@ -83,10 +83,10 @@ public class Reservas extends javax.swing.JFrame  {
         panelReservas.setBackground(new java.awt.Color(212, 215, 224));
         panelReservas.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Reborn", 1, 48)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Times New Roman", 1, 48)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Reservas");
-        panelReservas.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 29, -1, 78));
+        panelReservas.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 30, -1, 78));
 
         jLabel3.setFont(new java.awt.Font("Constantia", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));

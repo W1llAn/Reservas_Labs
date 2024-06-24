@@ -2,10 +2,13 @@ package Controladores;
 
 import Modelos.Horario;
 import Modelos.LabDB;
+import Modelos.Usuario;
+import Utilidades.Recurso;
 import Modelos.UsuarioSesion;
 import Vista.Festivos;
 import Vista.Horarios;
 import Vista.Laboratorios;
+import Vista.Login;
 import Vista.Menu;
 import Vista.Usuarios;
 import java.awt.BorderLayout;
@@ -26,6 +29,7 @@ import javax.swing.border.LineBorder;
 public class MenuControlador implements MouseListener {
 
     private Menu menu;
+    private Recurso rec = new Recurso();
     private final Color rojoOscuro = new Color(212,215,224);//[188,192,203][147,10,13
     private final Color rojoClaro = new Color(188,192,203);//[212,215,224]
     private final Font BOLD_FONT = new Font("Times New Roman", Font.BOLD, 16);
@@ -86,7 +90,20 @@ public class MenuControlador implements MouseListener {
         }
 
         if (e.getSource() == this.menu.lblSalir) {
-            System.exit(0);
+            boolean conf =this.rec.ConfirmarAccion("Está seguro que quiere salir?");
+            if ( conf) {
+                Login log = new Login();
+                Usuario user = new Usuario();
+                try {
+                    Cont_login controlador = new Cont_login(log, user);
+                } catch (SQLException ex) {
+                    Logger.getLogger(MenuControlador.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(MenuControlador.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                log.setVisible(true);
+                this.menu.dispose();
+            }
         }
 
         if (e.getSource() == this.menu.lblLAgregarUsuario) {
