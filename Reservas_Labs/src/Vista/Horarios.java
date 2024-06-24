@@ -13,7 +13,6 @@ import javax.swing.JMenuItem;
  */
 public class Horarios extends javax.swing.JFrame {
 public JMenuItem jitmReserva = new JMenuItem("Reservar");
- public JMenuItem jitmEliminarReserva = new JMenuItem(" Eliminar reserva");
     /**
      * Creates new form Laboratorios_
      */
@@ -22,9 +21,7 @@ public JMenuItem jitmReserva = new JMenuItem("Reservar");
         this.setLocationRelativeTo(null);
         Font font = new Font("Lucida fax", Font.PLAIN, 16); // Por ejemplo, Arial, negrita, tamaño 16
         this.jitmReserva.setFont(font);
-        this.jitmEliminarReserva.setFont(font);
         this.menuClick.add(jitmReserva);
-        this.menuClick.add(jitmEliminarReserva);
         this.tablaHorarios.setComponentPopupMenu(menuClick);
     }
 
