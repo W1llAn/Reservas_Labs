@@ -24,7 +24,7 @@ public class Horario {
     private String  hora_inicio,hora_final, nombre_dia,materia,nombre_responsable,descripcion ;
     private LocalDate fecha_dia; 
     private Recursos rec = new Recursos();
-    private int id_laboratorio,id_responsable;  
+    private int id_laboratorio,id_responsable,tipo;  
 
     public Horario(String hora_inicio, String hora_final, String nombre_dia, String materia,String nombre_responsable, LocalDate fecha_dia, int id_laboratorio) {
         this.hora_inicio = hora_inicio;
@@ -36,7 +36,7 @@ public class Horario {
         this.id_laboratorio = id_laboratorio;
     }
 
-    public Horario(LocalDate fecha_dia, String hora_inicio, String hora_final, String nombre_dia, String materia, int id_laboratorio, int id_responsable,String descripcion) {
+    public Horario(int tipo,LocalDate fecha_dia, String hora_inicio, String hora_final, String nombre_dia, String materia, int id_laboratorio, int id_responsable,String descripcion) {
         this.fecha_dia = fecha_dia;
         this.hora_inicio = hora_inicio;
         this.hora_final = hora_final;
@@ -45,6 +45,15 @@ public class Horario {
         this.id_laboratorio = id_laboratorio;
         this.id_responsable = id_responsable;
         this.descripcion= descripcion;
+        this.tipo=tipo;
+    }
+
+    public int getTipo() {
+        return this.tipo;
+    }
+
+    public void setTipo(int tipo) {
+        this.tipo = tipo;
     }
     
 
