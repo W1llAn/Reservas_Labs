@@ -96,7 +96,7 @@ public class Menu extends javax.swing.JFrame {
         lblSalir.setFont(new java.awt.Font("Times New Roman", 0, 16)); // NOI18N
         lblSalir.setForeground(new java.awt.Color(0, 0, 0));
         lblSalir.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblSalir.setText("Salir");
+        lblSalir.setText("Cerrar Sesión");
         panItemSalir.add(lblSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(1, 1, 250, 50));
 
         lblSalir1.setBackground(new java.awt.Color(43, 43, 43));
